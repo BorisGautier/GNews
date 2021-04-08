@@ -112,7 +112,7 @@ class SplashScreenState extends State<SplashScreen> {
             children: [
               Image.asset('assets/logoNews.png', height: 120),
               SizedBox(
-                height: 15,
+                height: 25,
               ),
               Text(mAppName, style: boldTextStyle(size: 22)),
             ],
