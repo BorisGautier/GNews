@@ -1,5 +1,6 @@
 import 'package:clippy_flutter/clippy_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:mighty_news/AppLocalizations.dart';
 import 'package:mighty_news/models/WalkThroughModel.dart';
 import 'package:mighty_news/utils/Colors.dart';
 import 'package:mighty_news/utils/Common.dart';
@@ -29,30 +30,6 @@ class WalkThroughScreenState extends State<WalkThroughScreen> {
 
   init() async {
     setStatusBarColor(colorPrimary);
-    list.add(
-      WalkThroughModel(
-        image: 'assets/walk_1.png',
-        title: 'Subscribe for updates',
-        subTitle: 'Mighty News offers an awesome category filter option which will let you access what you are interested in straight away!',
-        color: colorPrimary,
-      ),
-    );
-    list.add(
-      WalkThroughModel(
-        image: 'assets/walk_3.png',
-        title: 'Choose your category',
-        subTitle: 'Mighty News is a complete set of incredible, easily importable UI and get regular updates by subscribing to it!',
-        color: Color(0xFF6BD19B),
-      ),
-    );
-    list.add(
-      WalkThroughModel(
-        image: 'assets/walk_2.png',
-        title: 'Daily Notifications',
-        subTitle: 'Notify your users with the latest news with a daily push notification feature. They are highly interactive and useful.',
-        color: Color(0xFFA79BFC),
-      ),
-    );
   }
 
   @override
@@ -62,6 +39,32 @@ class WalkThroughScreenState extends State<WalkThroughScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var appLocalization = AppLocalizations.of(context);
+    list.clear();
+    list.add(
+      WalkThroughModel(
+        image: 'assets/walk_1.png',
+        title: appLocalization.translate('walk_Title1'),
+        subTitle: appLocalization.translate('walk_SubTitle1'),
+        color: colorPrimary,
+      ),
+    );
+    list.add(
+      WalkThroughModel(
+        image: 'assets/walk_3.png',
+        title: appLocalization.translate('walk_Title2'),
+        subTitle: appLocalization.translate('walk_SubTitle2'),
+        color: Color(0xFF6BD19B),
+      ),
+    );
+    list.add(
+      WalkThroughModel(
+        image: 'assets/walk_2.png',
+        title: appLocalization.translate('walk_Title3'),
+        subTitle: appLocalization.translate('walk_SubTitle3'),
+        color: Color(0xFFA79BFC),
+      ),
+    );
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -81,17 +84,27 @@ class WalkThroughScreenState extends State<WalkThroughScreen> {
                         arcType: ArcType.CONVEY,
                         edge: Edge.TOP,
                         height: 60,
-                        child: Container(height: context.height() * 0.5, width: context.width(), color: e.color),
+                        child: Container(
+                            height: context.height() * 0.5,
+                            width: context.width(),
+                            color: e.color),
                       ),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Image.asset(e.image, height: context.height() * 0.6, width: newsListWidgetSize(context), fit: BoxFit.fitWidth),
+                        Image.asset(e.image,
+                            height: context.height() * 0.6,
+                            width: newsListWidgetSize(context),
+                            fit: BoxFit.fitWidth),
                         16.height,
-                        Text(e.title, style: boldTextStyle(color: Colors.white, size: 24), textAlign: TextAlign.center),
+                        Text(e.title,
+                            style: boldTextStyle(color: Colors.white, size: 24),
+                            textAlign: TextAlign.center),
                         16.height,
-                        Text(e.subTitle, style: primaryTextStyle(color: Colors.white), textAlign: TextAlign.center),
+                        Text(e.subTitle,
+                            style: primaryTextStyle(color: Colors.white),
+                            textAlign: TextAlign.center),
                       ],
                     ).paddingOnly(left: 16, right: 16),
                   ],
@@ -105,9 +118,11 @@ class WalkThroughScreenState extends State<WalkThroughScreen> {
               if (currentPage == 0) {
                 setStatusBarColor(colorPrimary);
               } else if (currentPage == 1) {
-                setStatusBarColor(Color(0xFF6BD19B), statusBarIconBrightness: Brightness.light);
+                setStatusBarColor(Color(0xFF6BD19B),
+                    statusBarIconBrightness: Brightness.light);
               } else if (currentPage == 2) {
-                setStatusBarColor(Color(0xFFA79BFC), statusBarIconBrightness: Brightness.light);
+                setStatusBarColor(Color(0xFFA79BFC),
+                    statusBarIconBrightness: Brightness.light);
               }
             },
           ),
@@ -125,25 +140,31 @@ class WalkThroughScreenState extends State<WalkThroughScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      child: Text('skip'),
+                      child: Text(appLocalization.translate('skip')),
                       decoration: boxDecorationRoundedWithShadow(30),
-                      padding: EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
+                      padding: EdgeInsets.only(
+                          left: 16, right: 16, top: 8, bottom: 8),
                     ).onTap(() async {
                       await setValue(IS_FIRST_TIME, false);
 
                       DashboardScreen().launch(context, isNewTask: true);
                     }),
                     Container(
-                      child: Text(currentPage != 2 ? 'next' : 'finish'),
+                      child: Text(currentPage != 2
+                          ? appLocalization.translate('next')
+                          : appLocalization.translate('finish')),
                       decoration: boxDecorationRoundedWithShadow(30),
-                      padding: EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
+                      padding: EdgeInsets.only(
+                          left: 16, right: 16, top: 8, bottom: 8),
                     ).onTap(() async {
                       if (currentPage == 2) {
                         await setValue(IS_FIRST_TIME, false);
 
                         DashboardScreen().launch(context, isNewTask: true);
                       } else {
-                        pageController.animateToPage(currentPage + 1, duration: Duration(milliseconds: 300), curve: Curves.linear);
+                        pageController.animateToPage(currentPage + 1,
+                            duration: Duration(milliseconds: 300),
+                            curve: Curves.linear);
                       }
                     }),
                   ],

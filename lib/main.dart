@@ -49,8 +49,10 @@ void main() async {
   await initialize(defaultDialogBorderRadius: 10);
 
   appStore.setLanguage(getStringAsync(LANGUAGE, defaultValue: defaultLanguage));
-  appStore.setNotification(getBoolAsync(IS_NOTIFICATION_ON, defaultValue: true));
-  appStore.setTTSLanguage(getStringAsync(TEXT_TO_SPEECH_LANG, defaultValue: defaultTTSLanguage));
+  appStore
+      .setNotification(getBoolAsync(IS_NOTIFICATION_ON, defaultValue: true));
+  appStore.setTTSLanguage(
+      getStringAsync(TEXT_TO_SPEECH_LANG, defaultValue: defaultTTSLanguage));
   appStore.setCurrencyStoreModel();
 
   int themeModeIndex = getIntAsync(THEME_MODE_INDEX);
@@ -60,8 +62,11 @@ void main() async {
     appStore.setDarkMode(true);
   }
 
-  fontSize = fontSizes.firstWhere((element) => element.fontSize == getIntAsync(FONT_SIZE_PREF, defaultValue: 16));
-  ttsLang = ttsLanguage.firstWhere((element) => element.fullLanguageCode == getStringAsync(TEXT_TO_SPEECH_LANG, defaultValue: defaultTTSLanguage));
+  fontSize = fontSizes.firstWhere((element) =>
+      element.fontSize == getIntAsync(FONT_SIZE_PREF, defaultValue: 16));
+  ttsLang = ttsLanguage.firstWhere((element) =>
+      element.fullLanguageCode ==
+      getStringAsync(TEXT_TO_SPEECH_LANG, defaultValue: defaultTTSLanguage));
 
   if (isMobile) {
     Firebase.initializeApp().then((value) {
@@ -71,10 +76,15 @@ void main() async {
 
     await OneSignal.shared.init(
       mOneSignalAPPKey,
-      iOSSettings: {OSiOSSettings.autoPrompt: false, OSiOSSettings.promptBeforeOpeningPushUrl: true, OSiOSSettings.inAppAlerts: false},
+      iOSSettings: {
+        OSiOSSettings.autoPrompt: false,
+        OSiOSSettings.promptBeforeOpeningPushUrl: true,
+        OSiOSSettings.inAppAlerts: false
+      },
     );
 
-    OneSignal.shared.setInFocusDisplayType(OSNotificationDisplayType.notification);
+    OneSignal.shared
+        .setInFocusDisplayType(OSNotificationDisplayType.notification);
   }
 
   runApp(MyApp());
@@ -93,7 +103,11 @@ class MyApp extends StatelessWidget {
         darkTheme: AppTheme.darkTheme,
         themeMode: appStore.isDarkMode ? ThemeMode.dark : ThemeMode.light,
         supportedLocales: Language.languagesLocale(),
-        localizationsDelegates: [AppLocalizations.delegate, GlobalMaterialLocalizations.delegate, GlobalWidgetsLocalizations.delegate],
+        localizationsDelegates: [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate
+        ],
         localeResolutionCallback: (locale, supportedLocales) => locale,
         locale: Locale(appStore.selectedLanguageCode),
         home: SplashScreen(),

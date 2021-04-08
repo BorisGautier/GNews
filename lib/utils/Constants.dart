@@ -41,8 +41,8 @@ const tokenStream = 'tokenStream';
 //endregion
 
 //region Configs
-const defaultLanguage = 'en';
-const defaultTTSLanguage = 'en-US';
+const defaultLanguage = 'fr';
+const defaultTTSLanguage = 'fr-FR';
 const postsPerPage = 15;
 const dashboard3ItemTwitterLine = 7;
 const enableSocialLogin = true;
