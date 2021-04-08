@@ -63,7 +63,10 @@ class SubCategoryScreenState extends State<SubCategoryScreen> {
     return SafeArea(
       top: !isIos,
       child: Scaffold(
-        appBar: appBarWidget(widget.categoryData.name, showBack: true, color: getAppBarWidgetBackGroundColor(), textColor: getAppBarWidgetTextColor()),
+        appBar: appBarWidget(widget.categoryData.name,
+            showBack: true,
+            color: getAppBarWidgetBackGroundColor(),
+            textColor: getAppBarWidgetTextColor()),
         body: Container(
           height: context.height(),
           width: context.width(),
@@ -73,8 +76,10 @@ class SubCategoryScreenState extends State<SubCategoryScreen> {
               categoryId.validate() != 0
                   ? PaginatedNewsWidget(
                       {
-                        if (categoryId == widget.categoryData.cat_ID) 'category': categoryId,
-                        if (categoryId != widget.categoryData.cat_ID) 'subcategory': categoryId,
+                        if (categoryId == widget.categoryData.cat_ID)
+                          'category': categoryId,
+                        if (categoryId != widget.categoryData.cat_ID)
+                          'subcategory': categoryId,
                         'filter': 'by_category',
                         'posts_per_page': postsPerPage,
                       },
@@ -99,9 +104,17 @@ class SubCategoryScreenState extends State<SubCategoryScreen> {
                     return Container(
                       padding: EdgeInsets.only(left: 16, right: 16),
                       margin: EdgeInsets.only(left: 12, right: 12, bottom: 8),
-                      decoration: boxDecorationRoundedWithShadow(defaultRadius.toInt(), backgroundColor: data.cat_ID == categoryId ? colorPrimary : Colors.white),
+                      decoration: boxDecorationRoundedWithShadow(
+                          defaultRadius.toInt(),
+                          backgroundColor: data.cat_ID == categoryId
+                              ? colorPrimary
+                              : Colors.white),
                       alignment: Alignment.center,
-                      child: Text(data.name.validate(), style: boldTextStyle(color: data.cat_ID == categoryId ? Colors.white : colorPrimary)),
+                      child: Text(data.name.validate(),
+                          style: boldTextStyle(
+                              color: data.cat_ID == categoryId
+                                  ? Colors.white
+                                  : colorPrimary)),
                     ).onTap(() {
                       categoryId = data.cat_ID;
                       appStore.setLoading(true);
@@ -112,7 +125,8 @@ class SubCategoryScreenState extends State<SubCategoryScreen> {
                 ),
               ),
               Observer(builder: (_) => Loader().visible(appStore.isLoading)),
-              noDataWidget(context).visible(categories.isEmpty && !appStore.isLoading && categoryId == 0),
+              noDataWidget(context).visible(
+                  categories.isEmpty && !appStore.isLoading && categoryId == 0),
             ],
           ),
         ),

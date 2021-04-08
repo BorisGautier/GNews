@@ -12,7 +12,18 @@ class CategoryData {
 
   String image;
 
-  CategoryData({this.links, this.count, this.cat_ID, this.description, this.id, this.link, this.name, this.parent, this.slug, this.taxonomy, this.image});
+  CategoryData(
+      {this.links,
+      this.count,
+      this.cat_ID,
+      this.description,
+      this.id,
+      this.link,
+      this.name,
+      this.parent,
+      this.slug,
+      this.taxonomy,
+      this.image});
 
   factory CategoryData.fromJson(Map<String, dynamic> json) {
     return CategoryData(
@@ -60,11 +71,25 @@ class Links {
 
   factory Links.fromJson(Map<String, dynamic> json) {
     return Links(
-      about: json['about'] != null ? (json['about'] as List).map((i) => About.fromJson(i)).toList() : null,
-      collection: json['collection'] != null ? (json['collection'] as List).map((i) => Collection.fromJson(i)).toList() : null,
-      curies: json['curies'] != null ? (json['curies'] as List).map((i) => Cury.fromJson(i)).toList() : null,
-      self: json['self'] != null ? (json['self'] as List).map((i) => Self.fromJson(i)).toList() : null,
-      post_type: json['wp:post_type'] != null ? (json['wp:post_type'] as List).map((i) => WpPostType.fromJson(i)).toList() : null,
+      about: json['about'] != null
+          ? (json['about'] as List).map((i) => About.fromJson(i)).toList()
+          : null,
+      collection: json['collection'] != null
+          ? (json['collection'] as List)
+              .map((i) => Collection.fromJson(i))
+              .toList()
+          : null,
+      curies: json['curies'] != null
+          ? (json['curies'] as List).map((i) => Cury.fromJson(i)).toList()
+          : null,
+      self: json['self'] != null
+          ? (json['self'] as List).map((i) => Self.fromJson(i)).toList()
+          : null,
+      post_type: json['wp:post_type'] != null
+          ? (json['wp:post_type'] as List)
+              .map((i) => WpPostType.fromJson(i))
+              .toList()
+          : null,
     );
   }
 
