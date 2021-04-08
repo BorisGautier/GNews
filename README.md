@@ -1,4 +1,4 @@
-# mighty_news
+# GNews
 
 A new Flutter application.
 
