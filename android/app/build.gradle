@@ -32,8 +32,8 @@ android {
         applicationId "cm.tbg.gnews"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 23
-        versionName "1.4.1"
+        versionCode 1
+        versionName "1.0.1"
         multiDexEnabled true
         //signingConfig signingConfigs.release
     }
