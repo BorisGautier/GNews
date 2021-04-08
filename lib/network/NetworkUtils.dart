@@ -9,19 +9,21 @@ import 'package:mighty_news/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 Map<String, String> buildHeaderTokens() {
-  Map<String, String> header = {
-    HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+  /* Map<String, String> header = {
+    HttpHeaders.contentTypeHeader: 'application/json;charset=UTF-8',
     HttpHeaders.cacheControlHeader: 'no-cache',
-    HttpHeaders.acceptHeader: 'application/json; charset=utf-8',
+    HttpHeaders.acceptCharsetHeader: 'UTF-8',
+    HttpHeaders.acceptHeader: 'application/json;charset=UTF-8',
     'Access-Control-Allow-Headers': '*',
     'Access-Control-Allow-Origin': '*',
-  };
+  };*/
 
-  if (appStore.isLoggedIn) {
-    header.putIfAbsent(HttpHeaders.authorizationHeader, () => 'Bearer ${getStringAsync(TOKEN)}');
+  /* if (appStore.isLoggedIn) {
+    header.putIfAbsent(HttpHeaders.authorizationHeader,
+        () => 'Bearer ${getStringAsync(TOKEN)}');
   }
   log(jsonEncode(header));
-  return header;
+  return header;*/
 }
 
 Uri buildBaseUrl(String endPoint) {
@@ -33,9 +35,10 @@ Uri buildBaseUrl(String endPoint) {
   return url;
 }
 
-Future<Response> buildHttpResponse(String endPoint, {HttpMethod method = HttpMethod.GET, Map request}) async {
+Future<Response> buildHttpResponse(String endPoint,
+    {HttpMethod method = HttpMethod.GET, Map request}) async {
   if (await isNetworkAvailable()) {
-    var headers = buildHeaderTokens();
+    // var headers = buildHeaderTokens();
     Uri url = buildBaseUrl(endPoint);
 
     Response response;
@@ -43,13 +46,13 @@ Future<Response> buildHttpResponse(String endPoint, {HttpMethod method = HttpMet
     if (method == HttpMethod.POST) {
       log('Request: $request');
 
-      response = await http.post(url, body: jsonEncode(request), headers: headers);
+      response = await http.post(url, body: jsonEncode(request));
     } else if (method == HttpMethod.DELETE) {
-      response = await delete(url, headers: headers);
+      response = await delete(url);
     } else if (method == HttpMethod.PUT) {
-      response = await put(url, body: jsonEncode(request), headers: headers);
+      response = await put(url, body: jsonEncode(request));
     } else {
-      response = await get(url, headers: headers);
+      response = await get(url);
     }
 
     log('Response ($method): ${response.statusCode} ${response.body}');
@@ -61,10 +64,12 @@ Future<Response> buildHttpResponse(String endPoint, {HttpMethod method = HttpMet
 }
 
 @deprecated
-Future<Response> getRequest(String endPoint) async => buildHttpResponse(endPoint);
+Future<Response> getRequest(String endPoint) async =>
+    buildHttpResponse(endPoint);
 
 @deprecated
-Future<Response> postRequest(String endPoint, Map request) async => buildHttpResponse(endPoint, request: request, method: HttpMethod.POST);
+Future<Response> postRequest(String endPoint, Map request) async =>
+    buildHttpResponse(endPoint, request: request, method: HttpMethod.POST);
 
 Future handleResponse(Response response, [bool avoidTokenError]) async {
   if (!await isNetworkAvailable()) {

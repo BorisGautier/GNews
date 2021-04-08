@@ -47,16 +47,22 @@ class CategoryItemWidgetState extends State<CategoryItemWidget> {
         fit: StackFit.expand,
         children: [
           Container(
-            child: cachedImage(widget.data.image, fit: BoxFit.cover, radius: defaultRadius),
+            child: cachedImage(widget.data.image,
+                fit: BoxFit.cover, radius: defaultRadius),
           ).cornerRadiusWithClipRRect(defaultRadius),
           AnimatedContainer(
             duration: Duration(milliseconds: 400),
-            color: appStore.myTopics.contains(widget.data.cat_ID) && widget.onTap == null ? colorPrimary.withOpacity(0.5) : Colors.black45,
+            color: appStore.myTopics.contains(widget.data.cat_ID) &&
+                    widget.onTap == null
+                ? colorPrimary.withOpacity(0.5)
+                : Colors.black45,
           ).cornerRadiusWithClipRRect(defaultRadius),
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.check, color: Colors.white).paddingLeft(2).visible(widget.onTap == null && appStore.myTopics.contains(widget.data.cat_ID)),
+              Icon(Icons.check, color: Colors.white).paddingLeft(2).visible(
+                  widget.onTap == null &&
+                      appStore.myTopics.contains(widget.data.cat_ID)),
               Text(
                 widget.data.name.validate(),
                 textAlign: TextAlign.center,

@@ -1,6 +1,6 @@
 import 'package:nb_utils/nb_utils.dart';
 
-const mAppName = 'G News';
+const mAppName = 'GNews';
 
 //region URLs & Keys
 /// Note: /wp-json/ is required after your domain. Ex if your domain is www.abc.com then ${mBaseUrl} will be  https://www.abc.com/wp-json/
@@ -17,7 +17,7 @@ const mWeatherBaseUrl =
 const mWeatherAPIKey = 'ad8c5b9dd75b42009dc221740210704';
 
 const mOneSignalAPPKey = '50febdc3-9fdd-4769-9a95-37cf067d94e9';
-const mCoinMarketCapKey = 'd88a4fa1-6f5d-49fe-8356-cd18b11c32cf';
+const mCoinMarketCapKey = '483b11cd-87b8-4424-8b04-7f63f0b93de4';
 
 var mTwitterApiKey = 'TLdJCJ4IqdRyJyNa9PQxmpvgN';
 var mTwitterApiSecretKey = 'RLeKqcKr5JgtHt6iT38lkyYqou4vMLZOzOXZuWgbwKb5267uu4';
