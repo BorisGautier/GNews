@@ -102,5 +102,6 @@
   "rate_us": "Évaluez nous",
   "enable_push_notification": "Activer/ Desactiver les notifications push",
   "choose_article_size": "Choisir la taille de l'article",
-  "choose_app_language": "Choisir la langue de l'application"
+  "choose_app_language": "Choisir la langue de l'application",
+  "feed": "Voici votre fil d'actualités"
 }
