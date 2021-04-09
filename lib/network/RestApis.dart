@@ -319,7 +319,7 @@ Future<bool> updateProfile(
   };
   multiPartRequest.fields['my_preference'] = jsonEncode(map);
 
-  multiPartRequest.headers.addAll(buildHeaderTokens());
+  // multiPartRequest.headers.addAll(buildHeaderTokens());
 
   log(multiPartRequest.fields);
   Response response = await Response.fromStream(await multiPartRequest.send());

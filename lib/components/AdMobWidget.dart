@@ -55,15 +55,5 @@ class AdMobWidgetState extends State<AdMobWidget> {
   @override
   Widget build(BuildContext context) {
     return AdWidget(ad: myBanner);
-
-    return (myBanner != null)
-        ? Container(
-            color: Colors.white,
-            height: 50,
-            width: context.width(),
-            //width: (widget.width != null && myBanner != null) ? widget.adSize.width : context.width(),
-            child: AdWidget(ad: myBanner),
-          )
-        : SizedBox();
   }
 }

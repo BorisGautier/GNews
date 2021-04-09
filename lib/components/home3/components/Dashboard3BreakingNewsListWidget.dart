@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gnews/components/home3/components/Dashboard3BreakingNewsItemWidget.dart';
 import 'package:gnews/models/DashboardResponse.dart';
 import 'package:gnews/screens/NewsDetailListScreen.dart';
-import 'package:gnews/utils/Common.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../../utils/Constants.dart';

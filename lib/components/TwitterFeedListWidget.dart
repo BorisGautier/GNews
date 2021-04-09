@@ -4,7 +4,6 @@ import 'package:gnews/AppLocalizations.dart';
 import 'package:gnews/models/TweetModel.dart';
 import 'package:gnews/network/RestApis.dart';
 import 'package:gnews/shimmer/HorizontalImageShimmer.dart';
-import 'package:gnews/utils/Colors.dart';
 import 'package:gnews/utils/Common.dart';
 import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -153,9 +152,9 @@ class TwitterFeedListWidgetState extends State<TwitterFeedListWidget> {
         } else {
           log(snap.error);
         }
+        // ignore: todo
         //TODO
         return HorizontalImageShimmer();
-        return snapWidgetHelper(snap);
       },
     );
   }

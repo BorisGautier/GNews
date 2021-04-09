@@ -8,7 +8,6 @@ import 'package:gnews/models/DashboardResponse.dart';
 import 'package:gnews/network/RestApis.dart';
 import 'package:gnews/utils/Common.dart';
 import 'package:gnews/utils/Constants.dart';
-import 'package:gnews/utils/ListViewStateBuilder.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../main.dart';

@@ -34,8 +34,6 @@ class BreakingNewsItemWidgetState extends State<BreakingNewsItemWidget> {
 
   @override
   Widget build(BuildContext context) {
-    String heroTag = '${widget.newsData.iD}${currentTimeStamp()}';
-
     return Container(
       width: newsListWidgetSize(context),
       decoration: BoxDecoration(

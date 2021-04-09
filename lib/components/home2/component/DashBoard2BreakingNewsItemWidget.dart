@@ -36,8 +36,6 @@ class DashBoard2BreakingNewsItemWidgetState
 
   @override
   Widget build(BuildContext context) {
-    String heroTag = '${widget.newsData.iD}${currentTimeStamp()}';
-
     return Container(
       decoration: BoxDecoration(
         boxShadow: [

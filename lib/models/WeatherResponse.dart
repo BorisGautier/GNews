@@ -6,8 +6,10 @@ class WeatherResponse {
 
   factory WeatherResponse.fromJson(Map<String, dynamic> json) {
     return WeatherResponse(
-      current: json['current'] != null ? Current.fromJson(json['current']) : null,
-      location: json['location'] != null ? Location.fromJson(json['location']) : null,
+      current:
+          json['current'] != null ? Current.fromJson(json['current']) : null,
+      location:
+          json['location'] != null ? Location.fromJson(json['location']) : null,
     );
   }
 
@@ -27,13 +29,26 @@ class Location {
   String country;
   double lat;
   String localtime;
+  // ignore: non_constant_identifier_names
   int localtime_epoch;
   double lon;
   String name;
   String region;
+  // ignore: non_constant_identifier_names
   String tz_id;
 
-  Location({this.country, this.lat, this.localtime, this.localtime_epoch, this.lon, this.name, this.region, this.tz_id});
+  // ignore: non_constant_identifier_names
+  Location(
+      {this.country,
+      this.lat,
+      this.localtime,
+      // ignore: non_constant_identifier_names
+      this.localtime_epoch,
+      this.lon,
+      this.name,
+      this.region,
+      // ignore: non_constant_identifier_names
+      this.tz_id});
 
   factory Location.fromJson(Map<String, dynamic> json) {
     return Location(
@@ -65,57 +80,97 @@ class Location {
 class Current {
   int cloud;
   Condition condition;
+  // ignore: non_constant_identifier_names
   double feelslike_c;
+  // ignore: non_constant_identifier_names
   double feelslike_f;
+  // ignore: non_constant_identifier_names
   double gust_kph;
+  // ignore: non_constant_identifier_names
   double gust_mph;
   int humidity;
+  // ignore: non_constant_identifier_names
   int is_day;
+  // ignore: non_constant_identifier_names
   String last_updated;
+  // ignore: non_constant_identifier_names
   int last_updated_epoch;
+  // ignore: non_constant_identifier_names
   double precip_in;
+  // ignore: non_constant_identifier_names
   double precip_mm;
+  // ignore: non_constant_identifier_names
   double pressure_in;
+  // ignore: non_constant_identifier_names
   double pressure_mb;
+  // ignore: non_constant_identifier_names
   double temp_c;
+  // ignore: non_constant_identifier_names
   double temp_f;
   double uv;
+  // ignore: non_constant_identifier_names
   double vis_km;
+  // ignore: non_constant_identifier_names
   double vis_miles;
+  // ignore: non_constant_identifier_names
   int wind_degree;
+  // ignore: non_constant_identifier_names
   String wind_dir;
+  // ignore: non_constant_identifier_names
   double wind_kph;
+  // ignore: non_constant_identifier_names
   double wind_mph;
 
   Current(
       {this.cloud,
       this.condition,
+      // ignore: non_constant_identifier_names
       this.feelslike_c,
+      // ignore: non_constant_identifier_names
       this.feelslike_f,
+      // ignore: non_constant_identifier_names
       this.gust_kph,
+      // ignore: non_constant_identifier_names
       this.gust_mph,
       this.humidity,
+      // ignore: non_constant_identifier_names
       this.is_day,
+      // ignore: non_constant_identifier_names
       this.last_updated,
+      // ignore: non_constant_identifier_names
       this.last_updated_epoch,
+      // ignore: non_constant_identifier_names
       this.precip_in,
+      // ignore: non_constant_identifier_names
       this.precip_mm,
+      // ignore: non_constant_identifier_names
       this.pressure_in,
+      // ignore: non_constant_identifier_names
       this.pressure_mb,
+      // ignore: non_constant_identifier_names
       this.temp_c,
+      // ignore: non_constant_identifier_names
       this.temp_f,
       this.uv,
+      // ignore: non_constant_identifier_names
       this.vis_km,
+      // ignore: non_constant_identifier_names
       this.vis_miles,
+      // ignore: non_constant_identifier_names
       this.wind_degree,
+      // ignore: non_constant_identifier_names
       this.wind_dir,
+      // ignore: non_constant_identifier_names
       this.wind_kph,
+      // ignore: non_constant_identifier_names
       this.wind_mph});
 
   factory Current.fromJson(Map<String, dynamic> json) {
     return Current(
       cloud: json['cloud'],
-      condition: json['condition'] != null ? Condition.fromJson(json['condition']) : null,
+      condition: json['condition'] != null
+          ? Condition.fromJson(json['condition'])
+          : null,
       feelslike_c: json['feelslike_c'],
       feelslike_f: json['feelslike_f'],
       gust_kph: json['gust_kph'],

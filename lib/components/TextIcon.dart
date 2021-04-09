@@ -10,7 +10,13 @@ class TextIcon extends StatelessWidget {
   final int spacing;
   final int maxLine;
 
-  TextIcon({this.text, this.textStyle, this.prefix, this.suffix, this.spacing = 4, this.maxLine});
+  TextIcon(
+      {this.text,
+      this.textStyle,
+      this.prefix,
+      this.suffix,
+      this.spacing = 4,
+      this.maxLine});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +25,10 @@ class TextIcon extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           prefix != null ? Row(children: [prefix, spacing.width]) : SizedBox(),
-          Text(text, style: textStyle ?? primaryTextStyle(), maxLines: maxLine ?? 1, overflow: TextOverflow.ellipsis),
+          Text(text,
+              style: textStyle ?? primaryTextStyle(),
+              maxLines: maxLine ?? 1,
+              overflow: TextOverflow.ellipsis),
           suffix != null ? Row(children: [spacing.width, suffix]) : SizedBox(),
         ],
       ),

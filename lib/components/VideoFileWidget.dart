@@ -35,6 +35,7 @@ class VideoFileWidgetState extends State<VideoFileWidget> {
   }
 
   Future<void> init() async {
+    // ignore: invalid_use_of_protected_member
     if (controller.hasListeners) {
       controller.removeListener(() {});
     }

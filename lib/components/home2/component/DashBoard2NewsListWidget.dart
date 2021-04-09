@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gnews/components/home2/component/DashBoard2NewsItemWidget.dart';
 import 'package:gnews/models/DashboardResponse.dart';
 import 'package:gnews/screens/NewsDetailListScreen.dart';
-import 'package:gnews/utils/Common.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 // ignore: must_be_immutable

@@ -22,11 +22,16 @@ class RegisterResponse {
 }
 
 class Data {
+  // ignore: non_constant_identifier_names
   String first_name;
+  // ignore: non_constant_identifier_names
   String last_name;
+  // ignore: non_constant_identifier_names
   String user_email;
+  // ignore: non_constant_identifier_names
   String user_login;
 
+  // ignore: non_constant_identifier_names
   Data({this.first_name, this.last_name, this.user_email, this.user_login});
 
   factory Data.fromJson(Map<String, dynamic> json) {

@@ -1,30 +1,44 @@
 class TweetModel {
+  // ignore: non_constant_identifier_names
   String created_at;
+  // ignore: non_constant_identifier_names
   int favorite_count;
   bool favorited;
+  // ignore: non_constant_identifier_names
   String full_text;
   int id;
+  // ignore: non_constant_identifier_names
   String id_str;
+  // ignore: non_constant_identifier_names
   bool is_quote_status;
   String lang;
+  // ignore: non_constant_identifier_names
   int retweet_count;
   bool retweeted;
+  // ignore: non_constant_identifier_names
   RetweetedStatus retweeted_status;
   String source;
   bool truncated;
   User user;
 
   TweetModel(
+      // ignore: non_constant_identifier_names
       {this.created_at,
+      // ignore: non_constant_identifier_names
       this.favorite_count,
       this.favorited,
+      // ignore: non_constant_identifier_names
       this.full_text,
       this.id,
+      // ignore: non_constant_identifier_names
       this.id_str,
+      // ignore: non_constant_identifier_names
       this.is_quote_status,
       this.lang,
+      // ignore: non_constant_identifier_names
       this.retweet_count,
       this.retweeted,
+      // ignore: non_constant_identifier_names
       this.retweeted_status,
       this.source,
       this.truncated,
@@ -42,7 +56,9 @@ class TweetModel {
       lang: json['lang'],
       retweet_count: json['retweet_count'],
       retweeted: json['retweeted'],
-      retweeted_status: json['retweeted_status'] != null ? RetweetedStatus.fromJson(json['retweeted_status']) : null,
+      retweeted_status: json['retweeted_status'] != null
+          ? RetweetedStatus.fromJson(json['retweeted_status'])
+          : null,
       source: json['source'],
       truncated: json['truncated'],
       user: json['user'] != null ? User.fromJson(json['user']) : null,
@@ -75,73 +91,129 @@ class TweetModel {
 
 class User {
   bool protected;
+  // ignore: non_constant_identifier_names
   bool contributors_enabled;
+  // ignore: non_constant_identifier_names
   String created_at;
+  // ignore: non_constant_identifier_names
   bool default_profile;
+  // ignore: non_constant_identifier_names
   bool default_profile_image;
   String description;
+  // ignore: non_constant_identifier_names
   int favourites_count;
+  // ignore: non_constant_identifier_names
   int followers_count;
+  // ignore: non_constant_identifier_names
   int friends_count;
+  // ignore: non_constant_identifier_names
   bool geo_enabled;
+  // ignore: non_constant_identifier_names
   bool has_extended_profile;
   int id;
+  // ignore: non_constant_identifier_names
   String id_str;
+  // ignore: non_constant_identifier_names
   bool is_translation_enabled;
+  // ignore: non_constant_identifier_names
   bool is_translator;
+  // ignore: non_constant_identifier_names
   int listed_count;
   String location;
   String name;
+  // ignore: non_constant_identifier_names
   String profile_background_color;
+  // ignore: non_constant_identifier_names
   String profile_background_image_url;
+  // ignore: non_constant_identifier_names
   String profile_background_image_url_https;
+  // ignore: non_constant_identifier_names
   bool profile_background_tile;
+  // ignore: non_constant_identifier_names
   String profile_banner_url;
+  // ignore: non_constant_identifier_names
   String profile_image_url;
+  // ignore: non_constant_identifier_names
   String profile_image_url_https;
+  // ignore: non_constant_identifier_names
   String profile_link_color;
+  // ignore: non_constant_identifier_names
   String profile_sidebar_border_color;
+  // ignore: non_constant_identifier_names
   String profile_sidebar_fill_color;
+  // ignore: non_constant_identifier_names
   String profile_text_color;
+  // ignore: non_constant_identifier_names
   bool profile_use_background_image;
+  // ignore: non_constant_identifier_names
   String screen_name;
+  // ignore: non_constant_identifier_names
   int statuses_count;
+  // ignore: non_constant_identifier_names
   String translator_type;
   bool verified;
 
   User(
       {this.protected,
+      // ignore: non_constant_identifier_names
       this.contributors_enabled,
+      // ignore: non_constant_identifier_names
       this.created_at,
+      // ignore: non_constant_identifier_names
       this.default_profile,
+      // ignore: non_constant_identifier_names
       this.default_profile_image,
       this.description,
+      // ignore: non_constant_identifier_names
       this.favourites_count,
+      // ignore: non_constant_identifier_names
       this.followers_count,
+      // ignore: non_constant_identifier_names
       this.friends_count,
+      // ignore: non_constant_identifier_names
       this.geo_enabled,
+      // ignore: non_constant_identifier_names
       this.has_extended_profile,
       this.id,
+      // ignore: non_constant_identifier_names
       this.id_str,
+      // ignore: non_constant_identifier_names
       this.is_translation_enabled,
+      // ignore: non_constant_identifier_names
       this.is_translator,
+      // ignore: non_constant_identifier_names
       this.listed_count,
       this.location,
       this.name,
+      // ignore: non_constant_identifier_names
       this.profile_background_color,
+      // ignore: non_constant_identifier_names
       this.profile_background_image_url,
+      // ignore: non_constant_identifier_names
       this.profile_background_image_url_https,
+      // ignore: non_constant_identifier_names
       this.profile_background_tile,
+      // ignore: non_constant_identifier_names
       this.profile_banner_url,
+      // ignore: non_constant_identifier_names
       this.profile_image_url,
+      // ignore: non_constant_identifier_names
       this.profile_image_url_https,
+      // ignore: non_constant_identifier_names
       this.profile_link_color,
+      // ignore: non_constant_identifier_names
       this.profile_sidebar_border_color,
+      // ignore: non_constant_identifier_names
       this.profile_sidebar_fill_color,
+      // ignore: non_constant_identifier_names
       this.profile_text_color,
+      // ignore: non_constant_identifier_names
       this.profile_use_background_image,
+      // ignore: non_constant_identifier_names
       this.screen_name,
+      // ignore: non_constant_identifier_names
       this.statuses_count,
+      // ignore: non_constant_identifier_names
       this.translator_type,
       this.verified});
 
@@ -167,7 +239,8 @@ class User {
       name: json['name'],
       profile_background_color: json['profile_background_color'],
       profile_background_image_url: json['profile_background_image_url'],
-      profile_background_image_url_https: json['profile_background_image_url_https'],
+      profile_background_image_url_https:
+          json['profile_background_image_url_https'],
       profile_background_tile: json['profile_background_tile'],
       profile_banner_url: json['profile_banner_url'],
       profile_image_url: json['profile_image_url'],
@@ -206,7 +279,8 @@ class User {
     data['name'] = this.name;
     data['profile_background_color'] = this.profile_background_color;
     data['profile_background_image_url'] = this.profile_background_image_url;
-    data['profile_background_image_url_https'] = this.profile_background_image_url_https;
+    data['profile_background_image_url_https'] =
+        this.profile_background_image_url_https;
     data['profile_background_tile'] = this.profile_background_tile;
     data['profile_banner_url'] = this.profile_banner_url;
     data['profile_image_url'] = this.profile_image_url;
@@ -225,20 +299,45 @@ class User {
 }
 
 class RetweetedStatus {
+  // ignore: non_constant_identifier_names
   String created_at;
+  // ignore: non_constant_identifier_names
   int favorite_count;
   bool favorited;
+  // ignore: non_constant_identifier_names
   String full_text;
   int id;
+  // ignore: non_constant_identifier_names
   String id_str;
+  // ignore: non_constant_identifier_names
   bool is_quote_status;
   String lang;
+  // ignore: non_constant_identifier_names
   int retweet_count;
   bool retweeted;
   String source;
   UserX user;
 
-  RetweetedStatus({this.created_at, this.favorite_count, this.favorited, this.full_text, this.id, this.id_str, this.is_quote_status, this.lang, this.retweet_count, this.retweeted, this.source, this.user});
+  // ignore: non_constant_identifier_names
+  RetweetedStatus(
+      // ignore: non_constant_identifier_names
+      {this.created_at,
+      // ignore: non_constant_identifier_names
+      this.favorite_count,
+      this.favorited,
+      // ignore: non_constant_identifier_names
+      this.full_text,
+      this.id,
+      // ignore: non_constant_identifier_names
+      this.id_str,
+      // ignore: non_constant_identifier_names
+      this.is_quote_status,
+      this.lang,
+      // ignore: non_constant_identifier_names
+      this.retweet_count,
+      this.retweeted,
+      this.source,
+      this.user});
 
   factory RetweetedStatus.fromJson(Map<String, dynamic> json) {
     return RetweetedStatus(
@@ -279,72 +378,126 @@ class RetweetedStatus {
 
 class UserX {
   bool protected;
+  // ignore: non_constant_identifier_names
   bool contributors_enabled;
+  // ignore: non_constant_identifier_names
   String created_at;
+  // ignore: non_constant_identifier_names
   bool default_profile;
+  // ignore: non_constant_identifier_names
   bool default_profile_image;
   String description;
+  // ignore: non_constant_identifier_names
   int favourites_count;
+  // ignore: non_constant_identifier_names
   int followers_count;
+  // ignore: non_constant_identifier_names
   int friends_count;
+  // ignore: non_constant_identifier_names
   bool geo_enabled;
+  // ignore: non_constant_identifier_names
   bool has_extended_profile;
   int id;
+  // ignore: non_constant_identifier_names
   String id_str;
+  // ignore: non_constant_identifier_names
   bool is_translation_enabled;
+  // ignore: non_constant_identifier_names
   bool is_translator;
+  // ignore: non_constant_identifier_names
   int listed_count;
   String location;
   String name;
+  // ignore: non_constant_identifier_names
   String profile_background_color;
+  // ignore: non_constant_identifier_names
   String profile_background_image_url;
+  // ignore: non_constant_identifier_names
   String profile_background_image_url_https;
+  // ignore: non_constant_identifier_names
   bool profile_background_tile;
+  // ignore: non_constant_identifier_names
   String profile_image_url;
+  // ignore: non_constant_identifier_names
   String profile_image_url_https;
+  // ignore: non_constant_identifier_names
   String profile_link_color;
+  // ignore: non_constant_identifier_names
   String profile_sidebar_border_color;
+  // ignore: non_constant_identifier_names
   String profile_sidebar_fill_color;
+  // ignore: non_constant_identifier_names
   String profile_text_color;
+  // ignore: non_constant_identifier_names
   bool profile_use_background_image;
+  // ignore: non_constant_identifier_names
   String screen_name;
+  // ignore: non_constant_identifier_names
   int statuses_count;
+  // ignore: non_constant_identifier_names
   String translator_type;
   String url;
   bool verified;
 
   UserX(
       {this.protected,
+      // ignore: non_constant_identifier_names
       this.contributors_enabled,
+      // ignore: non_constant_identifier_names
       this.created_at,
+      // ignore: non_constant_identifier_names
       this.default_profile,
+      // ignore: non_constant_identifier_names
       this.default_profile_image,
       this.description,
+      // ignore: non_constant_identifier_names
       this.favourites_count,
+      // ignore: non_constant_identifier_names
       this.followers_count,
+      // ignore: non_constant_identifier_names
       this.friends_count,
+      // ignore: non_constant_identifier_names
       this.geo_enabled,
+      // ignore: non_constant_identifier_names
       this.has_extended_profile,
       this.id,
+      // ignore: non_constant_identifier_names
       this.id_str,
+      // ignore: non_constant_identifier_names
       this.is_translation_enabled,
+      // ignore: non_constant_identifier_names
       this.is_translator,
+      // ignore: non_constant_identifier_names
       this.listed_count,
       this.location,
       this.name,
+      // ignore: non_constant_identifier_names
       this.profile_background_color,
+      // ignore: non_constant_identifier_names
       this.profile_background_image_url,
+      // ignore: non_constant_identifier_names
       this.profile_background_image_url_https,
+      // ignore: non_constant_identifier_names
       this.profile_background_tile,
+      // ignore: non_constant_identifier_names
       this.profile_image_url,
+      // ignore: non_constant_identifier_names
       this.profile_image_url_https,
+      // ignore: non_constant_identifier_names
       this.profile_link_color,
+      // ignore: non_constant_identifier_names
       this.profile_sidebar_border_color,
+      // ignore: non_constant_identifier_names
       this.profile_sidebar_fill_color,
+      // ignore: non_constant_identifier_names
       this.profile_text_color,
+      // ignore: non_constant_identifier_names
       this.profile_use_background_image,
+      // ignore: non_constant_identifier_names
       this.screen_name,
+      // ignore: non_constant_identifier_names
       this.statuses_count,
+      // ignore: non_constant_identifier_names
       this.translator_type,
       this.url,
       this.verified});
@@ -371,7 +524,8 @@ class UserX {
       name: json['name'],
       profile_background_color: json['profile_background_color'],
       profile_background_image_url: json['profile_background_image_url'],
-      profile_background_image_url_https: json['profile_background_image_url_https'],
+      profile_background_image_url_https:
+          json['profile_background_image_url_https'],
       profile_background_tile: json['profile_background_tile'],
       profile_image_url: json['profile_image_url'],
       profile_image_url_https: json['profile_image_url_https'],
@@ -410,7 +564,8 @@ class UserX {
     data['name'] = this.name;
     data['profile_background_color'] = this.profile_background_color;
     data['profile_background_image_url'] = this.profile_background_image_url;
-    data['profile_background_image_url_https'] = this.profile_background_image_url_https;
+    data['profile_background_image_url_https'] =
+        this.profile_background_image_url_https;
     data['profile_background_tile'] = this.profile_background_tile;
     data['profile_image_url'] = this.profile_image_url;
     data['profile_image_url_https'] = this.profile_image_url_https;

@@ -4,10 +4,8 @@ import 'package:gnews/utils/Colors.dart';
 import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../AppLocalizations.dart';
 import '../screens/StoryListScreen.dart';
 import 'AppWidgets.dart';
-import 'ViewAllHeadingWidget.dart';
 
 class StoryListWidget extends StatelessWidget {
   static String tag = '/StoryListWidget';
@@ -20,7 +18,6 @@ class StoryListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (getBoolAsync(DISABLE_STORY_WIDGET)) return SizedBox();
-    var appLocale = AppLocalizations.of(context);
     var h = 70.0;
 
     return Column(

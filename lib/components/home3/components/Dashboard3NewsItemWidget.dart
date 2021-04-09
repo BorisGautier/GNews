@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:gnews/components/AppWidgets.dart';
 import 'package:gnews/main.dart';
 import 'package:gnews/models/DashboardResponse.dart';
-import 'package:gnews/screens/NewsDetailScreen.dart';
 import 'package:gnews/utils/Colors.dart';
 import 'package:gnews/utils/Common.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -39,8 +38,6 @@ class Dashboard3NewsItemWidgetState extends State<Dashboard3NewsItemWidget> {
 
   @override
   Widget build(BuildContext context) {
-    String heroTag = '${widget.newsData.iD}${currentTimeStamp()}';
-
     return Container(
       margin: EdgeInsets.all(8),
       decoration: boxDecorationWithRoundedCorners(

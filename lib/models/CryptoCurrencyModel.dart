@@ -6,7 +6,9 @@ class CryptoCurrencyModel {
 
   factory CryptoCurrencyModel.fromJson(Map<String, dynamic> json) {
     return CryptoCurrencyModel(
-      data: json['data'] != null ? CurrencyDataModel.fromJson(json['data']) : null,
+      data: json['data'] != null
+          ? CurrencyDataModel.fromJson(json['data'])
+          : null,
       status: json['status'] != null ? Status.fromJson(json['status']) : null,
     );
   }
@@ -24,14 +26,27 @@ class CryptoCurrencyModel {
 }
 
 class Status {
+  // ignore: non_constant_identifier_names
   int credit_count;
   int elapsed;
+  // ignore: non_constant_identifier_names
   int error_code;
+  // ignore: non_constant_identifier_names
   String error_message;
   String notice;
   String timestamp;
 
-  Status({this.credit_count, this.elapsed, this.error_code, this.error_message, this.notice, this.timestamp});
+  // ignore: non_constant_identifier_names
+  Status(
+      // ignore: non_constant_identifier_names
+      {this.credit_count,
+      this.elapsed,
+      // ignore: non_constant_identifier_names
+      this.error_code,
+      // ignore: non_constant_identifier_names
+      this.error_message,
+      this.notice,
+      this.timestamp});
 
   factory Status.fromJson(Map<String, dynamic> json) {
     return Status(
@@ -64,8 +79,12 @@ class CurrencyDataModel {
 
   factory CurrencyDataModel.fromJson(Map<String, dynamic> json) {
     return CurrencyDataModel(
-      btc: json['BTC'] != null ? (json['BTC'] as List).map((i) => CurrencyModel.fromJson(i)).toList() : null,
-      eth: json['ETH'] != null ? (json['ETH'] as List).map((i) => CurrencyModel.fromJson(i)).toList() : null,
+      btc: json['BTC'] != null
+          ? (json['BTC'] as List).map((i) => CurrencyModel.fromJson(i)).toList()
+          : null,
+      eth: json['ETH'] != null
+          ? (json['ETH'] as List).map((i) => CurrencyModel.fromJson(i)).toList()
+          : null,
     );
   }
 
@@ -141,10 +160,12 @@ class Quote {
 
 class USD {
   double price;
+  // ignore: non_constant_identifier_names
   double percent_change_24h;
 
   USD({
     this.price,
+    // ignore: non_constant_identifier_names
     this.percent_change_24h,
   });
 
