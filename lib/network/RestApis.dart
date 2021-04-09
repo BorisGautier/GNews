@@ -125,7 +125,7 @@ Future<List<TweetModel>> loadTweetConfig() async {
 Future<List<TweetModel>> loadTweets() async {
   return await get(
     Uri.parse(
-        'https://api.twitter.com/1.1/statuses/user_timeline.json?tweet_mode=extended&screen_name=${getStringAsync(TWITTER_USERNAME)}'),
+        'https://api.twitter.com/1.1/statuses/user_timeline.json?tweet_mode=extended&screen_name=GNews237'),
     headers: {
       'Authorization': 'Bearer ${getStringAsync(TWITTER_ACCESS_TOKEN)}'
     },
