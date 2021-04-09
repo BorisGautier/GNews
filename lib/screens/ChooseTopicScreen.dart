@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mighty_news/components/AppWidgets.dart';
-import 'package:mighty_news/components/CategoryItemWidget.dart';
-import 'package:mighty_news/models/CategoryData.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/shimmer/TopicShimmer.dart';
-import 'package:mighty_news/utils/Common.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/components/AppWidgets.dart';
+import 'package:gnews/components/CategoryItemWidget.dart';
+import 'package:gnews/models/CategoryData.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/shimmer/TopicShimmer.dart';
+import 'package:gnews/utils/Common.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../AppLocalizations.dart';
@@ -70,7 +70,7 @@ class ChooseTopicScreenState extends State<ChooseTopicScreen> {
     var appLocalization = AppLocalizations.of(context);
 
     return SafeArea(
-top: !isIos,
+      top: !isIos,
       child: Scaffold(
         appBar: appBarWidget(
           appLocalization.translate('choose_Topics'),
@@ -78,14 +78,19 @@ top: !isIos,
           color: getAppBarWidgetBackGroundColor(),
           textColor: getAppBarWidgetTextColor(),
           actions: [
-            IconButton(icon: Icon(Icons.check, color: Theme.of(context).iconTheme.color), onPressed: () => save()),
+            IconButton(
+                icon:
+                    Icon(Icons.check, color: Theme.of(context).iconTheme.color),
+                onPressed: () => save()),
           ],
         ),
         body: Stack(
           fit: StackFit.expand,
           children: [
             FutureBuilder<List<CategoryData>>(
-              initialData: getStringAsync(CATEGORY_DATA).isEmpty ? null : getInitialData(),
+              initialData: getStringAsync(CATEGORY_DATA).isEmpty
+                  ? null
+                  : getInitialData(),
               future: getCategories(),
               builder: (_, snap) {
                 if (snap.hasData) {

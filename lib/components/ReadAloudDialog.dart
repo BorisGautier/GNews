@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:mighty_news/components/AppWidgets.dart';
-import 'package:mighty_news/main.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/components/AppWidgets.dart';
+import 'package:gnews/main.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 enum TtsState { playing, stopped, paused, continued }
@@ -17,7 +16,8 @@ class ReadAloudDialog extends StatefulWidget {
   ReadAloudDialogState createState() => ReadAloudDialogState();
 }
 
-class ReadAloudDialogState extends State<ReadAloudDialog> with TickerProviderStateMixin {
+class ReadAloudDialogState extends State<ReadAloudDialog>
+    with TickerProviderStateMixin {
   FlutterTts flutterTts = FlutterTts();
 
   TtsState ttsState = TtsState.stopped;
@@ -31,7 +31,8 @@ class ReadAloudDialogState extends State<ReadAloudDialog> with TickerProviderSta
   @override
   void initState() {
     super.initState();
-    animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 400));
+    animationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 400));
 
     init();
   }
@@ -65,7 +66,8 @@ class ReadAloudDialogState extends State<ReadAloudDialog> with TickerProviderSta
       stop();
     });
 
-    flutterTts.setProgressHandler((String text, int startOffset, int endOffset, String word) {
+    flutterTts.setProgressHandler(
+        (String text, int startOffset, int endOffset, String word) {
       currentWordPosition++;
 
       if (progress < 100) {
@@ -149,7 +151,7 @@ class ReadAloudDialogState extends State<ReadAloudDialog> with TickerProviderSta
         alignment: Alignment.bottomCenter,
         children: [
           cachedImage(
-            'https://3.bp.blogspot.com/-BogykpVgXv8/WYeJk--8xOI/AAAAAAAACWk/GORfjYPnTMoeeMH7uV61H0SPBy02j4ERACLcBGAs/s1600/Relaxing%2BQuotes%2Bwww.mostphrases.blogspot.com.jpg',
+            'https://www.e-tribart.fr/blog/wp-content/uploads/2013/04/1.jpg',
             fit: BoxFit.cover,
           ).cornerRadiusWithClipRRect(defaultRadius).opacity(opacity: 0.7),
           Column(
@@ -161,12 +163,16 @@ class ReadAloudDialogState extends State<ReadAloudDialog> with TickerProviderSta
                   //Text('${ttsState == TtsState.playing ? 'Playing' : 'Stopped'}', style: boldTextStyle()),
                   //30.width,
                   Container(
-                    decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle, color: Colors.white),
                     child: IconButton(
                       onPressed: () {
                         ttsState == TtsState.playing ? stop() : speak();
                       },
-                      icon: AnimatedIcon(icon: AnimatedIcons.play_pause, progress: animationController, color: Colors.black),
+                      icon: AnimatedIcon(
+                          icon: AnimatedIcons.play_pause,
+                          progress: animationController,
+                          color: Colors.black),
                     ),
                   ),
                   16.width,
@@ -174,14 +180,18 @@ class ReadAloudDialogState extends State<ReadAloudDialog> with TickerProviderSta
                     children: [
                       Container(
                         height: 10,
-                        decoration: BoxDecoration(color: Colors.white.withOpacity(0.3), borderRadius: radius(defaultRadius)),
+                        decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.3),
+                            borderRadius: radius(defaultRadius)),
                         alignment: Alignment.centerLeft,
                         width: 200,
                       ),
                       AnimatedContainer(
                         duration: Duration(milliseconds: 800),
                         height: 10,
-                        decoration: BoxDecoration(color: Colors.white, borderRadius: radius(defaultRadius)),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: radius(defaultRadius)),
                         alignment: Alignment.centerLeft,
                         width: (progress * 2).toDouble(),
                       ),

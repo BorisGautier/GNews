@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mighty_news/AppLocalizations.dart';
-import 'package:mighty_news/main.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/utils/Colors.dart';
-import 'package:mighty_news/utils/Common.dart';
+import 'package:gnews/AppLocalizations.dart';
+import 'package:gnews/main.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/utils/Colors.dart';
+import 'package:gnews/utils/Common.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class PostCommentDialog extends StatefulWidget {
@@ -39,7 +39,8 @@ class PostCommentDialogState extends State<PostCommentDialog> {
     var appLocalization = AppLocalizations.of(context);
 
     Future<void> submit() async {
-      if (commentCont.text.isEmpty) return toast(appLocalization.translate('write_comment'));
+      if (commentCont.text.isEmpty)
+        return toast(appLocalization.translate('write_comment'));
 
       var request = {
         'comment_content': commentCont.text,
@@ -69,7 +70,8 @@ class PostCommentDialogState extends State<PostCommentDialog> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(appLocalization.translate('post_comment'), style: boldTextStyle()),
+                Text(appLocalization.translate('post_comment'),
+                    style: boldTextStyle()),
                 CloseButton(),
               ],
             ),
@@ -77,7 +79,8 @@ class PostCommentDialogState extends State<PostCommentDialog> {
               controller: commentCont,
               textFieldType: TextFieldType.ADDRESS,
               textCapitalization: TextCapitalization.sentences,
-              decoration: inputDecoration(context, hint: appLocalization.translate('write_here')),
+              decoration: inputDecoration(context,
+                  hint: appLocalization.translate('write_here')),
               maxLines: 4,
               minLines: 4,
               textStyle: primaryTextStyle(),
@@ -92,7 +95,8 @@ class PostCommentDialogState extends State<PostCommentDialog> {
               text: appLocalization.translate('post'),
               color: appStore.isDarkMode ? scaffoldSecondaryDark : colorPrimary,
               textStyle: boldTextStyle(color: white),
-            ).visible(!appStore.isLoading, defaultWidget: Loader().center().visible(appStore.isLoading))
+            ).visible(!appStore.isLoading,
+                defaultWidget: Loader().center().visible(appStore.isLoading))
           ],
         ),
       ),

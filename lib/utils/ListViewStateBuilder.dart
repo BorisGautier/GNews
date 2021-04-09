@@ -9,7 +9,13 @@ class ListViewStateBuilder extends StatefulWidget {
   final Widget loaderWidget;
   final bool hasError;
 
-  ListViewStateBuilder({@required this.length, this.listView, this.emptyWidget, this.errorWidget, this.hasError, this.loaderWidget});
+  ListViewStateBuilder(
+      {@required this.length,
+      this.listView,
+      this.emptyWidget,
+      this.errorWidget,
+      this.hasError,
+      this.loaderWidget});
 
   @override
   _ListViewStateBuilderState createState() => _ListViewStateBuilderState();

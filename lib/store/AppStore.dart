@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mighty_news/models/CurrencyStoreModel.dart';
-import 'package:mighty_news/utils/Colors.dart';
-import 'package:mighty_news/utils/Common.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/models/CurrencyStoreModel.dart';
+import 'package:gnews/utils/Colors.dart';
+import 'package:gnews/utils/Common.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:mobx/mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
@@ -158,7 +158,8 @@ abstract class _AppStore with Store {
 
     appBarTheme = AppBarTheme(
       brightness: getSystemBrightness(),
-      systemOverlayStyle: SystemUiOverlayStyle(statusBarIconBrightness: getSystemIconBrightness()),
+      systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarIconBrightness: getSystemIconBrightness()),
     );
 
     setDynamicStatusBarColor();
@@ -168,7 +169,8 @@ abstract class _AppStore with Store {
   Future<void> setLanguage(String aSelectedLanguageCode) async {
     selectedLanguageCode = aSelectedLanguageCode;
 
-    language = languages.firstWhere((element) => element.languageCode == aSelectedLanguageCode);
+    language = languages
+        .firstWhere((element) => element.languageCode == aSelectedLanguageCode);
     await setValue(LANGUAGE, aSelectedLanguageCode);
   }
 }

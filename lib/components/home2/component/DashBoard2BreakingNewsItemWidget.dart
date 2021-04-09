@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_news/models/DashboardResponse.dart';
-import 'package:mighty_news/utils/Common.dart';
+import 'package:gnews/models/DashboardResponse.dart';
+import 'package:gnews/utils/Common.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../AppWidgets.dart';
@@ -13,10 +13,12 @@ class DashBoard2BreakingNewsItemWidget extends StatefulWidget {
   DashBoard2BreakingNewsItemWidget(this.newsData, {this.onTap});
 
   @override
-  DashBoard2BreakingNewsItemWidgetState createState() => DashBoard2BreakingNewsItemWidgetState();
+  DashBoard2BreakingNewsItemWidgetState createState() =>
+      DashBoard2BreakingNewsItemWidgetState();
 }
 
-class DashBoard2BreakingNewsItemWidgetState extends State<DashBoard2BreakingNewsItemWidget> {
+class DashBoard2BreakingNewsItemWidgetState
+    extends State<DashBoard2BreakingNewsItemWidget> {
   @override
   void initState() {
     super.initState();
@@ -34,19 +36,22 @@ class DashBoard2BreakingNewsItemWidgetState extends State<DashBoard2BreakingNews
 
   @override
   Widget build(BuildContext context) {
-    String heroTag = '${widget.newsData.iD}${currentTimeStamp()}';
-
     return Container(
       decoration: BoxDecoration(
-        boxShadow: [BoxShadow(color: white.withOpacity(0.1), spreadRadius: 0.5, blurRadius: 1.0)],
+        boxShadow: [
+          BoxShadow(
+              color: white.withOpacity(0.1), spreadRadius: 0.5, blurRadius: 1.0)
+        ],
         borderRadius: radius(),
       ),
       margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Stack(
         fit: StackFit.expand,
         children: [
-          cachedImage(widget.newsData.image.validate(), fit: BoxFit.cover).cornerRadiusWithClipRRect(defaultRadius),
-          Container(color: Colors.black38).cornerRadiusWithClipRRect(defaultRadius),
+          cachedImage(widget.newsData.image.validate(), fit: BoxFit.cover)
+              .cornerRadiusWithClipRRect(defaultRadius),
+          Container(color: Colors.black38)
+              .cornerRadiusWithClipRRect(defaultRadius),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -54,7 +59,8 @@ class DashBoard2BreakingNewsItemWidgetState extends State<DashBoard2BreakingNews
               Text(
                 parseHtmlString(widget.newsData.post_title.validate()),
                 maxLines: 1,
-                style: boldTextStyle(size: 20, color: Colors.white, fontFamily: titleFont()),
+                style: boldTextStyle(
+                    size: 20, color: Colors.white, fontFamily: titleFont()),
               ),
               Text(
                 parseHtmlString(widget.newsData.post_content.validate()),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_news/components/home2/component/DashBoard2BreakingNewsItemWidget.dart';
-import 'package:mighty_news/models/DashboardResponse.dart';
-import 'package:mighty_news/screens/NewsDetailListScreen.dart';
-import 'package:mighty_news/utils/Common.dart';
+import 'package:gnews/components/home2/component/DashBoard2BreakingNewsItemWidget.dart';
+import 'package:gnews/models/DashboardResponse.dart';
+import 'package:gnews/screens/NewsDetailListScreen.dart';
+import 'package:gnews/utils/Common.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../../main.dart';
@@ -14,10 +14,13 @@ class DashBoard2BreakingNewsListWidget extends StatefulWidget {
   DashBoard2BreakingNewsListWidget(this.newsList);
 
   @override
-  DashBoard2BreakingNewsListWidgetState createState() => DashBoard2BreakingNewsListWidgetState();
+  DashBoard2BreakingNewsListWidgetState createState() =>
+      DashBoard2BreakingNewsListWidgetState();
 }
 
-class DashBoard2BreakingNewsListWidgetState extends State<DashBoard2BreakingNewsListWidget> with AfterLayoutMixin<DashBoard2BreakingNewsListWidget> {
+class DashBoard2BreakingNewsListWidgetState
+    extends State<DashBoard2BreakingNewsListWidget>
+    with AfterLayoutMixin<DashBoard2BreakingNewsListWidget> {
   PageController pageController = PageController();
 
   double currentPage = 0;
@@ -44,7 +47,12 @@ class DashBoard2BreakingNewsListWidgetState extends State<DashBoard2BreakingNews
     pages = widget.newsList
         .asMap()
         .map((index, e) {
-          return MapEntry(index, DashBoard2BreakingNewsItemWidget(e, onTap: () => NewsDetailListScreen(widget.newsList, index: index).launch(context)));
+          return MapEntry(
+              index,
+              DashBoard2BreakingNewsItemWidget(e,
+                  onTap: () =>
+                      NewsDetailListScreen(widget.newsList, index: index)
+                          .launch(context)));
         })
         .values
         .toList();
@@ -68,7 +76,9 @@ class DashBoard2BreakingNewsListWidgetState extends State<DashBoard2BreakingNews
       height: getDashBoard2WidgetHeight(),
       child: Stack(
         children: [
-          PageView(controller: pageController, children: pages.map((e) => e).toList()),
+          PageView(
+              controller: pageController,
+              children: pages.map((e) => e).toList()),
           16.height,
           Positioned(
             bottom: 12,
@@ -81,7 +91,8 @@ class DashBoard2BreakingNewsListWidgetState extends State<DashBoard2BreakingNews
               indicatorColor: appStore.isDarkMode ? gray : getPrimaryColor(),
               dotSize: 5,
               onDotTap: (s) {
-                pageController.animateToPage(s, duration: 5.milliseconds, curve: Curves.bounceIn);
+                pageController.animateToPage(s,
+                    duration: 5.milliseconds, curve: Curves.bounceIn);
               },
             ),
           ),

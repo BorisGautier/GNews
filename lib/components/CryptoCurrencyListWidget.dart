@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mighty_news/components/CryptoCurrencyWidget.dart';
-import 'package:mighty_news/utils/Colors.dart';
-import 'package:mighty_news/utils/Constants.dart';
-import 'package:mighty_news/utils/Marquee2Custom.dart' as m2;
+import 'package:gnews/components/CryptoCurrencyWidget.dart';
+import 'package:gnews/utils/Colors.dart';
+import 'package:gnews/utils/Constants.dart';
+import 'package:gnews/utils/Marquee2Custom.dart' as m2;
 import 'package:nb_utils/nb_utils.dart';
 
 import '../main.dart';
@@ -12,7 +12,8 @@ class CryptoCurrencyListWidget extends StatefulWidget {
   static String tag = '/CryptoCurrencyListWidget';
 
   @override
-  CryptoCurrencyListWidgetState createState() => CryptoCurrencyListWidgetState();
+  CryptoCurrencyListWidgetState createState() =>
+      CryptoCurrencyListWidgetState();
 }
 
 class CryptoCurrencyListWidgetState extends State<CryptoCurrencyListWidget> {
@@ -37,16 +38,25 @@ class CryptoCurrencyListWidgetState extends State<CryptoCurrencyListWidget> {
             children: [
               CryptoCurrencyWidget(
                 image: 'assets/bitcoin.png',
-                price: appStore.currencyStoreModel.bitcoinPrice.validate().toStringAsFixed(2),
-                change: appStore.currencyStoreModel.bitcoinChange.toStringAsFixed(2),
-                color: appStore.currencyStoreModel.bitcoinChange.isNegative ? colorPrimary : Colors.green,
+                price: appStore.currencyStoreModel.bitcoinPrice
+                    .validate()
+                    .toStringAsFixed(2),
+                change: appStore.currencyStoreModel.bitcoinChange
+                    .toStringAsFixed(2),
+                color: appStore.currencyStoreModel.bitcoinChange.isNegative
+                    ? colorPrimary
+                    : Colors.green,
               ),
               16.width,
               CryptoCurrencyWidget(
                 image: 'assets/ethereum.png',
-                price: appStore.currencyStoreModel.ethereumPrice.toStringAsFixed(2),
-                change: appStore.currencyStoreModel.ethereumChange.toStringAsFixed(2),
-                color: appStore.currencyStoreModel.ethereumChange.isNegative ? colorPrimary : Colors.green,
+                price: appStore.currencyStoreModel.ethereumPrice
+                    .toStringAsFixed(2),
+                change: appStore.currencyStoreModel.ethereumChange
+                    .toStringAsFixed(2),
+                color: appStore.currencyStoreModel.ethereumChange.isNegative
+                    ? colorPrimary
+                    : Colors.green,
               ),
               16.width,
             ],

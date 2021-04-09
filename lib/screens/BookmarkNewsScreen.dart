@@ -2,13 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mighty_news/AppLocalizations.dart';
-import 'package:mighty_news/components/NewsItemWidget.dart';
-import 'package:mighty_news/models/DashboardResponse.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/utils/Common.dart';
-import 'package:mighty_news/utils/Constants.dart';
-import 'package:mighty_news/utils/ListViewStateBuilder.dart';
+import 'package:gnews/AppLocalizations.dart';
+import 'package:gnews/components/NewsItemWidget.dart';
+import 'package:gnews/models/DashboardResponse.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/utils/Common.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../main.dart';
@@ -38,7 +37,8 @@ class BookmarkNewsScreenState extends State<BookmarkNewsScreen> {
 
     loadNews();
     scrollController.addListener(() {
-      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
         if (page < numPage) {
           page++;
           loadNews();
@@ -96,7 +96,10 @@ class BookmarkNewsScreenState extends State<BookmarkNewsScreen> {
     return SafeArea(
       top: !isIos,
       child: Scaffold(
-        appBar: appBarWidget(appLocalization.translate('Bookmarks'), showBack: true, color: getAppBarWidgetBackGroundColor(), textColor: getAppBarWidgetTextColor()),
+        appBar: appBarWidget(appLocalization.translate('Bookmarks'),
+            showBack: true,
+            color: getAppBarWidgetBackGroundColor(),
+            textColor: getAppBarWidgetTextColor()),
         body: Observer(
           builder: (_) => Stack(
             fit: StackFit.expand,

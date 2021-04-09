@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_news/components/home2/component/DashBoard2NewsItemWidget.dart';
-import 'package:mighty_news/models/DashboardResponse.dart';
-import 'package:mighty_news/screens/NewsDetailListScreen.dart';
-import 'package:mighty_news/utils/Common.dart';
+import 'package:gnews/components/home2/component/DashBoard2NewsItemWidget.dart';
+import 'package:gnews/models/DashboardResponse.dart';
+import 'package:gnews/screens/NewsDetailListScreen.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 // ignore: must_be_immutable
@@ -15,7 +14,8 @@ class DashBoard2NewsListWidget extends StatefulWidget {
   DashBoard2NewsListWidget(this.newsList, {this.enableScrolling, this.padding});
 
   @override
-  DashBoard2NewsListWidgetState createState() => DashBoard2NewsListWidgetState();
+  DashBoard2NewsListWidgetState createState() =>
+      DashBoard2NewsListWidgetState();
 }
 
 class DashBoard2NewsListWidgetState extends State<DashBoard2NewsListWidget> {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_news/AppLocalizations.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/screens/DashboardScreen.dart';
-import 'package:mighty_news/utils/Colors.dart';
-import 'package:mighty_news/utils/Common.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/AppLocalizations.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/screens/DashboardScreen.dart';
+import 'package:gnews/utils/Colors.dart';
+import 'package:gnews/utils/Common.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../main.dart';
@@ -13,10 +13,12 @@ class ChooseDashboardPageVariant extends StatefulWidget {
   static String tag = '/ChooseDashboardScreen';
 
   @override
-  ChooseDashboardPageVariantState createState() => ChooseDashboardPageVariantState();
+  ChooseDashboardPageVariantState createState() =>
+      ChooseDashboardPageVariantState();
 }
 
-class ChooseDashboardPageVariantState extends State<ChooseDashboardPageVariant> {
+class ChooseDashboardPageVariantState
+    extends State<ChooseDashboardPageVariant> {
   @override
   void initState() {
     super.initState();
@@ -46,7 +48,10 @@ class ChooseDashboardPageVariantState extends State<ChooseDashboardPageVariant> 
           textColor: getAppBarWidgetTextColor(),
           actions: [
             IconButton(
-              icon: Icon(Icons.home_outlined, color: getAppBarWidgetBackGroundColor().isDark() ? Colors.white : Colors.black),
+              icon: Icon(Icons.home_outlined,
+                  color: getAppBarWidgetBackGroundColor().isDark()
+                      ? Colors.white
+                      : Colors.black),
               onPressed: () {
                 DashboardScreen().launch(context, isNewTask: true);
               },
@@ -92,14 +97,17 @@ class ChooseDashboardPageVariantState extends State<ChooseDashboardPageVariant> 
     );
   }
 
-  Widget itemWidget({@required Function onTap, String title, int code = 1, String img}) {
+  Widget itemWidget(
+      {@required Function onTap, String title, int code = 1, String img}) {
     return Container(
       width: context.width() * 0.48,
       height: context.height() * 0.4,
       alignment: Alignment.center,
       decoration: BoxDecoration(
         border: Border.all(
-          color: getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) == code ? colorPrimary : Theme.of(context).dividerColor,
+          color: getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) == code
+              ? colorPrimary
+              : Theme.of(context).dividerColor,
         ),
       ),
       child: Stack(
@@ -112,12 +120,20 @@ class ChooseDashboardPageVariantState extends State<ChooseDashboardPageVariant> 
           ),
           AnimatedContainer(
             duration: Duration(milliseconds: 800),
-            color: getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) == code ? Colors.black12 : Colors.black45,
+            color: getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) == code
+                ? Colors.black12
+                : Colors.black45,
           ),
           AnimatedContainer(
             duration: Duration(milliseconds: 800),
-            child: Text(title.validate(), style: boldTextStyle(color: textPrimaryColor)),
-            decoration: BoxDecoration(color: getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) == code ? Colors.white : Colors.white54, borderRadius: radius(defaultRadius)),
+            child: Text(title.validate(),
+                style: boldTextStyle(color: textPrimaryColor)),
+            decoration: BoxDecoration(
+                color:
+                    getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) == code
+                        ? Colors.white
+                        : Colors.white54,
+                borderRadius: radius(defaultRadius)),
             padding: EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
           ).center(),
           Positioned(
@@ -127,8 +143,12 @@ class ChooseDashboardPageVariantState extends State<ChooseDashboardPageVariant> 
               duration: Duration(milliseconds: 800),
               padding: EdgeInsets.all(4),
               child: Icon(Icons.check, size: 18, color: colorPrimary),
-              decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle, boxShadow: defaultBoxShadow()),
-            ).visible(getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) == code),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                  boxShadow: defaultBoxShadow()),
+            ).visible(
+                getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) == code),
           ),
         ],
       ),

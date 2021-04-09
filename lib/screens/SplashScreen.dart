@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/screens/WalkThroughScreen.dart';
-import 'package:mighty_news/utils/Colors.dart';
-import 'package:mighty_news/utils/Common.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/screens/WalkThroughScreen.dart';
+import 'package:gnews/utils/Colors.dart';
+import 'package:gnews/utils/Common.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:package_info/package_info.dart';
 

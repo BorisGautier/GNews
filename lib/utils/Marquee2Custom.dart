@@ -140,8 +140,10 @@ class Marquee extends StatefulWidget {
             pauseAfterRound >= Duration.zero,
             "The pauseAfterRound cannot be negative as time travel isn't "
             "invented yet."),
-        assert(fadingEdgeStartFraction >= 0 && fadingEdgeStartFraction <= 1, "The fadingEdgeGradientFractionOnStart value should be between 0 and 1, inclusive"),
-        assert(fadingEdgeEndFraction >= 0 && fadingEdgeEndFraction <= 1, "The fadingEdgeGradientFractionOnEnd value should be between 0 and 1, inclusive"),
+        assert(fadingEdgeStartFraction >= 0 && fadingEdgeStartFraction <= 1,
+            "The fadingEdgeGradientFractionOnStart value should be between 0 and 1, inclusive"),
+        assert(fadingEdgeEndFraction >= 0 && fadingEdgeEndFraction <= 1,
+            "The fadingEdgeGradientFractionOnEnd value should be between 0 and 1, inclusive"),
         assert(
             startPadding != null,
             "The start padding cannot be null. If you don't want any "
@@ -550,9 +552,12 @@ class _MarqueeState extends State<Marquee> with SingleTickerProviderStateMixin {
   bool _isOnPause = false;
   int _roundCounter = 0;
 
-  bool get isDone => widget.numberOfRounds == null ? false : widget.numberOfRounds == _roundCounter;
+  bool get isDone => widget.numberOfRounds == null
+      ? false
+      : widget.numberOfRounds == _roundCounter;
 
-  bool get showFading => !widget.showFadingOnlyWhenScrolling ? true : !_isOnPause;
+  bool get showFading =>
+      !widget.showFadingOnlyWhenScrolling ? true : !_isOnPause;
 
   @override
   void initState() {
@@ -593,9 +598,17 @@ class _MarqueeState extends State<Marquee> with SingleTickerProviderStateMixin {
 
     // Calculate lengths (amount of pixels that each phase needs).
     final totalLength = context.width() + widget.blankSpace;
-    final accelerationLength = widget.accelerationCurve.integral * widget.velocity * _accelerationDuration.inMilliseconds / 1000.0;
-    final decelerationLength = widget.decelerationCurve.integral * widget.velocity * _decelerationDuration.inMilliseconds / 1000.0;
-    final linearLength = (totalLength - accelerationLength.abs() - decelerationLength.abs()) * (widget.velocity > 0 ? 1 : -1);
+    final accelerationLength = widget.accelerationCurve.integral *
+        widget.velocity *
+        _accelerationDuration.inMilliseconds /
+        1000.0;
+    final decelerationLength = widget.decelerationCurve.integral *
+        widget.velocity *
+        _decelerationDuration.inMilliseconds /
+        1000.0;
+    final linearLength =
+        (totalLength - accelerationLength.abs() - decelerationLength.abs()) *
+            (widget.velocity > 0 ? 1 : -1);
 
     // Calculate scroll positions at various scrolling phases.
     _startPosition = 2 * totalLength - widget.startPadding;
@@ -604,8 +617,11 @@ class _MarqueeState extends State<Marquee> with SingleTickerProviderStateMixin {
     _decelerationTarget = _linearTarget + decelerationLength;
 
     // Calculate durations for the phases.
-    _totalDuration = _accelerationDuration + _decelerationDuration + Duration(milliseconds: (linearLength / widget.velocity * 1000).toInt());
-    _linearDuration = _totalDuration - _accelerationDuration - _decelerationDuration;
+    _totalDuration = _accelerationDuration +
+        _decelerationDuration +
+        Duration(milliseconds: (linearLength / widget.velocity * 1000).toInt());
+    _linearDuration =
+        _totalDuration - _accelerationDuration - _decelerationDuration;
 
     assert(
         _totalDuration > Duration.zero,
@@ -650,11 +666,14 @@ class _MarqueeState extends State<Marquee> with SingleTickerProviderStateMixin {
   }
 
   // Methods that animate the controller.
-  Future<void> _accelerate() async => await _animateTo(_accelerationTarget, _accelerationDuration, widget.accelerationCurve);
+  Future<void> _accelerate() async => await _animateTo(
+      _accelerationTarget, _accelerationDuration, widget.accelerationCurve);
 
-  Future<void> _moveLinearly() async => await _animateTo(_linearTarget, _linearDuration, Curves.linear);
+  Future<void> _moveLinearly() async =>
+      await _animateTo(_linearTarget, _linearDuration, Curves.linear);
 
-  Future<void> _decelerate() async => await _animateTo(_decelerationTarget, _decelerationDuration, widget.decelerationCurve.flipped);
+  Future<void> _decelerate() async => await _animateTo(_decelerationTarget,
+      _decelerationDuration, widget.decelerationCurve.flipped);
 
   /// Helping method that either animates to the given target position or jumps
   /// right to it if the duration is Duration.zero.
@@ -665,24 +684,6 @@ class _MarqueeState extends State<Marquee> with SingleTickerProviderStateMixin {
     } else {
       _controller.jumpTo(target);
     }
-  }
-
-  /// Returns the width of the text.
-  double _getTextWidth(BuildContext context) {
-    /*final span = TextSpan(text: widget.text, style: widget.style);
-
-    final constraints = BoxConstraints(maxWidth: double.infinity);
-
-    final richTextWidget = Text.rich(span).build(context) as RichText;
-    final renderObject = richTextWidget.createRenderObject(context);
-    renderObject.layout(constraints);
-
-    final boxes = renderObject.getBoxesForSelection(TextSelection(
-      baseOffset: 0,
-      extentOffset: TextSpan(text: widget.text).toPlainText().length,
-    ));
-
-    return boxes.last.right;*/
   }
 
   @override
@@ -697,7 +698,8 @@ class _MarqueeState extends State<Marquee> with SingleTickerProviderStateMixin {
         alignment = isHorizontal ? Alignment.topCenter : Alignment.centerLeft;
         break;
       case CrossAxisAlignment.end:
-        alignment = isHorizontal ? Alignment.bottomCenter : Alignment.centerRight;
+        alignment =
+            isHorizontal ? Alignment.bottomCenter : Alignment.centerRight;
         break;
       case CrossAxisAlignment.center:
         alignment = Alignment.center;
@@ -715,7 +717,9 @@ class _MarqueeState extends State<Marquee> with SingleTickerProviderStateMixin {
       physics: NeverScrollableScrollPhysics(),
       itemBuilder: (_, i) {
         final text = i.isEven ? widget.child : _buildBlankSpace();
-        return alignment == null ? text : Align(alignment: alignment, child: text);
+        return alignment == null
+            ? text
+            : Align(alignment: alignment, child: text);
       },
     );
 
@@ -732,7 +736,8 @@ class _MarqueeState extends State<Marquee> with SingleTickerProviderStateMixin {
 
   Widget _wrapWithFadingEdgeScrollView(Widget child) {
     return FadingEdgeScrollView.fromScrollView(
-      gradientFractionOnStart: !showFading ? 0.0 : widget.fadingEdgeStartFraction,
+      gradientFractionOnStart:
+          !showFading ? 0.0 : widget.fadingEdgeStartFraction,
       gradientFractionOnEnd: !showFading ? 0.0 : widget.fadingEdgeEndFraction,
       child: child,
     );

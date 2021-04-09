@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_news/utils/Constants.dart';
-import 'package:mighty_news/utils/Marquee2Custom.dart' as m;
+import 'package:gnews/utils/Constants.dart';
+import 'package:gnews/utils/Marquee2Custom.dart' as m;
 import 'package:nb_utils/nb_utils.dart';
 
 import '../main.dart';
@@ -12,7 +12,8 @@ class BreakingNewsMarqueeWidget extends StatefulWidget {
   BreakingNewsMarqueeWidget({this.string});
 
   @override
-  BreakingNewsMarqueeWidgetState createState() => BreakingNewsMarqueeWidgetState();
+  BreakingNewsMarqueeWidgetState createState() =>
+      BreakingNewsMarqueeWidgetState();
 }
 
 class BreakingNewsMarqueeWidgetState extends State<BreakingNewsMarqueeWidget> {
@@ -39,7 +40,9 @@ class BreakingNewsMarqueeWidgetState extends State<BreakingNewsMarqueeWidget> {
     return Container(
       height: 45.0,
       width: context.width(),
-      decoration: BoxDecoration(boxShadow: defaultBoxShadow(), color: appStore.isDarkMode ? black : white),
+      decoration: BoxDecoration(
+          boxShadow: defaultBoxShadow(),
+          color: appStore.isDarkMode ? black : white),
       child: m.Marquee(
         child: Text(widget.string.validate(), style: boldTextStyle()),
         style: primaryTextStyle(),

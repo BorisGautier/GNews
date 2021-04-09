@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:mighty_news/main.dart';
-import 'package:mighty_news/models/DashboardResponse.dart';
-import 'package:mighty_news/utils/Colors.dart';
-import 'package:mighty_news/utils/Common.dart';
+import 'package:gnews/main.dart';
+import 'package:gnews/models/DashboardResponse.dart';
+import 'package:gnews/utils/Colors.dart';
+import 'package:gnews/utils/Common.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../AppWidgets.dart';
@@ -16,7 +16,8 @@ class DashBoard2NewsItemWidget extends StatefulWidget {
   DashBoard2NewsItemWidget(this.newsData, {this.onTap});
 
   @override
-  DashBoard2NewsItemWidgetState createState() => DashBoard2NewsItemWidgetState();
+  DashBoard2NewsItemWidgetState createState() =>
+      DashBoard2NewsItemWidgetState();
 }
 
 class DashBoard2NewsItemWidgetState extends State<DashBoard2NewsItemWidget> {
@@ -45,14 +46,21 @@ class DashBoard2NewsItemWidgetState extends State<DashBoard2NewsItemWidget> {
         decoration: BoxDecoration(
           color: appStore.isDarkMode ? scaffoldColorDark : white,
           borderRadius: radius(),
-          boxShadow: [BoxShadow(color: gray.withOpacity(0.4), blurRadius: 3.0, spreadRadius: 0.0)],
+          boxShadow: [
+            BoxShadow(
+                color: gray.withOpacity(0.4),
+                blurRadius: 3.0,
+                spreadRadius: 0.0)
+          ],
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ClipRRect(
-              borderRadius: radiusOnly(topLeft: defaultRadius, bottomLeft: defaultRadius),
-              child: cachedImage(widget.newsData.image.validate(), width: 130, height: 130, fit: BoxFit.cover),
+              borderRadius:
+                  radiusOnly(topLeft: defaultRadius, bottomLeft: defaultRadius),
+              child: cachedImage(widget.newsData.image.validate(),
+                  width: 130, height: 130, fit: BoxFit.cover),
             ),
             16.width,
             Column(
@@ -73,7 +81,8 @@ class DashBoard2NewsItemWidgetState extends State<DashBoard2NewsItemWidget> {
                 ),
                 8.height,
                 Align(
-                  child: Text(widget.newsData.human_time_diff.validate(), maxLines: 1, style: secondaryTextStyle(size: 12)),
+                  child: Text(widget.newsData.human_time_diff.validate(),
+                      maxLines: 1, style: secondaryTextStyle(size: 12)),
                   alignment: Alignment.centerLeft,
                 ),
               ],

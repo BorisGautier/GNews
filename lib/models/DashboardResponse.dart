@@ -1,27 +1,69 @@
 class DashboardResponse {
+  // ignore: non_constant_identifier_names
   String app_lang;
   List<Banner> banner;
+  // ignore: non_constant_identifier_names
   int feature_num_pages;
+  // ignore: non_constant_identifier_names
   List<NewsData> breaking_post;
+  // ignore: non_constant_identifier_names
   int recent_num_pages;
+  // ignore: non_constant_identifier_names
   List<NewsData> recent_post;
+  // ignore: non_constant_identifier_names
   List<NewsData> story_post;
   List<VideoData> videos;
+  // ignore: non_constant_identifier_names
   SocialLink social_link;
 
-  DashboardResponse({this.app_lang, this.banner, this.story_post, this.feature_num_pages, this.videos, this.breaking_post, this.recent_num_pages, this.recent_post, this.social_link});
+  // ignore: non_constant_identifier_names
+  DashboardResponse(
+      // ignore: non_constant_identifier_names
+      {this.app_lang,
+      this.banner,
+      // ignore: non_constant_identifier_names
+      this.story_post,
+      // ignore: non_constant_identifier_names
+      this.feature_num_pages,
+      this.videos,
+      // ignore: non_constant_identifier_names
+      this.breaking_post,
+      // ignore: non_constant_identifier_names
+      this.recent_num_pages,
+      // ignore: non_constant_identifier_names
+      this.recent_post,
+      // ignore: non_constant_identifier_names
+      this.social_link});
 
   factory DashboardResponse.fromJson(Map<String, dynamic> json) {
     return DashboardResponse(
       app_lang: json['app_lang'],
-      banner: json['banner'] != null ? (json['banner'] as List).map((i) => Banner.fromJson(i)).toList() : null,
+      banner: json['banner'] != null
+          ? (json['banner'] as List).map((i) => Banner.fromJson(i)).toList()
+          : null,
       feature_num_pages: json['feature_num_pages'],
-      breaking_post: json['feature_post'] != null ? (json['feature_post'] as List).map((i) => NewsData.fromJson(i)).toList() : null,
+      breaking_post: json['feature_post'] != null
+          ? (json['feature_post'] as List)
+              .map((i) => NewsData.fromJson(i))
+              .toList()
+          : null,
       recent_num_pages: json['recent_num_pages'],
-      recent_post: json['recent_post'] != null ? (json['recent_post'] as List).map((i) => NewsData.fromJson(i)).toList() : null,
-      story_post: json['story_post'] != null ? (json['story_post'] as List).map((i) => NewsData.fromJson(i)).toList() : null,
-      videos: json['videos'] != null ? (json['videos'] as List).map((i) => VideoData.fromJson(i)).toList() : null,
-      social_link: json['social_link'] != null ? SocialLink.fromJson(json['social_link']) : null,
+      recent_post: json['recent_post'] != null
+          ? (json['recent_post'] as List)
+              .map((i) => NewsData.fromJson(i))
+              .toList()
+          : null,
+      story_post: json['story_post'] != null
+          ? (json['story_post'] as List)
+              .map((i) => NewsData.fromJson(i))
+              .toList()
+          : null,
+      videos: json['videos'] != null
+          ? (json['videos'] as List).map((i) => VideoData.fromJson(i)).toList()
+          : null,
+      social_link: json['social_link'] != null
+          ? SocialLink.fromJson(json['social_link'])
+          : null,
     );
   }
 
@@ -77,14 +119,29 @@ class Banner {
 }
 
 class VideoData {
+  // ignore: non_constant_identifier_names
   String created_at;
   int id;
+  // ignore: non_constant_identifier_names
   String image_url;
   String title;
+  // ignore: non_constant_identifier_names
   String video_type;
+  // ignore: non_constant_identifier_names
   String video_url;
 
-  VideoData({this.created_at, this.id, this.image_url, this.title, this.video_type, this.video_url});
+  // ignore: non_constant_identifier_names
+  VideoData(
+      // ignore: non_constant_identifier_names
+      {this.created_at,
+      this.id,
+      // ignore: non_constant_identifier_names
+      this.image_url,
+      this.title,
+      // ignore: non_constant_identifier_names
+      this.video_type,
+      // ignore: non_constant_identifier_names
+      this.video_url});
 
   factory VideoData.fromJson(Map<String, dynamic> json) {
     return VideoData(
@@ -110,76 +167,134 @@ class VideoData {
 }
 
 class NewsData {
+  // ignore: non_constant_identifier_names
   String human_time_diff;
   int iD;
   String image;
+  // ignore: non_constant_identifier_names
   bool is_fav;
+  // ignore: non_constant_identifier_names
   String no_of_comments_text;
+  // ignore: non_constant_identifier_names
   String post_content;
+  // ignore: non_constant_identifier_names
   String post_date;
+  // ignore: non_constant_identifier_names
   String post_date_gmt;
+  // ignore: non_constant_identifier_names
   String post_excerpt;
+  // ignore: non_constant_identifier_names
   String post_title;
+  // ignore: non_constant_identifier_names
   String readable_date;
+  // ignore: non_constant_identifier_names
   String share_url;
+  // ignore: non_constant_identifier_names
   String post_author_name;
+  // ignore: non_constant_identifier_names
   String post_author_image;
+  // ignore: non_constant_identifier_names
   int post_view;
 
   List<Category> category;
+  // ignore: non_constant_identifier_names
   String comment_count;
+  // ignore: non_constant_identifier_names
   String comment_status;
   String filter;
+  // ignore: non_constant_identifier_names
   int menu_order;
+  // ignore: non_constant_identifier_names
   String ping_status;
   String pinged;
+  // ignore: non_constant_identifier_names
   String post_author;
+  // ignore: non_constant_identifier_names
   String post_content_filtered;
+  // ignore: non_constant_identifier_names
   String post_mime_type;
+  // ignore: non_constant_identifier_names
   String post_modified;
+  // ignore: non_constant_identifier_names
   String post_modified_gmt;
+  // ignore: non_constant_identifier_names
   String post_name;
+  // ignore: non_constant_identifier_names
   int post_parent;
+  // ignore: non_constant_identifier_names
   String post_password;
+  // ignore: non_constant_identifier_names
   String post_status;
+  // ignore: non_constant_identifier_names
   String post_type;
+  // ignore: non_constant_identifier_names
   List<NewsData> related_news;
+  // ignore: non_constant_identifier_names
   String to_ping;
 
   NewsData({
+    // ignore: non_constant_identifier_names
     this.post_author_name,
+    // ignore: non_constant_identifier_names
     this.post_author_image,
+    // ignore: non_constant_identifier_names
     this.human_time_diff,
     this.iD,
     this.image,
+    // ignore: non_constant_identifier_names
     this.is_fav,
+    // ignore: non_constant_identifier_names
     this.no_of_comments_text,
+    // ignore: non_constant_identifier_names
     this.post_content,
+    // ignore: non_constant_identifier_names
     this.post_date,
+    // ignore: non_constant_identifier_names
     this.post_date_gmt,
+    // ignore: non_constant_identifier_names
     this.post_excerpt,
+    // ignore: non_constant_identifier_names
     this.post_title,
+    // ignore: non_constant_identifier_names
     this.readable_date,
+    // ignore: non_constant_identifier_names
     this.share_url,
+    // ignore: non_constant_identifier_names
     this.post_view,
     this.category,
+    // ignore: non_constant_identifier_names
     this.comment_count,
+    // ignore: non_constant_identifier_names
     this.comment_status,
     this.filter,
+    // ignore: non_constant_identifier_names
     this.menu_order,
+    // ignore: non_constant_identifier_names
     this.ping_status,
     this.pinged,
+    // ignore: non_constant_identifier_names
     this.post_author,
+    // ignore: non_constant_identifier_names
     this.post_content_filtered,
+    // ignore: non_constant_identifier_names
     this.post_mime_type,
+    // ignore: non_constant_identifier_names
     this.post_modified,
+    // ignore: non_constant_identifier_names
     this.post_modified_gmt,
+    // ignore: non_constant_identifier_names
     this.post_name,
+    // ignore: non_constant_identifier_names
     this.post_parent,
+    // ignore: non_constant_identifier_names
     this.post_password,
+    // ignore: non_constant_identifier_names
     this.post_status,
+    // ignore: non_constant_identifier_names
     this.post_type,
+    // ignore: non_constant_identifier_names
     this.related_news,
+    // ignore: non_constant_identifier_names
     this.to_ping,
   });
 
@@ -200,7 +315,9 @@ class NewsData {
       post_author_name: json['post_author_name'],
       post_author_image: json['post_author_image'],
       post_view: json['post_view'],
-      category: json['category'] != null ? (json['category'] as List).map((i) => Category.fromJson(i)).toList() : null,
+      category: json['category'] != null
+          ? (json['category'] as List).map((i) => Category.fromJson(i)).toList()
+          : null,
       comment_count: json['comment_count'],
       comment_status: json['comment_status'],
       filter: json['filter'],
@@ -217,7 +334,11 @@ class NewsData {
       post_password: json['post_password'],
       post_status: json['post_status'],
       post_type: json['post_type'],
-      related_news: json['related_news'] != null ? (json['related_news'] as List).map((i) => NewsData.fromJson(i)).toList() : null,
+      related_news: json['related_news'] != null
+          ? (json['related_news'] as List)
+              .map((i) => NewsData.fromJson(i))
+              .toList()
+          : null,
       to_ping: json['to_ping'],
     );
   }
@@ -344,11 +465,17 @@ class SocialLink {
 }
 
 class Category {
+  // ignore: non_constant_identifier_names
   int cat_ID;
+  // ignore: non_constant_identifier_names
   String cat_name;
+  // ignore: non_constant_identifier_names
   int category_count;
+  // ignore: non_constant_identifier_names
   String category_description;
+  // ignore: non_constant_identifier_names
   String category_nicename;
+  // ignore: non_constant_identifier_names
   int category_parent;
   int count;
   String description;
@@ -357,18 +484,27 @@ class Category {
   int parent;
   String slug;
   String taxonomy;
+  // ignore: non_constant_identifier_names
   int term_group;
+  // ignore: non_constant_identifier_names
   int term_id;
+  // ignore: non_constant_identifier_names
   int term_taxonomy_id;
 
   String image;
 
   Category({
+    // ignore: non_constant_identifier_names
     this.cat_ID,
+    // ignore: non_constant_identifier_names
     this.cat_name,
+    // ignore: non_constant_identifier_names
     this.category_count,
+    // ignore: non_constant_identifier_names
     this.category_description,
+    // ignore: non_constant_identifier_names
     this.category_nicename,
+    // ignore: non_constant_identifier_names
     this.category_parent,
     this.count,
     this.description,
@@ -377,8 +513,11 @@ class Category {
     this.parent,
     this.slug,
     this.taxonomy,
+    // ignore: non_constant_identifier_names
     this.term_group,
+    // ignore: non_constant_identifier_names
     this.term_id,
+    // ignore: non_constant_identifier_names
     this.term_taxonomy_id,
     this.image,
   });

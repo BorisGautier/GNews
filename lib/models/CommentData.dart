@@ -1,9 +1,12 @@
 class CommentData {
   int author;
+  // ignore: non_constant_identifier_names
   String author_name;
+  // ignore: non_constant_identifier_names
   String author_url;
   Content content;
   String date;
+  // ignore: non_constant_identifier_names
   String date_gmt;
   int id;
   String link;
@@ -12,16 +15,37 @@ class CommentData {
   int post;
   String status;
   String type;
+  // ignore: non_constant_identifier_names
   AuthorAvatarUrls author_avatar_urls;
 
-  CommentData({this.author, this.author_name, this.author_url, this.content, this.date, this.date_gmt, this.id, this.link, this.meta, this.parent, this.post, this.status, this.type, this.author_avatar_urls});
+  // ignore: non_constant_identifier_names
+  CommentData(
+      {this.author,
+      // ignore: non_constant_identifier_names
+      this.author_name,
+      // ignore: non_constant_identifier_names
+      this.author_url,
+      this.content,
+      this.date,
+      // ignore: non_constant_identifier_names
+      this.date_gmt,
+      this.id,
+      this.link,
+      this.meta,
+      this.parent,
+      this.post,
+      this.status,
+      this.type,
+      // ignore: non_constant_identifier_names
+      this.author_avatar_urls});
 
   factory CommentData.fromJson(Map<String, dynamic> json) {
     return CommentData(
       author: json['author'],
       author_name: json['author_name'],
       author_url: json['author_url'],
-      content: json['content'] != null ? Content.fromJson(json['content']) : null,
+      content:
+          json['content'] != null ? Content.fromJson(json['content']) : null,
       date: json['date'],
       date_gmt: json['date_gmt'],
       id: json['id'],
@@ -30,7 +54,9 @@ class CommentData {
       post: json['post'],
       status: json['status'],
       type: json['type'],
-      author_avatar_urls: json['author_avatar_urls'] != null ? AuthorAvatarUrls.fromJson(json['author_avatar_urls']) : null,
+      author_avatar_urls: json['author_avatar_urls'] != null
+          ? AuthorAvatarUrls.fromJson(json['author_avatar_urls'])
+          : null,
     );
   }
 
@@ -85,10 +111,20 @@ class Links {
 
   factory Links.fromJson(Map<String, dynamic> json) {
     return Links(
-      author: json['author'] != null ? (json['author'] as List).map((i) => Author.fromJson(i)).toList() : null,
-      collection: json['collection'] != null ? (json['collection'] as List).map((i) => Collection.fromJson(i)).toList() : null,
-      self: json['self'] != null ? (json['self'] as List).map((i) => Self.fromJson(i)).toList() : null,
-      up: json['up'] != null ? (json['up'] as List).map((i) => Up.fromJson(i)).toList() : null,
+      author: json['author'] != null
+          ? (json['author'] as List).map((i) => Author.fromJson(i)).toList()
+          : null,
+      collection: json['collection'] != null
+          ? (json['collection'] as List)
+              .map((i) => Collection.fromJson(i))
+              .toList()
+          : null,
+      self: json['self'] != null
+          ? (json['self'] as List).map((i) => Self.fromJson(i)).toList()
+          : null,
+      up: json['up'] != null
+          ? (json['up'] as List).map((i) => Up.fromJson(i)).toList()
+          : null,
     );
   }
 
@@ -113,8 +149,10 @@ class Links {
 class Up {
   bool embeddable;
   String href;
+  // ignore: non_constant_identifier_names
   String post_type;
 
+  // ignore: non_constant_identifier_names
   Up({this.embeddable, this.href, this.post_type});
 
   factory Up.fromJson(Map<String, dynamic> json) {

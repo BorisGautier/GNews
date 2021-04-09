@@ -2,26 +2,29 @@ import 'package:async/async.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:mighty_news/AppLocalizations.dart';
-import 'package:mighty_news/components/AppWidgets.dart';
-import 'package:mighty_news/components/TextIcon.dart';
-import 'package:mighty_news/components/ViewAllHeadingWidget.dart';
-import 'package:mighty_news/main.dart';
-import 'package:mighty_news/models/TweetModel.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/utils/Colors.dart';
-import 'package:mighty_news/utils/Common.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/AppLocalizations.dart';
+import 'package:gnews/components/AppWidgets.dart';
+import 'package:gnews/components/TextIcon.dart';
+import 'package:gnews/components/ViewAllHeadingWidget.dart';
+import 'package:gnews/main.dart';
+import 'package:gnews/models/TweetModel.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/utils/Colors.dart';
+import 'package:gnews/utils/Common.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class DashBoard2TwitterFeedListWidget extends StatefulWidget {
   static String tag = '/TwitterFeedListWidget';
 
   @override
-  DashBoard2TwitterFeedListWidgetState createState() => DashBoard2TwitterFeedListWidgetState();
+  DashBoard2TwitterFeedListWidgetState createState() =>
+      DashBoard2TwitterFeedListWidgetState();
 }
 
-class DashBoard2TwitterFeedListWidgetState extends State<DashBoard2TwitterFeedListWidget> with AfterLayoutMixin<DashBoard2TwitterFeedListWidget> {
+class DashBoard2TwitterFeedListWidgetState
+    extends State<DashBoard2TwitterFeedListWidget>
+    with AfterLayoutMixin<DashBoard2TwitterFeedListWidget> {
   final String proxy = kIsWeb ? "http://localhost:8888/" : "";
   final memoizer = AsyncMemoizer<List<TweetModel>>();
 
@@ -77,7 +80,10 @@ class DashBoard2TwitterFeedListWidgetState extends State<DashBoard2TwitterFeedLi
             mainAxisSize: MainAxisSize.min,
             children: [
               16.height,
-              ViewAllHeadingWidget(title: appLocale.translate('our_twitter_handle'), backgroundColor: white, textColor: scaffoldColorDark),
+              ViewAllHeadingWidget(
+                  title: appLocale.translate('our_twitter_handle'),
+                  backgroundColor: white,
+                  textColor: scaffoldColorDark),
               8.height,
               Container(
                 height: 200,
@@ -92,25 +98,54 @@ class DashBoard2TwitterFeedListWidgetState extends State<DashBoard2TwitterFeedLi
                           margin: EdgeInsets.all(8),
                           padding: EdgeInsets.all(8),
                           width: context.width() * 0.94,
-                          decoration: BoxDecoration(border: Border.all(color: viewLineColor.withOpacity(0.5)), borderRadius: radius(defaultRadius)),
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: viewLineColor.withOpacity(0.5)),
+                              borderRadius: radius(defaultRadius)),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              cachedImage(data.user.profile_image_url_https.validate(), height: 40, width: 40, fit: BoxFit.cover).cornerRadiusWithClipRRect(30),
+                              cachedImage(
+                                      data.user.profile_image_url_https
+                                          .validate(),
+                                      height: 40,
+                                      width: 40,
+                                      fit: BoxFit.cover)
+                                  .cornerRadiusWithClipRRect(30),
                               8.width,
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  TextIcon(text: data.user.name.validate(), suffix: Icon(Octicons.verified, size: 14)),
-                                  Text('@${data.user.screen_name.validate()}', style: secondaryTextStyle(), maxLines: 1, overflow: TextOverflow.ellipsis),
+                                  TextIcon(
+                                      text: data.user.name.validate(),
+                                      suffix:
+                                          Icon(Octicons.verified, size: 14)),
+                                  Text('@${data.user.screen_name.validate()}',
+                                      style: secondaryTextStyle(),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis),
                                   8.height,
-                                  Text(data.full_text.validate(), style: primaryTextStyle(), maxLines: 3, overflow: TextOverflow.ellipsis).expand(),
+                                  Text(data.full_text.validate(),
+                                          style: primaryTextStyle(),
+                                          maxLines: 3,
+                                          overflow: TextOverflow.ellipsis)
+                                      .expand(),
                                   8.height,
                                   Row(
                                     children: [
-                                      TextIcon(text: data.retweet_count.validate().toString(), prefix: Icon(EvilIcons.retweet, size: 24)),
+                                      TextIcon(
+                                          text: data.retweet_count
+                                              .validate()
+                                              .toString(),
+                                          prefix: Icon(EvilIcons.retweet,
+                                              size: 24)),
                                       8.width,
-                                      TextIcon(text: data.favorite_count.validate().toString(), prefix: Icon(Icons.favorite, size: 18, color: Colors.red)),
+                                      TextIcon(
+                                          text: data.favorite_count
+                                              .validate()
+                                              .toString(),
+                                          prefix: Icon(Icons.favorite,
+                                              size: 18, color: Colors.red)),
                                     ],
                                   ),
                                 ],
@@ -118,7 +153,8 @@ class DashBoard2TwitterFeedListWidgetState extends State<DashBoard2TwitterFeedLi
                             ],
                           ),
                         ).onTap(() {
-                          launchUrl('https://twitter.com/${data.user.screen_name}/status/${data.id}');
+                          launchUrl(
+                              'https://twitter.com/${data.user.screen_name}/status/${data.id}');
                         });
                       },
                       itemCount: snap.data.length,
@@ -134,10 +170,14 @@ class DashBoard2TwitterFeedListWidgetState extends State<DashBoard2TwitterFeedLi
                       child: DotIndicator(
                         pageController: pageController,
                         pages: snap.data,
-                        unselectedIndicatorColor: appStore.isDarkMode ? white : black,
-                        indicatorColor: appStore.isDarkMode ? gray : getPrimaryColor(),
+                        unselectedIndicatorColor:
+                            appStore.isDarkMode ? white : black,
+                        indicatorColor:
+                            appStore.isDarkMode ? gray : getPrimaryColor(),
                         onDotTap: (s) {
-                          pageController.animateToPage(s, duration: Duration(milliseconds: 5), curve: Curves.bounceIn);
+                          pageController.animateToPage(s,
+                              duration: Duration(milliseconds: 5),
+                              curve: Curves.bounceIn);
                         },
                       ),
                     ),

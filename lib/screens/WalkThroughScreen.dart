@@ -1,10 +1,10 @@
 import 'package:clippy_flutter/clippy_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:mighty_news/AppLocalizations.dart';
-import 'package:mighty_news/models/WalkThroughModel.dart';
-import 'package:mighty_news/utils/Colors.dart';
-import 'package:mighty_news/utils/Common.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/AppLocalizations.dart';
+import 'package:gnews/models/WalkThroughModel.dart';
+import 'package:gnews/utils/Colors.dart';
+import 'package:gnews/utils/Common.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import 'DashboardScreen.dart';

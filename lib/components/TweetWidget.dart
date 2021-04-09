@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:mighty_news/utils/Common.dart';
+import 'package:gnews/utils/Common.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -51,7 +51,9 @@ class _TweetWebViewState extends State<TweetWebView> {
     Widget child;
 
     if (_tweetHTML != null && _tweetHTML.length > 0) {
-      String downloadUrl = Uri.dataFromString(_tweetHTML, mimeType: 'text/html', encoding: Encoding.getByName('utf-8')).toString();
+      String downloadUrl = Uri.dataFromString(_tweetHTML,
+              mimeType: 'text/html', encoding: Encoding.getByName('utf-8'))
+          .toString();
 
       // Create the WebView to contain the tweet HTML
       Widget webView = WebView(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mighty_news/utils/Colors.dart';
+import 'package:gnews/utils/Colors.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import 'main.dart';
@@ -14,7 +14,8 @@ class AppTheme {
     primaryColor: colorPrimary,
     scaffoldBackgroundColor: Colors.white,
     fontFamily: GoogleFonts.roboto().fontFamily,
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(backgroundColor: Colors.white),
+    bottomNavigationBarTheme:
+        BottomNavigationBarThemeData(backgroundColor: Colors.white),
     iconTheme: IconThemeData(color: scaffoldSecondaryDark),
     textTheme: TextTheme(headline6: TextStyle()),
     dialogBackgroundColor: Colors.white,
@@ -38,7 +39,8 @@ class AppTheme {
     primaryColor: colorPrimary,
     scaffoldBackgroundColor: scaffoldColorDark,
     fontFamily: GoogleFonts.roboto().fontFamily,
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(backgroundColor: scaffoldSecondaryDark),
+    bottomNavigationBarTheme:
+        BottomNavigationBarThemeData(backgroundColor: scaffoldSecondaryDark),
     iconTheme: IconThemeData(color: Colors.white),
     textTheme: TextTheme(headline6: TextStyle(color: textSecondaryColor)),
     dialogBackgroundColor: scaffoldSecondaryDark,

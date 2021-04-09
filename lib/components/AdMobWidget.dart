@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 // ignore: must_be_immutable
@@ -55,15 +55,5 @@ class AdMobWidgetState extends State<AdMobWidget> {
   @override
   Widget build(BuildContext context) {
     return AdWidget(ad: myBanner);
-
-    return (myBanner != null)
-        ? Container(
-            color: Colors.white,
-            height: 50,
-            width: context.width(),
-            //width: (widget.width != null && myBanner != null) ? widget.adSize.width : context.width(),
-            child: AdWidget(ad: myBanner),
-          )
-        : SizedBox();
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_news/AppLocalizations.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/utils/Colors.dart';
-import 'package:mighty_news/utils/Common.dart';
+import 'package:gnews/AppLocalizations.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/utils/Colors.dart';
+import 'package:gnews/utils/Common.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../main.dart';
@@ -30,7 +30,8 @@ class ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
   Future<void> submit(AppLocalizations appLocale) async {
     if (emailCont.text.trim().isEmpty) return toast(errorThisFieldRequired);
 
-    if (!emailCont.text.trim().validateEmail()) return toast(appLocale.translate('email_is_invalid'));
+    if (!emailCont.text.trim().validateEmail())
+      return toast(appLocale.translate('email_is_invalid'));
 
     hideKeyboard(context);
 
@@ -64,7 +65,8 @@ class ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(appLocalization.translate('forgot_pwd'), style: boldTextStyle()),
+              Text(appLocalization.translate('forgot_pwd'),
+                  style: boldTextStyle()),
               CloseButton(),
             ],
           ),
@@ -72,7 +74,8 @@ class ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
           AppTextField(
             controller: emailCont,
             textFieldType: TextFieldType.EMAIL,
-            decoration: inputDecoration(context, hint: appLocalization.translate('email')),
+            decoration: inputDecoration(context,
+                hint: appLocalization.translate('email')),
             textStyle: primaryTextStyle(),
             autoFocus: true,
           ),

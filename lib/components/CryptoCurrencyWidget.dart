@@ -18,7 +18,8 @@ class CryptoCurrencyWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: appStore.isDarkMode ? black : white,
         boxShadow: [BoxShadow(color: Colors.black26)],
-        border: Border.all(color: appStore.isDarkMode ? Colors.white12 : gainsBoro),
+        border:
+            Border.all(color: appStore.isDarkMode ? Colors.white12 : gainsBoro),
         borderRadius: radius(),
       ),
       child: Row(

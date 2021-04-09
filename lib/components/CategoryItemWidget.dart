@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_news/components/AppWidgets.dart';
-import 'package:mighty_news/models/CategoryData.dart';
-import 'package:mighty_news/utils/Colors.dart';
+import 'package:gnews/components/AppWidgets.dart';
+import 'package:gnews/models/CategoryData.dart';
+import 'package:gnews/utils/Colors.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../main.dart';

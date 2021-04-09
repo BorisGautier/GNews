@@ -1,15 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_news/models/WeatherResponse.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/utils/Common.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:gnews/models/WeatherResponse.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/utils/Common.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:osm_nominatim/osm_nominatim.dart';
 
 import '../AppLocalizations.dart';
 import '../main.dart';
 import 'AppWidgets.dart';
 
-class WeatherWidget extends StatelessWidget {
+class WeatherWidget extends StatefulWidget {
   static String tag = '/WeatherWidget';
+
+  @override
+  _WeatherWidgetState createState() => _WeatherWidgetState();
+}
+
+class _WeatherWidgetState extends State<WeatherWidget> {
+  String location = "";
+  Future<String> getLocation() async {
+    Position position = await Geolocator.getLastKnownPosition();
+    if (position == null) {
+      position = await Geolocator.getCurrentPosition();
+    }
+    print(position);
+    final searchResult = await Nominatim.reverseSearch(
+      lat: position.latitude,
+      lon: position.longitude,
+      addressDetails: true,
+      extraTags: true,
+      nameDetails: true,
+    );
+    setState(() {
+      location = searchResult.displayName;
+      print(location);
+    });
+    return location;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    print("1");
+    getLocation();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +74,9 @@ class WeatherWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    snap.hasData ? snap.data.location.region.validate() : '-',
+                    snap.hasData ? location : '-',
                     style: boldTextStyle(
-                        color: getAppBarWidgetTextColor(), size: 28),
+                        color: getAppBarWidgetTextColor(), size: 20),
                     overflow: TextOverflow.ellipsis,
                   ).paddingLeft(8),
                   4.height,

@@ -3,10 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:mighty_news/components/OTPDialog.dart';
-import 'package:mighty_news/main.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/components/OTPDialog.dart';
+import 'package:gnews/main.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -16,14 +16,16 @@ Future<User> signInWithGoogle() async {
   GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
 
   if (googleSignInAccount != null) {
-    final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
+    final GoogleSignInAuthentication googleSignInAuthentication =
+        await googleSignInAccount.authentication;
 
     final AuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleSignInAuthentication.accessToken,
       idToken: googleSignInAuthentication.idToken,
     );
 
-    final UserCredential authResult = await _auth.signInWithCredential(credential);
+    final UserCredential authResult =
+        await _auth.signInWithCredential(credential);
     final User user = authResult.user;
 
     assert(!user.isAnonymous);
@@ -37,8 +39,10 @@ Future<User> signInWithGoogle() async {
     String firstName = '';
     String lastName = '';
 
-    if (currentUser.displayName.validate().split(' ').length >= 1) firstName = currentUser.displayName.splitBefore(' ');
-    if (currentUser.displayName.validate().split(' ').length >= 2) lastName = currentUser.displayName.splitAfter(' ');
+    if (currentUser.displayName.validate().split(' ').length >= 1)
+      firstName = currentUser.displayName.splitBefore(' ');
+    if (currentUser.displayName.validate().split(' ').length >= 2)
+      lastName = currentUser.displayName.splitAfter(' ');
 
     await setValue(PROFILE_IMAGE, currentUser.photoURL);
     appStore.setUserProfile(currentUser.photoURL);
@@ -83,7 +87,12 @@ Future<void> loginWithOTP(BuildContext context, String phoneNumber) async {
     },
     codeSent: (String verificationId, int resendToken) async {
       finish(context);
-      await showInDialog(context, child: OTPDialog(verificationId: verificationId, isCodeSent: true, phoneNumber: phoneNumber), barrierDismissible: false);
+      await showInDialog(context,
+          child: OTPDialog(
+              verificationId: verificationId,
+              isCodeSent: true,
+              phoneNumber: phoneNumber),
+          barrierDismissible: false);
     },
     codeAutoRetrievalTimeout: (String verificationId) {
       //

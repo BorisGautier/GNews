@@ -1,14 +1,14 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mighty_news/AppLocalizations.dart';
-import 'package:mighty_news/network/AuthService.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/screens/DashboardScreen.dart';
-import 'package:mighty_news/screens/RegisterScreen.dart';
-import 'package:mighty_news/utils/Colors.dart';
-import 'package:mighty_news/utils/Common.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/AppLocalizations.dart';
+import 'package:gnews/network/AuthService.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/screens/DashboardScreen.dart';
+import 'package:gnews/screens/RegisterScreen.dart';
+import 'package:gnews/utils/Colors.dart';
+import 'package:gnews/utils/Common.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
@@ -22,7 +22,11 @@ class OTPDialog extends StatefulWidget {
   final bool isCodeSent;
   final PhoneAuthCredential credential;
 
-  OTPDialog({this.verificationId, this.isCodeSent, this.phoneNumber, this.credential});
+  OTPDialog(
+      {this.verificationId,
+      this.isCodeSent,
+      this.phoneNumber,
+      this.credential});
 
   @override
   OTPDialogState createState() => OTPDialogState();
@@ -56,9 +60,12 @@ class OTPDialogState extends State<OTPDialog> {
     isLoading = true;
     setState(() {});
 
-    AuthCredential credential = PhoneAuthProvider.credential(verificationId: widget.verificationId, smsCode: otpCode.validate());
+    AuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: widget.verificationId, smsCode: otpCode.validate());
 
-    await FirebaseAuth.instance.signInWithCredential(credential).then((result) async {
+    await FirebaseAuth.instance
+        .signInWithCredential(credential)
+        .then((result) async {
       Map req = {
         'username': widget.phoneNumber.replaceAll('+', ''),
         'password': widget.phoneNumber.replaceAll('+', ''),
@@ -75,7 +82,8 @@ class OTPDialogState extends State<OTPDialog> {
         if (e.toString().contains('invalid_username')) {
           finish(context);
           finish(context);
-          RegisterScreen(phoneNumber: widget.phoneNumber.replaceAll('+', '')).launch(context);
+          RegisterScreen(phoneNumber: widget.phoneNumber.replaceAll('+', ''))
+              .launch(context);
 
           toast(appLocale.translate('sign_up_to_continue'));
         } else {
@@ -124,7 +132,8 @@ class OTPDialogState extends State<OTPDialog> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(appLocale.translate('enter_your_phone'), style: boldTextStyle()),
+                Text(appLocale.translate('enter_your_phone'),
+                    style: boldTextStyle()),
                 30.height,
                 Container(
                   height: 100,
@@ -149,7 +158,8 @@ class OTPDialogState extends State<OTPDialog> {
                       AppTextField(
                         controller: numberController,
                         textFieldType: TextFieldType.PHONE,
-                        decoration: inputDecoration(context, hint: appLocale.translate('phone_number')),
+                        decoration: inputDecoration(context,
+                            hint: appLocale.translate('phone_number')),
                         autoFocus: true,
                         onFieldSubmitted: (s) {
                           sendOTP(appLocale);
@@ -167,7 +177,9 @@ class OTPDialogState extends State<OTPDialog> {
                         sendOTP(appLocale);
                       },
                       text: appLocale.translate('send_otp'),
-                      color: appStore.isDarkMode ? scaffoldSecondaryDark : colorPrimary,
+                      color: appStore.isDarkMode
+                          ? scaffoldSecondaryDark
+                          : colorPrimary,
                       textStyle: boldTextStyle(color: white),
                       width: context.width(),
                     ),
@@ -183,7 +195,8 @@ class OTPDialogState extends State<OTPDialog> {
               mainAxisSize: MainAxisSize.min,
               //crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(appLocale.translate('enter_otp_received'), style: boldTextStyle()),
+                Text(appLocale.translate('enter_otp_received'),
+                    style: boldTextStyle()),
                 30.height,
                 OTPTextField(
                   length: 6,
@@ -209,7 +222,9 @@ class OTPDialogState extends State<OTPDialog> {
                         submit(appLocale);
                       },
                       text: appLocale.translate('confirm'),
-                      color: appStore.isDarkMode ? scaffoldSecondaryDark : colorPrimary,
+                      color: appStore.isDarkMode
+                          ? scaffoldSecondaryDark
+                          : colorPrimary,
                       textStyle: boldTextStyle(color: white),
                       width: context.width(),
                     ),

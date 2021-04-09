@@ -1,29 +1,59 @@
 class LoginResponse {
+  // ignore: non_constant_identifier_names
   String first_name;
+  // ignore: non_constant_identifier_names
   String last_name;
+  // ignore: non_constant_identifier_names
   List<int> my_topics;
+  // ignore: non_constant_identifier_names
   String profile_image;
   String token;
+  // ignore: non_constant_identifier_names
   String user_display_name;
+  // ignore: non_constant_identifier_names
   String user_email;
+  // ignore: non_constant_identifier_names
   int user_id;
+  // ignore: non_constant_identifier_names
   String user_nicename;
   MyPreferenceData myPreference;
 
-  LoginResponse({this.first_name, this.last_name, this.my_topics, this.profile_image, this.token, this.user_display_name, this.user_email, this.user_id, this.user_nicename, this.myPreference});
+  // ignore: non_constant_identifier_names
+  LoginResponse(
+      // ignore: non_constant_identifier_names
+      {this.first_name,
+      // ignore: non_constant_identifier_names
+      this.last_name,
+      // ignore: non_constant_identifier_names
+      this.my_topics,
+      // ignore: non_constant_identifier_names
+      this.profile_image,
+      this.token,
+      // ignore: non_constant_identifier_names
+      this.user_display_name,
+      // ignore: non_constant_identifier_names
+      this.user_email,
+      // ignore: non_constant_identifier_names
+      this.user_id,
+      // ignore: non_constant_identifier_names
+      this.user_nicename,
+      this.myPreference});
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) {
     return LoginResponse(
       first_name: json['first_name'],
       last_name: json['last_name'],
-      my_topics: json['my_topics'] != null ? List<int>.from(json['my_topics']) : null,
+      my_topics:
+          json['my_topics'] != null ? List<int>.from(json['my_topics']) : null,
       profile_image: json['profile_image'],
       token: json['token'],
       user_display_name: json['user_display_name'],
       user_email: json['user_email'],
       user_id: json['user_id'],
       user_nicename: json['user_nicename'],
-      myPreference: json['my_preference'] != null ? MyPreferenceData.fromJson(json['my_preference']) : null,
+      myPreference: json['my_preference'] != null
+          ? MyPreferenceData.fromJson(json['my_preference'])
+          : null,
     );
   }
 

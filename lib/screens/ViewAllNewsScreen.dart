@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_news/AppLocalizations.dart';
-import 'package:mighty_news/components/PaginatedNewsWidget.dart';
-import 'package:mighty_news/utils/Common.dart';
+import 'package:gnews/AppLocalizations.dart';
+import 'package:gnews/components/PaginatedNewsWidget.dart';
+import 'package:gnews/utils/Common.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class ViewAllNewsScreen extends StatefulWidget {
@@ -44,7 +44,10 @@ class ViewAllNewsScreenState extends State<ViewAllNewsScreen> {
     return SafeArea(
       top: !isIos,
       child: Scaffold(
-        appBar: appBarWidget(appLocalization.translate(widget.title), showBack: true, color: getAppBarWidgetBackGroundColor(), textColor: getAppBarWidgetTextColor()),
+        appBar: appBarWidget(appLocalization.translate(widget.title),
+            showBack: true,
+            color: getAppBarWidgetBackGroundColor(),
+            textColor: getAppBarWidgetTextColor()),
         body: PaginatedNewsWidget(widget.req),
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_news/models/DashboardResponse.dart';
-import 'package:mighty_news/utils/Colors.dart';
-import 'package:mighty_news/utils/Common.dart';
+import 'package:gnews/models/DashboardResponse.dart';
+import 'package:gnews/utils/Colors.dart';
+import 'package:gnews/utils/Common.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:story_view/story_view.dart';
 
@@ -78,7 +78,10 @@ class _StoryListScreenState extends State<StoryListScreen> {
                         roundedTop: false,
                         caption: Text(
                           parseHtmlString(e.post_title),
-                          style: TextStyle(color: Colors.white, backgroundColor: Colors.black54, fontSize: 17),
+                          style: TextStyle(
+                              color: Colors.white,
+                              backgroundColor: Colors.black54,
+                              fontSize: 17),
                         ),
                       );
                     }).toList(),

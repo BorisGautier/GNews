@@ -1,30 +1,10 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
-import 'package:mighty_news/main.dart';
-import 'package:mighty_news/utils/Common.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/utils/Common.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
-
-Map<String, String> buildHeaderTokens() {
-  /* Map<String, String> header = {
-    HttpHeaders.contentTypeHeader: 'application/json;charset=UTF-8',
-    HttpHeaders.cacheControlHeader: 'no-cache',
-    HttpHeaders.acceptCharsetHeader: 'UTF-8',
-    HttpHeaders.acceptHeader: 'application/json;charset=UTF-8',
-    'Access-Control-Allow-Headers': '*',
-    'Access-Control-Allow-Origin': '*',
-  };*/
-
-  /* if (appStore.isLoggedIn) {
-    header.putIfAbsent(HttpHeaders.authorizationHeader,
-        () => 'Bearer ${getStringAsync(TOKEN)}');
-  }
-  log(jsonEncode(header));
-  return header;*/
-}
 
 Uri buildBaseUrl(String endPoint) {
   Uri url = Uri.parse(endPoint);

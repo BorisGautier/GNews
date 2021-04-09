@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/html_parser.dart';
 import 'package:flutter_html/style.dart';
-import 'package:mighty_news/components/VimeoEmbedWidget.dart';
-import 'package:mighty_news/components/YouTubeEmbedWidget.dart';
-import 'package:mighty_news/utils/Common.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/components/VimeoEmbedWidget.dart';
+import 'package:gnews/components/YouTubeEmbedWidget.dart';
+import 'package:gnews/utils/Common.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import 'AppWidgets.dart';
@@ -28,39 +28,125 @@ class HtmlWidget extends StatelessWidget {
         openPhotoViewer(context, Image.network(s).image);
       },
       style: {
-        'embed': Style(color: color ?? transparentColor, fontStyle: FontStyle.italic, fontWeight: FontWeight.bold, fontSize: FontSize(getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
-        'strong': Style(color: color ?? textPrimaryColorGlobal, fontSize: FontSize(getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
-        'a': Style(color: color ?? Colors.blue, fontWeight: FontWeight.bold, fontSize: FontSize(getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
-        'div': Style(color: color ?? textPrimaryColorGlobal, fontSize: FontSize(getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
-        'figure': Style(color: color ?? textPrimaryColorGlobal, fontSize: FontSize(getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble()), padding: EdgeInsets.zero, margin: EdgeInsets.zero),
-        'h1': Style(color: color ?? textPrimaryColorGlobal, fontSize: FontSize(getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
-        'h2': Style(color: color ?? textPrimaryColorGlobal, fontSize: FontSize(getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
-        'h3': Style(color: color ?? textPrimaryColorGlobal, fontSize: FontSize(getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
-        'h4': Style(color: color ?? textPrimaryColorGlobal, fontSize: FontSize(getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
-        'h5': Style(color: color ?? textPrimaryColorGlobal, fontSize: FontSize(getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
-        'h6': Style(color: color ?? textPrimaryColorGlobal, fontSize: FontSize(getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
-        'ol': Style(color: color ?? textPrimaryColorGlobal, fontSize: FontSize(getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
-        'ul': Style(color: color ?? textPrimaryColorGlobal, fontSize: FontSize(getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
-        'strike': Style(color: color ?? textPrimaryColorGlobal, fontSize: FontSize(getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
-        'u': Style(color: color ?? textPrimaryColorGlobal, fontSize: FontSize(getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
-        'b': Style(color: color ?? textPrimaryColorGlobal, fontSize: FontSize(getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
-        'i': Style(color: color ?? textPrimaryColorGlobal, fontSize: FontSize(getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
-        'hr': Style(color: color ?? textPrimaryColorGlobal, fontSize: FontSize(getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
-        'header': Style(color: color ?? textPrimaryColorGlobal, fontSize: FontSize(getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
-        'code': Style(color: color ?? textPrimaryColorGlobal, fontSize: FontSize(getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
-        'data': Style(color: color ?? textPrimaryColorGlobal, fontSize: FontSize(getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
-        'body': Style(color: color ?? textPrimaryColorGlobal, fontSize: FontSize(getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
-        'big': Style(color: color ?? textPrimaryColorGlobal, fontSize: FontSize(getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
-        'blockquote': Style(color: color ?? textPrimaryColorGlobal, fontSize: FontSize(getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
-        'audio': Style(color: color ?? textPrimaryColorGlobal, fontSize: FontSize(getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
-        'img': Style(width: context.width(), padding: EdgeInsets.only(bottom: 8), fontSize: FontSize(getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
+        'embed': Style(
+            color: color ?? transparentColor,
+            fontStyle: FontStyle.italic,
+            fontWeight: FontWeight.bold,
+            fontSize: FontSize(
+                getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
+        'strong': Style(
+            color: color ?? textPrimaryColorGlobal,
+            fontSize: FontSize(
+                getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
+        'a': Style(
+            color: color ?? Colors.blue,
+            fontWeight: FontWeight.bold,
+            fontSize: FontSize(
+                getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
+        'div': Style(
+            color: color ?? textPrimaryColorGlobal,
+            fontSize: FontSize(
+                getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
+        'figure': Style(
+            color: color ?? textPrimaryColorGlobal,
+            fontSize: FontSize(
+                getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble()),
+            padding: EdgeInsets.zero,
+            margin: EdgeInsets.zero),
+        'h1': Style(
+            color: color ?? textPrimaryColorGlobal,
+            fontSize: FontSize(
+                getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
+        'h2': Style(
+            color: color ?? textPrimaryColorGlobal,
+            fontSize: FontSize(
+                getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
+        'h3': Style(
+            color: color ?? textPrimaryColorGlobal,
+            fontSize: FontSize(
+                getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
+        'h4': Style(
+            color: color ?? textPrimaryColorGlobal,
+            fontSize: FontSize(
+                getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
+        'h5': Style(
+            color: color ?? textPrimaryColorGlobal,
+            fontSize: FontSize(
+                getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
+        'h6': Style(
+            color: color ?? textPrimaryColorGlobal,
+            fontSize: FontSize(
+                getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
+        'ol': Style(
+            color: color ?? textPrimaryColorGlobal,
+            fontSize: FontSize(
+                getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
+        'ul': Style(
+            color: color ?? textPrimaryColorGlobal,
+            fontSize: FontSize(
+                getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
+        'strike': Style(
+            color: color ?? textPrimaryColorGlobal,
+            fontSize: FontSize(
+                getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
+        'u': Style(
+            color: color ?? textPrimaryColorGlobal,
+            fontSize: FontSize(
+                getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
+        'b': Style(
+            color: color ?? textPrimaryColorGlobal,
+            fontSize: FontSize(
+                getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
+        'i': Style(
+            color: color ?? textPrimaryColorGlobal,
+            fontSize: FontSize(
+                getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
+        'hr': Style(
+            color: color ?? textPrimaryColorGlobal,
+            fontSize: FontSize(
+                getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
+        'header': Style(
+            color: color ?? textPrimaryColorGlobal,
+            fontSize: FontSize(
+                getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
+        'code': Style(
+            color: color ?? textPrimaryColorGlobal,
+            fontSize: FontSize(
+                getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
+        'data': Style(
+            color: color ?? textPrimaryColorGlobal,
+            fontSize: FontSize(
+                getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
+        'body': Style(
+            color: color ?? textPrimaryColorGlobal,
+            fontSize: FontSize(
+                getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
+        'big': Style(
+            color: color ?? textPrimaryColorGlobal,
+            fontSize: FontSize(
+                getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
+        'blockquote': Style(
+            color: color ?? textPrimaryColorGlobal,
+            fontSize: FontSize(
+                getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
+        'audio': Style(
+            color: color ?? textPrimaryColorGlobal,
+            fontSize: FontSize(
+                getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
+        'img': Style(
+            width: context.width(),
+            padding: EdgeInsets.only(bottom: 8),
+            fontSize: FontSize(
+                getIntAsync(FONT_SIZE_PREF, defaultValue: 16).toDouble())),
       },
       customRender: {
         "embed": (RenderContext renderContext, Widget child, attributes, _) {
-          var videoLink = renderContext.parser.htmlData.splitBetween('<embed>', '</embed');
+          var videoLink =
+              renderContext.parser.htmlData.splitBetween('<embed>', '</embed');
 
           if (videoLink.contains('yout')) {
-            return YouTubeEmbedWidget(videoLink.replaceAll('<br>', '').convertYouTubeUrlToId());
+            return YouTubeEmbedWidget(
+                videoLink.replaceAll('<br>', '').convertYouTubeUrlToId());
           } else if (videoLink.contains('vimeo')) {
             return VimeoEmbedWidget(videoLink.replaceAll('<br>', ''));
           } else {
@@ -69,11 +155,19 @@ class HtmlWidget extends StatelessWidget {
         },
         "figure": (RenderContext renderContext, Widget child, attributes, _) {
           if (_.innerHtml.contains('yout')) {
-            return YouTubeEmbedWidget(_.innerHtml.splitBetween('<div class="wp-block-embed__wrapper">', "</div>").replaceAll('<br>', '').convertYouTubeUrlToId());
+            return YouTubeEmbedWidget(_.innerHtml
+                .splitBetween('<div class="wp-block-embed__wrapper">', "</div>")
+                .replaceAll('<br>', '')
+                .convertYouTubeUrlToId());
           } else if (_.innerHtml.contains('vimeo')) {
-            return VimeoEmbedWidget(_.innerHtml.splitBetween('<div class="wp-block-embed__wrapper">', "</div>").replaceAll('<br>', '').splitAfter('com/'));
+            return VimeoEmbedWidget(_.innerHtml
+                .splitBetween('<div class="wp-block-embed__wrapper">', "</div>")
+                .replaceAll('<br>', '')
+                .splitAfter('com/'));
           } else if (_.innerHtml.contains('twitter')) {
-            String t = _.innerHtml.splitAfter('<div class="wp-block-embed__wrapper">').splitBefore('</div>');
+            String t = _.innerHtml
+                .splitAfter('<div class="wp-block-embed__wrapper">')
+                .splitBefore('</div>');
             return TweetWebView.tweetUrl(t);
           } else if (_.innerHtml.contains('audio controls')) {
             return Theme(

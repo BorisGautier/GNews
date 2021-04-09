@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:mighty_news/components/BreakingNewsMarqueeWidget.dart';
-import 'package:mighty_news/components/CryptoCurrencyListWidget.dart';
-import 'package:mighty_news/components/VideoListWidget.dart';
-import 'package:mighty_news/models/DashboardResponse.dart';
-import 'package:mighty_news/screens/ViewAllNewsScreen.dart';
-import 'package:mighty_news/screens/ViewAllVideoScreen.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/components/BreakingNewsMarqueeWidget.dart';
+import 'package:gnews/components/CryptoCurrencyListWidget.dart';
+import 'package:gnews/components/VideoListWidget.dart';
+import 'package:gnews/models/DashboardResponse.dart';
+import 'package:gnews/screens/ViewAllNewsScreen.dart';
+import 'package:gnews/screens/ViewAllVideoScreen.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../AppLocalizations.dart';
@@ -27,7 +27,8 @@ class Dashboard1Widget extends StatefulWidget {
   Dashboard1WidgetState createState() => Dashboard1WidgetState();
 }
 
-class Dashboard1WidgetState extends State<Dashboard1Widget> with SingleTickerProviderStateMixin {
+class Dashboard1WidgetState extends State<Dashboard1Widget>
+    with SingleTickerProviderStateMixin {
   String mBreakingNewsMarquee = '';
 
   @override
@@ -78,9 +79,13 @@ class Dashboard1WidgetState extends State<Dashboard1Widget> with SingleTickerPro
               children: [
                 20.height,
                 ViewAllHeadingWidget(
-                  title: appLocalization.translate('breaking_News').toUpperCase(),
+                  title:
+                      appLocalization.translate('breaking_News').toUpperCase(),
                   onTap: () {
-                    ViewAllNewsScreen(title: 'breaking_News', req: {'posts_per_page': postsPerPage, FILTER: FILTER_FEATURE}).launch(context);
+                    ViewAllNewsScreen(title: 'breaking_News', req: {
+                      'posts_per_page': postsPerPage,
+                      FILTER: FILTER_FEATURE
+                    }).launch(context);
                   },
                 ),
                 8.height,
@@ -102,7 +107,8 @@ class Dashboard1WidgetState extends State<Dashboard1Widget> with SingleTickerPro
                   },
                 ),
                 8.height,
-                VideoListWidget(widget.snap.data.videos.validate(), axis: Axis.horizontal),
+                VideoListWidget(widget.snap.data.videos.validate(),
+                    axis: Axis.horizontal),
                 8.height,
               ],
             ).visible(widget.snap.data.videos.validate().isNotEmpty),
@@ -114,11 +120,14 @@ class Dashboard1WidgetState extends State<Dashboard1Widget> with SingleTickerPro
                 ViewAllHeadingWidget(
                   title: appLocalization.translate('recent_News').toUpperCase(),
                   onTap: () {
-                    ViewAllNewsScreen(title: 'recent_News', req: {'posts_per_page': postsPerPage}).launch(context);
+                    ViewAllNewsScreen(
+                        title: 'recent_News',
+                        req: {'posts_per_page': postsPerPage}).launch(context);
                   },
                 ),
                 8.height,
-                NewsListWidget(widget.snap.data.recent_post, padding: EdgeInsets.symmetric(horizontal: 8)),
+                NewsListWidget(widget.snap.data.recent_post,
+                    padding: EdgeInsets.symmetric(horizontal: 8)),
               ],
             ).visible(widget.snap.data.recent_post.validate().isNotEmpty),
 

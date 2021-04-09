@@ -7,7 +7,8 @@ class Language {
   String fullLanguageCode;
   String flag;
 
-  Language(this.id, this.name, this.languageCode, this.flag, this.fullLanguageCode);
+  Language(
+      this.id, this.name, this.languageCode, this.flag, this.fullLanguageCode);
 
   static List<Language> getLanguages() {
     return <Language>[
@@ -16,7 +17,8 @@ class Language {
       Language(2, 'हिन्दी', 'hi', 'assets/flags/ic_india.png', 'hi-IN'),
       Language(3, 'عربي', 'ar', 'assets/flags/ic_ar.png', 'ar-AR'),
       Language(4, 'Deutsche', 'de', 'assets/flags/ic_germany.png', 'de-DE'),
-      Language(5, 'Nederlands', 'nl', 'assets/flags/ic_netherlands.png', 'nl-NL'),
+      Language(
+          5, 'Nederlands', 'nl', 'assets/flags/ic_netherlands.png', 'nl-NL'),
       Language(6, 'русский', 'ru', 'assets/flags/ic_russia.png', 'ru-RU'),
       Language(7, 'Türk', 'tr', 'assets/flags/ic_turkey.png', 'tr-TR'),
       Language(8, 'বাংলা', 'bn', 'assets/flags/ic_bangladesh.png', 'bn-BN'),

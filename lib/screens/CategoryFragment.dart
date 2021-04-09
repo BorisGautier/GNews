@@ -2,12 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mighty_news/components/CategoryItemWidget.dart';
-import 'package:mighty_news/models/CategoryData.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/screens/SubCategoryScreen.dart';
-import 'package:mighty_news/shimmer/TopicShimmer.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/components/CategoryItemWidget.dart';
+import 'package:gnews/models/CategoryData.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/screens/SubCategoryScreen.dart';
+import 'package:gnews/shimmer/TopicShimmer.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../AppLocalizations.dart';
@@ -60,7 +60,8 @@ class CategoryFragmentState extends State<CategoryFragment> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(appLocalization.translate('category'), style: boldTextStyle()),
+              Text(appLocalization.translate('category'),
+                  style: boldTextStyle()),
             ],
           ).paddingSymmetric(vertical: 20, horizontal: 16),
           Positioned(
@@ -69,7 +70,9 @@ class CategoryFragmentState extends State<CategoryFragment> {
               height: context.height(),
               width: context.width(),
               child: FutureBuilder<List<CategoryData>>(
-                initialData: getStringAsync(CATEGORY_DATA).isEmpty ? null : getInitialData(),
+                initialData: getStringAsync(CATEGORY_DATA).isEmpty
+                    ? null
+                    : getInitialData(),
                 future: getCategories(),
                 builder: (_, snap) {
                   if (snap.hasData) {
@@ -80,7 +83,8 @@ class CategoryFragmentState extends State<CategoryFragment> {
                         alignment: WrapAlignment.spaceEvenly,
                         children: snap.data.map((data) {
                           return CategoryItemWidget(data, onTap: () {
-                            SubCategoryScreen(data, snap.hasError).launch(context);
+                            SubCategoryScreen(data, snap.hasError)
+                                .launch(context);
                           });
                         }).toList(),
                       ).paddingAll(4),

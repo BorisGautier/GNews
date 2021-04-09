@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mighty_news/components/AppWidgets.dart';
-import 'package:mighty_news/components/PaginatedNewsWidget.dart';
-import 'package:mighty_news/main.dart';
-import 'package:mighty_news/models/CategoryData.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/utils/Colors.dart';
-import 'package:mighty_news/utils/Common.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/components/AppWidgets.dart';
+import 'package:gnews/components/PaginatedNewsWidget.dart';
+import 'package:gnews/main.dart';
+import 'package:gnews/models/CategoryData.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/utils/Colors.dart';
+import 'package:gnews/utils/Common.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class SubCategoryScreen extends StatefulWidget {

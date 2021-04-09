@@ -2,14 +2,14 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:mighty_news/components/NewsListWidget.dart';
-import 'package:mighty_news/components/home3/components/Dashboard3NewsListWidget.dart';
-import 'package:mighty_news/main.dart';
-import 'package:mighty_news/models/DashboardResponse.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/shimmer/VerticalTextImageShimmer.dart';
-import 'package:mighty_news/shimmer/VerticalTextImageShimmerD2.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/components/NewsListWidget.dart';
+import 'package:gnews/components/home3/components/Dashboard3NewsListWidget.dart';
+import 'package:gnews/main.dart';
+import 'package:gnews/models/DashboardResponse.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/shimmer/VerticalTextImageShimmer.dart';
+import 'package:gnews/shimmer/VerticalTextImageShimmerD2.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import 'AppWidgets.dart';
@@ -48,7 +48,8 @@ class PaginatedNewsWidgetState extends State<PaginatedNewsWidget> {
     super.initState();
     init();
     scrollController.addListener(() {
-      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
         if (page < numPage) {
           page++;
           loadNews();
@@ -163,9 +164,12 @@ class PaginatedNewsWidgetState extends State<PaginatedNewsWidget> {
             padding: EdgeInsets.only(bottom: 70, top: widget.topPadding ?? 0),
             child: viewAllListWidget().visible(news.isNotEmpty && !hasError),
           ),
-          textImageShimmerWidget().paddingAll(8).visible(isShimmerLoading && page == 1),
+          textImageShimmerWidget()
+              .paddingAll(8)
+              .visible(isShimmerLoading && page == 1),
           Loader().center().visible(isLoading && page != 1),
-          noDataWidget(context).visible(!hasError && news.isEmpty && (!isLoading && !isShimmerLoading)),
+          noDataWidget(context).visible(
+              !hasError && news.isEmpty && (!isLoading && !isShimmerLoading)),
           Text(error.validate()).center().visible(hasError),
         ],
       ),

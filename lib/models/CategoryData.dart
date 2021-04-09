@@ -3,6 +3,7 @@ class CategoryData {
   int count;
   String description;
   int id;
+  // ignore: non_constant_identifier_names
   int cat_ID;
   String link;
   String name;
@@ -15,6 +16,7 @@ class CategoryData {
   CategoryData(
       {this.links,
       this.count,
+      // ignore: non_constant_identifier_names
       this.cat_ID,
       this.description,
       this.id,
@@ -65,8 +67,10 @@ class Links {
   List<Collection> collection;
   List<Cury> curies;
   List<Self> self;
+  // ignore: non_constant_identifier_names
   List<WpPostType> post_type;
 
+  // ignore: non_constant_identifier_names
   Links({this.about, this.collection, this.curies, this.self, this.post_type});
 
   factory Links.fromJson(Map<String, dynamic> json) {

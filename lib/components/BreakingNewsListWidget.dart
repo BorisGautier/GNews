@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_news/components/BreakingNewsItemWidget.dart';
-import 'package:mighty_news/models/DashboardResponse.dart';
-import 'package:mighty_news/screens/NewsDetailListScreen.dart';
-import 'package:mighty_news/utils/Common.dart';
+import 'package:gnews/components/BreakingNewsItemWidget.dart';
+import 'package:gnews/models/DashboardResponse.dart';
+import 'package:gnews/screens/NewsDetailListScreen.dart';
+import 'package:gnews/utils/Common.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class BreakingNewsListWidget extends StatefulWidget {
@@ -50,7 +50,8 @@ class BreakingNewsListWidgetState extends State<BreakingNewsListWidget> {
 
           return BreakingNewsItemWidget(
             newsData,
-            onTap: () => NewsDetailListScreen(widget.newsList, index: index).launch(context),
+            onTap: () => NewsDetailListScreen(widget.newsList, index: index)
+                .launch(context),
           );
         },
         itemCount: widget.newsList.length,

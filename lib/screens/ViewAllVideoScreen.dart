@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mighty_news/components/AppWidgets.dart';
-import 'package:mighty_news/components/VideoListWidget.dart';
-import 'package:mighty_news/models/DashboardResponse.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/utils/Common.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/components/AppWidgets.dart';
+import 'package:gnews/components/VideoListWidget.dart';
+import 'package:gnews/models/DashboardResponse.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/utils/Common.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../AppLocalizations.dart';
@@ -33,7 +32,8 @@ class ViewAllVideoScreenState extends State<ViewAllVideoScreen> {
     init();
 
     scrollController.addListener(() {
-      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
         if (!isLastPage) {
           page++;
           loadVideos();
@@ -93,8 +93,10 @@ class ViewAllVideoScreenState extends State<ViewAllVideoScreen> {
         body: Observer(
           builder: (_) => Stack(
             children: [
-              VideoListWidget(videos, axis: Axis.vertical, scrollController: scrollController),
-              noDataWidget(context).visible(!appStore.isLoading && videos.isEmpty),
+              VideoListWidget(videos,
+                  axis: Axis.vertical, scrollController: scrollController),
+              noDataWidget(context)
+                  .visible(!appStore.isLoading && videos.isEmpty),
               Positioned(
                 bottom: page == 1 ? null : 0,
                 child: Loader().center().visible(appStore.isLoading),

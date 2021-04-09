@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mighty_news/utils/Common.dart';
+import 'package:gnews/utils/Common.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:video_player/video_player.dart';
 
@@ -35,23 +35,29 @@ class VideoFileWidgetState extends State<VideoFileWidget> {
   }
 
   Future<void> init() async {
+    // ignore: invalid_use_of_protected_member
     if (controller.hasListeners) {
       controller.removeListener(() {});
     }
     controller.addListener(() {
       if (mounted && controller.value.isInitialized) {
-        currentPosition = controller.value.duration?.inMilliseconds == 0 ? 0 : controller.value.position.inMilliseconds;
+        currentPosition = controller.value.duration?.inMilliseconds == 0
+            ? 0
+            : controller.value.position.inMilliseconds;
         duration = controller.value.duration.inMilliseconds;
       }
 
       isBuffering = controller.value.isBuffering;
       if (!controller.value.isPlaying && !controller.value.isBuffering) {
-        if (controller.value.duration == null || controller.value.position == null) {
+        if (controller.value.duration == null ||
+            controller.value.position == null) {
           return;
         }
       }
 
-      if (controller.value.isInitialized && !isVideoCompleted && controller.value.duration.inMilliseconds == currentPosition) {
+      if (controller.value.isInitialized &&
+          !isVideoCompleted &&
+          controller.value.duration.inMilliseconds == currentPosition) {
         isVideoCompleted = true;
       } else {
         isVideoCompleted = false;
@@ -97,7 +103,9 @@ class VideoFileWidgetState extends State<VideoFileWidget> {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: controller.value.isInitialized ? controller.value.aspectRatio : 16 / 10,
+      aspectRatio: controller.value.isInitialized
+          ? controller.value.aspectRatio
+          : 16 / 10,
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: <Widget>[
@@ -126,27 +134,45 @@ class VideoFileWidgetState extends State<VideoFileWidget> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 Text(
-                                  durationFormatter(currentPosition) + " / " + durationFormatter(duration),
+                                  durationFormatter(currentPosition) +
+                                      " / " +
+                                      durationFormatter(duration),
                                   style: primaryTextStyle(color: Colors.white),
                                 ).paddingLeft(8),
                                 IconButton(
-                                  icon: Icon(isFullScreen ? Icons.fullscreen_exit : Icons.fullscreen),
+                                  icon: Icon(isFullScreen
+                                      ? Icons.fullscreen_exit
+                                      : Icons.fullscreen),
                                   color: Colors.white,
                                   onPressed: () {
                                     !isFullScreen
-                                        ? SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft])
-                                        : SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+                                        ? SystemChrome
+                                            .setPreferredOrientations([
+                                            DeviceOrientation.landscapeRight,
+                                            DeviceOrientation.landscapeLeft
+                                          ])
+                                        : SystemChrome
+                                            .setPreferredOrientations([
+                                            DeviceOrientation.portraitUp,
+                                            DeviceOrientation.portraitDown
+                                          ]);
                                     isFullScreen = !isFullScreen;
                                     setState(() {});
                                   },
                                 ).visible(!isBuffering)
                               ],
                             ),
-                            VideoProgressIndicator(controller, allowScrubbing: true),
+                            VideoProgressIndicator(controller,
+                                allowScrubbing: true),
                           ],
                         ),
                         IconButton(
-                          icon: Icon(controller.value.isPlaying ? Icons.pause : Icons.play_arrow, color: Colors.white, size: 56.0),
+                          icon: Icon(
+                              controller.value.isPlaying
+                                  ? Icons.pause
+                                  : Icons.play_arrow,
+                              color: Colors.white,
+                              size: 56.0),
                           onPressed: () {
                             handlePlayPauseVideo();
                           },

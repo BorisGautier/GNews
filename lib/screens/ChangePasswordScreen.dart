@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/utils/Colors.dart';
-import 'package:mighty_news/utils/Common.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/utils/Colors.dart';
+import 'package:gnews/utils/Common.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../AppLocalizations.dart';
@@ -79,7 +79,11 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
     return SafeArea(
       top: !isIos,
       child: Scaffold(
-        appBar: appBarWidget(appLocalization.translate('change_Pwd'), showBack: true, elevation: 0, color: getAppBarWidgetBackGroundColor(), textColor: getAppBarWidgetTextColor()),
+        appBar: appBarWidget(appLocalization.translate('change_Pwd'),
+            showBack: true,
+            elevation: 0,
+            color: getAppBarWidgetBackGroundColor(),
+            textColor: getAppBarWidgetTextColor()),
         body: Container(
           padding: EdgeInsets.all(16),
           child: Stack(
@@ -93,7 +97,8 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       AppTextField(
                         controller: oldPassCont,
                         textFieldType: TextFieldType.PASSWORD,
-                        decoration: inputDecoration(context, hint: appLocalization.translate('password')),
+                        decoration: inputDecoration(context,
+                            hint: appLocalization.translate('password')),
                         nextFocus: newPassFocus,
                         textStyle: primaryTextStyle(),
                       ),
@@ -101,7 +106,8 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       AppTextField(
                         controller: newPassCont,
                         textFieldType: TextFieldType.PASSWORD,
-                        decoration: inputDecoration(context, hint: appLocalization.translate('new_password')),
+                        decoration: inputDecoration(context,
+                            hint: appLocalization.translate('new_password')),
                         focus: newPassFocus,
                         nextFocus: confPassFocus,
                         textStyle: primaryTextStyle(),
@@ -110,12 +116,17 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       AppTextField(
                         controller: confNewPassCont,
                         textFieldType: TextFieldType.PASSWORD,
-                        decoration: inputDecoration(context, hint: appLocalization.translate('confirm_Password')),
+                        decoration: inputDecoration(context,
+                            hint:
+                                appLocalization.translate('confirm_Password')),
                         focus: confPassFocus,
                         validator: (String value) {
                           if (value.isEmpty) return errorThisFieldRequired;
-                          if (value.length < passwordLengthGlobal) return passwordLengthMsg;
-                          if (value.trim() != newPassCont.text.trim()) return appLocalization.translate('confirmPwdValidation');
+                          if (value.length < passwordLengthGlobal)
+                            return passwordLengthMsg;
+                          if (value.trim() != newPassCont.text.trim())
+                            return appLocalization
+                                .translate('confirmPwdValidation');
                           return null;
                         },
                         textInputAction: TextInputAction.done,
@@ -131,14 +142,19 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         },
                         text: appLocalization.translate('save'),
                         width: context.width(),
-                        color: appStore.isDarkMode ? scaffoldSecondaryDark : colorPrimary,
+                        color: appStore.isDarkMode
+                            ? scaffoldSecondaryDark
+                            : colorPrimary,
                         textStyle: boldTextStyle(color: white),
                       ),
                     ],
                   ),
                 ),
               ),
-              Loader().withSize(height: 40, width: 40).center().visible(mIsLoading),
+              Loader()
+                  .withSize(height: 40, width: 40)
+                  .center()
+                  .visible(mIsLoading),
             ],
           ),
         ),
