@@ -686,6 +686,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.6.3"
+  osm_nominatim:
+    dependency: "direct main"
+    description:
+      name: osm_nominatim
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   otp_text_field:
     dependency: "direct main"
     description:
