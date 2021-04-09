@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_news/AppLocalizations.dart';
-import 'package:mighty_news/components/PaginatedNewsWidget.dart';
-import 'package:mighty_news/screens/ChooseTopicScreen.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/AppLocalizations.dart';
+import 'package:gnews/components/PaginatedNewsWidget.dart';
+import 'package:gnews/screens/ChooseTopicScreen.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../main.dart';
@@ -56,7 +56,8 @@ class SuggestedForYouFragmentState extends State<SuggestedForYouFragment> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(appLocalization.translate('suggest_for_you'), style: boldTextStyle()),
+                Text(appLocalization.translate('suggest_for_you'),
+                    style: boldTextStyle()),
                 Icon(Icons.edit).onTap(() async {
                   redirect();
                 }),
@@ -66,7 +67,8 @@ class SuggestedForYouFragmentState extends State<SuggestedForYouFragment> {
               top: 60,
               child: Container(
                 height: context.height() - 100,
-                child: PaginatedNewsWidget({'filter': 'suggested', 'posts_per_page': postsPerPage}),
+                child: PaginatedNewsWidget(
+                    {'filter': 'suggested', 'posts_per_page': postsPerPage}),
               ),
             ),
           ],

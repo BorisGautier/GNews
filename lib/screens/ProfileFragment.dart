@@ -2,23 +2,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:mighty_news/AppLocalizations.dart';
-import 'package:mighty_news/components/AppWidgets.dart';
-import 'package:mighty_news/components/SocialLoginWidget.dart';
-import 'package:mighty_news/components/ThemeSelectionDialog.dart';
-import 'package:mighty_news/components/LanguageSelectionWidget.dart';
-import 'package:mighty_news/main.dart';
-import 'package:mighty_news/models/FontSizeModel.dart';
-import 'package:mighty_news/models/LanguageModel.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/screens/AboutAppScreen.dart';
-import 'package:mighty_news/screens/ChangePasswordScreen.dart';
-import 'package:mighty_news/screens/ChooseTopicScreen.dart';
-import 'package:mighty_news/screens/EditProfileScreen.dart';
-import 'package:mighty_news/screens/LoginScreen.dart';
-import 'package:mighty_news/utils/Colors.dart';
-import 'package:mighty_news/utils/Common.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/AppLocalizations.dart';
+import 'package:gnews/components/AppWidgets.dart';
+import 'package:gnews/components/SocialLoginWidget.dart';
+import 'package:gnews/components/ThemeSelectionDialog.dart';
+import 'package:gnews/components/LanguageSelectionWidget.dart';
+import 'package:gnews/main.dart';
+import 'package:gnews/models/FontSizeModel.dart';
+import 'package:gnews/models/LanguageModel.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/screens/AboutAppScreen.dart';
+import 'package:gnews/screens/ChangePasswordScreen.dart';
+import 'package:gnews/screens/ChooseTopicScreen.dart';
+import 'package:gnews/screens/EditProfileScreen.dart';
+import 'package:gnews/screens/LoginScreen.dart';
+import 'package:gnews/utils/Colors.dart';
+import 'package:gnews/utils/Common.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:package_info/package_info.dart';
 import 'package:share/share.dart';
@@ -67,24 +67,38 @@ class ProfileFragmentState extends State<ProfileFragment> {
                   children: [
                     Container(
                       padding: EdgeInsets.all(16),
-                      color: appStore.isDarkMode ? scaffoldSecondaryDark : Colors.white,
+                      color: appStore.isDarkMode
+                          ? scaffoldSecondaryDark
+                          : Colors.white,
                       child: appStore.isLoggedIn
                           ? Row(
                               children: [
                                 appStore.userProfileImage.validate().isEmpty
                                     ? Icon(Icons.person_outline, size: 40)
-                                    : cachedImage(appStore.userProfileImage.validate(), usePlaceholderIfUrlEmpty: true, height: 60, width: 60, fit: BoxFit.cover).cornerRadiusWithClipRRect(60),
+                                    : cachedImage(
+                                            appStore.userProfileImage
+                                                .validate(),
+                                            usePlaceholderIfUrlEmpty: true,
+                                            height: 60,
+                                            width: 60,
+                                            fit: BoxFit.cover)
+                                        .cornerRadiusWithClipRRect(60),
                                 16.width,
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text('${appStore.userFirstName.validate()} ${appStore.userLastName.validate()}', style: boldTextStyle()),
-                                    Text(appStore.userEmail.validate(), style: primaryTextStyle()).fit(),
+                                    Text(
+                                        '${appStore.userFirstName.validate()} ${appStore.userLastName.validate()}',
+                                        style: boldTextStyle()),
+                                    Text(appStore.userEmail.validate(),
+                                            style: primaryTextStyle())
+                                        .fit(),
                                   ],
                                 ).expand(),
                                 IconButton(
                                   icon: Icon(Icons.edit),
-                                  onPressed: () => EditProfileScreen().launch(context),
+                                  onPressed: () =>
+                                      EditProfileScreen().launch(context),
                                 ),
                               ],
                             )
@@ -92,18 +106,31 @@ class ProfileFragmentState extends State<ProfileFragment> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Container(
-                                  padding: EdgeInsets.only(left: 20, right: 20, top: 12, bottom: 12),
-                                  decoration: BoxDecoration(border: Border.all(color: Theme.of(context).dividerColor)),
-                                  child: Text(appLocalization.translate('login'), style: boldTextStyle()),
+                                  padding: EdgeInsets.only(
+                                      left: 20, right: 20, top: 12, bottom: 12),
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color:
+                                              Theme.of(context).dividerColor)),
+                                  child: Text(
+                                      appLocalization.translate('login'),
+                                      style: boldTextStyle()),
                                 ).onTap(() async {
-                                  await LoginScreen(isNewTask: false).launch(context);
+                                  await LoginScreen(isNewTask: false)
+                                      .launch(context);
                                   setState(() {});
                                 }),
-                                if (enableSocialLogin) SocialLoginWidget(voidCallback: () => setState(() {})),
+                                if (enableSocialLogin)
+                                  SocialLoginWidget(
+                                      voidCallback: () => setState(() {})),
                               ],
                             ),
                     ),
-                    Divider(height: 20, color: appStore.isDarkMode ? Colors.transparent : Theme.of(context).dividerColor),
+                    Divider(
+                        height: 20,
+                        color: appStore.isDarkMode
+                            ? Colors.transparent
+                            : Theme.of(context).dividerColor),
                     8.height,
                     titleWidget(appLocalization.translate('app_settings')),
                     LanguageSelectionWidget(),
@@ -116,7 +143,8 @@ class ProfileFragmentState extends State<ProfileFragment> {
                           context,
                           child: ThemeSelectionDialog(),
                           contentPadding: EdgeInsets.zero,
-                          title: Text(appLocalization.translate('select_theme'), style: boldTextStyle(size: 20)),
+                          title: Text(appLocalization.translate('select_theme'),
+                              style: boldTextStyle(size: 20)),
                         );
                         if (isIos) {
                           DashboardScreen().launch(context, isNewTask: true);
@@ -125,11 +153,15 @@ class ProfileFragmentState extends State<ProfileFragment> {
                     ),
                     8.height,
                     SettingItemWidget(
-                      leading: Icon(appStore.isNotificationOn ? Feather.bell : Feather.bell_off),
-                      title: '${appStore.isNotificationOn ? appLocalization.translate('disable') : appLocalization.translate('enable')} ${appLocalization.translate(
+                      leading: Icon(appStore.isNotificationOn
+                          ? Feather.bell
+                          : Feather.bell_off),
+                      title:
+                          '${appStore.isNotificationOn ? appLocalization.translate('disable') : appLocalization.translate('enable')} ${appLocalization.translate(
                         'push_notification',
                       )}',
-                      subTitle: appLocalization.translate('enable_push_notification'),
+                      subTitle:
+                          appLocalization.translate('enable_push_notification'),
                       trailing: CupertinoSwitch(
                         activeColor: colorPrimary,
                         value: appStore.isNotificationOn,
@@ -138,18 +170,26 @@ class ProfileFragmentState extends State<ProfileFragment> {
                         },
                       ).withHeight(10),
                       onTap: () {
-                        appStore.setNotification(!getBoolAsync(IS_NOTIFICATION_ON, defaultValue: true));
+                        appStore.setNotification(!getBoolAsync(
+                            IS_NOTIFICATION_ON,
+                            defaultValue: true));
                       },
                     ),
                     SettingItemWidget(
                       leading: Icon(FontAwesome.font),
                       title: appLocalization.translate('article_font_size'),
-                      subTitle: appLocalization.translate('choose_article_size'),
+                      subTitle:
+                          appLocalization.translate('choose_article_size'),
                       trailing: DropdownButton<FontSizeModel>(
                         items: fontSizes.map((e) {
-                          return DropdownMenuItem<FontSizeModel>(child: Text('${e.title}', style: primaryTextStyle(size: 14)), value: e);
+                          return DropdownMenuItem<FontSizeModel>(
+                              child: Text('${e.title}',
+                                  style: primaryTextStyle(size: 14)),
+                              value: e);
                         }).toList(),
-                        dropdownColor: appStore.isDarkMode ? scaffoldSecondaryDark : Colors.white,
+                        dropdownColor: appStore.isDarkMode
+                            ? scaffoldSecondaryDark
+                            : Colors.white,
                         value: fontSize,
                         underline: SizedBox(),
                         onChanged: (FontSizeModel v) async {
@@ -157,7 +197,9 @@ class ProfileFragmentState extends State<ProfileFragment> {
 
                           await setValue(FONT_SIZE_PREF, v.fontSize);
 
-                          fontSize = fontSizes.firstWhere((element) => element.fontSize == getIntAsync(FONT_SIZE_PREF, defaultValue: 16));
+                          fontSize = fontSizes.firstWhere((element) =>
+                              element.fontSize ==
+                              getIntAsync(FONT_SIZE_PREF, defaultValue: 16));
 
                           setState(() {});
                         },
@@ -167,17 +209,27 @@ class ProfileFragmentState extends State<ProfileFragment> {
                       },
                     ),
                     SettingItemWidget(
-                      leading: Image.asset('assets/tts.png', width: 25, height: 25, color: appStore.isDarkMode ? Colors.white : Colors.black),
+                      leading: Image.asset('assets/tts.png',
+                          width: 25,
+                          height: 25,
+                          color: appStore.isDarkMode
+                              ? Colors.white
+                              : Colors.black),
                       title: appLocalization.translate('text_to_speech'),
-                      subTitle: appLocalization.translate('select_tts_language'),
+                      subTitle:
+                          appLocalization.translate('select_tts_language'),
                       trailing: DropdownButton<Language>(
                         items: ttsLanguage.map((e) {
                           return DropdownMenuItem<Language>(
-                            child: Text('${e.name}', style: primaryTextStyle(size: 14), overflow: TextOverflow.ellipsis),
+                            child: Text('${e.name}',
+                                style: primaryTextStyle(size: 14),
+                                overflow: TextOverflow.ellipsis),
                             value: e,
                           );
                         }).toList(),
-                        dropdownColor: appStore.isDarkMode ? scaffoldSecondaryDark : Colors.white,
+                        dropdownColor: appStore.isDarkMode
+                            ? scaffoldSecondaryDark
+                            : Colors.white,
                         value: ttsLang,
                         underline: SizedBox(),
                         onChanged: (Language l) async {
@@ -186,7 +238,8 @@ class ProfileFragmentState extends State<ProfileFragment> {
                           ttsLang = l;
 
                           setState(() {});
-                          toast('${l.name} ${appLocalization.translate('tts_language_confirm')}');
+                          toast(
+                              '${l.name} ${appLocalization.translate('tts_language_confirm')}');
                         },
                       ),
                       onTap: null,
@@ -200,8 +253,12 @@ class ProfileFragmentState extends State<ProfileFragment> {
                       onTap: () {
                         ChangePasswordScreen().launch(context);
                       },
-                    ).visible(appStore.isLoggedIn && !isLoggedInWithGoogleOrApple() && getStringAsync(LOGIN_TYPE) != LoginTypeOTP),
-                    8.height.visible(appStore.isLoggedIn && !isLoggedInWithGoogleOrApple() && getStringAsync(LOGIN_TYPE) != LoginTypeOTP),
+                    ).visible(appStore.isLoggedIn &&
+                        !isLoggedInWithGoogleOrApple() &&
+                        getStringAsync(LOGIN_TYPE) != LoginTypeOTP),
+                    8.height.visible(appStore.isLoggedIn &&
+                        !isLoggedInWithGoogleOrApple() &&
+                        getStringAsync(LOGIN_TYPE) != LoginTypeOTP),
                     SettingItemWidget(
                       leading: Icon(Icons.my_library_add_outlined),
                       title: appLocalization.translate('my_Topics'),
@@ -216,7 +273,8 @@ class ProfileFragmentState extends State<ProfileFragment> {
                     8.height,
                     SettingItemWidget(
                       leading: Icon(Icons.check_circle_outline_outlined),
-                      title: appLocalization.translate('choose_detail_page_variant'),
+                      title: appLocalization
+                          .translate('choose_detail_page_variant'),
                       onTap: () {
                         ChooseDetailPageVariantScreen().launch(context);
                       },
@@ -224,7 +282,8 @@ class ProfileFragmentState extends State<ProfileFragment> {
                     8.height,
                     SettingItemWidget(
                       leading: Icon(Icons.check_circle_outline_outlined),
-                      title: appLocalization.translate('choose_dashboard_page_variant'),
+                      title: appLocalization
+                          .translate('choose_dashboard_page_variant'),
                       onTap: () {
                         ChooseDashboardPageVariant().launch(context);
                       },
@@ -244,13 +303,15 @@ class ProfileFragmentState extends State<ProfileFragment> {
                     8.height,
                     SettingItemWidget(
                       leading: Icon(Icons.share_outlined),
-                      title: '${appLocalization.translate('share')} ${appLocalization.translate('app_name')}',
+                      title:
+                          '${appLocalization.translate('share')} ${appLocalization.translate('app_name')}',
                       onTap: () {
                         PackageInfo.fromPlatform().then((value) {
                           String package = '';
                           if (isAndroid) package = value.packageName;
 
-                          Share.share('Share $mAppName app\n\n${storeBaseURL()}$package');
+                          Share.share(
+                              'Share $mAppName app\n\n${storeBaseURL()}$package');
                         });
                       },
                     ),
@@ -272,7 +333,8 @@ class ProfileFragmentState extends State<ProfileFragment> {
                       leading: Icon(Icons.assignment_outlined),
                       title: appLocalization.translate('term_condition'),
                       onTap: () {
-                        launchUrl(getStringAsync(TERMS_AND_CONDITION_PREF), forceWebView: true);
+                        launchUrl(getStringAsync(TERMS_AND_CONDITION_PREF),
+                            forceWebView: true);
                       },
                     ),
                     8.height,
@@ -280,7 +342,8 @@ class ProfileFragmentState extends State<ProfileFragment> {
                       leading: Icon(Icons.assignment_outlined),
                       title: appLocalization.translate('privacyPolicy'),
                       onTap: () {
-                        launchUrl(getStringAsync(PRIVACY_POLICY_PREF), forceWebView: true);
+                        launchUrl(getStringAsync(PRIVACY_POLICY_PREF),
+                            forceWebView: true);
                       },
                     ),
                     8.height,
@@ -321,7 +384,10 @@ class ProfileFragmentState extends State<ProfileFragment> {
                       future: PackageInfo.fromPlatform(),
                       builder: (_, snap) {
                         if (snap.hasData) {
-                          return Text('${appLocalization.translate('version')} ${snap.data.version.validate()}', style: secondaryTextStyle(size: 10)).paddingLeft(16);
+                          return Text(
+                                  '${appLocalization.translate('version')} ${snap.data.version.validate()}',
+                                  style: secondaryTextStyle(size: 10))
+                              .paddingLeft(16);
                         }
                         return SizedBox();
                       },

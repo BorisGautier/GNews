@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:mighty_news/main.dart';
-import 'package:mighty_news/models/DashboardResponse.dart';
-import 'package:mighty_news/screens/NewsDetailScreen.dart';
-import 'package:mighty_news/utils/Common.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/main.dart';
+import 'package:gnews/models/DashboardResponse.dart';
+import 'package:gnews/screens/NewsDetailScreen.dart';
+import 'package:gnews/utils/Common.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class NewsDetailListScreen extends StatefulWidget {
@@ -47,7 +47,8 @@ class NewsDetailListScreenState extends State<NewsDetailListScreen> {
 
   InterstitialAd buildInterstitialAd() {
     return InterstitialAd(
-      adUnitId: kReleaseMode ? mAdMobInterstitialId : InterstitialAd.testAdUnitId,
+      adUnitId:
+          kReleaseMode ? mAdMobInterstitialId : InterstitialAd.testAdUnitId,
       listener: AdListener(onAdLoaded: (ad) {
         //
       }),
@@ -86,7 +87,12 @@ class NewsDetailListScreenState extends State<NewsDetailListScreen> {
       children: [
         PageView(
           controller: pageController,
-          children: widget.newsData.map((e) => NewsDetailScreen(newsData: e, heroTag: '${e.iD}${currentTimeStamp()}', disableAd: true)).toList(),
+          children: widget.newsData
+              .map((e) => NewsDetailScreen(
+                  newsData: e,
+                  heroTag: '${e.iD}${currentTimeStamp()}',
+                  disableAd: true))
+              .toList(),
         ),
         if (myBanner != null)
           Positioned(

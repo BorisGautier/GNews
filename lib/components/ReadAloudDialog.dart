@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:mighty_news/components/AppWidgets.dart';
-import 'package:mighty_news/main.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/components/AppWidgets.dart';
+import 'package:gnews/main.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 enum TtsState { playing, stopped, paused, continued }

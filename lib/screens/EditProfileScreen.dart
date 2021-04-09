@@ -2,12 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mighty_news/components/AppWidgets.dart';
-import 'package:mighty_news/main.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/utils/Colors.dart';
-import 'package:mighty_news/utils/Common.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/components/AppWidgets.dart';
+import 'package:gnews/main.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/utils/Colors.dart';
+import 'package:gnews/utils/Common.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../AppLocalizations.dart';
@@ -62,7 +62,10 @@ class EditProfileScreenState extends State<EditProfileScreen> {
       isLoading = true;
       setState(() {});
 
-      bool res = await updateProfile(firstName: firstNameController.text, lastName: lastNameController.text, file: image != null ? File(image.path) : null);
+      bool res = await updateProfile(
+          firstName: firstNameController.text,
+          lastName: lastNameController.text,
+          file: image != null ? File(image.path) : null);
 
       isLoading = false;
       setState(() {});
@@ -73,7 +76,8 @@ class EditProfileScreenState extends State<EditProfileScreen> {
 
   Future getImage() async {
     if (!isLoggedInWithGoogleOrApple()) {
-      image = await ImagePicker().getImage(source: ImageSource.gallery, imageQuality: 100);
+      image = await ImagePicker()
+          .getImage(source: ImageSource.gallery, imageQuality: 100);
 
       setState(() {});
     }
@@ -90,11 +94,19 @@ class EditProfileScreenState extends State<EditProfileScreen> {
 
     Widget profileImage() {
       if (image != null) {
-        return Image.file(File(image.path), height: 130, width: 130, fit: BoxFit.cover, alignment: Alignment.center);
+        return Image.file(File(image.path),
+            height: 130,
+            width: 130,
+            fit: BoxFit.cover,
+            alignment: Alignment.center);
       } else {
         if (getStringAsync(LOGIN_TYPE) == LoginTypeGoogle) {
-          return cachedImage(appStore.userProfileImage, height: 130, width: 130, fit: BoxFit.cover, alignment: Alignment.center);
-        } else  {
+          return cachedImage(appStore.userProfileImage,
+              height: 130,
+              width: 130,
+              fit: BoxFit.cover,
+              alignment: Alignment.center);
+        } else {
           return Icon(Icons.person_outline_rounded).paddingAll(16);
         }
       }
@@ -103,7 +115,10 @@ class EditProfileScreenState extends State<EditProfileScreen> {
     return SafeArea(
       top: !isIos,
       child: Scaffold(
-        appBar: appBarWidget(appLocalization.translate('edit_Profile'), showBack: true, color: getAppBarWidgetBackGroundColor(), textColor: getAppBarWidgetTextColor()),
+        appBar: appBarWidget(appLocalization.translate('edit_Profile'),
+            showBack: true,
+            color: getAppBarWidgetBackGroundColor(),
+            textColor: getAppBarWidgetTextColor()),
         body: Stack(
           children: [
             Container(
@@ -125,13 +140,16 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                               clipBehavior: Clip.antiAliasWithSaveLayer,
                               elevation: 16,
                               margin: EdgeInsets.all(0),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80)),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(80)),
                               child: profileImage(),
                             ),
                             Text(
                               appLocalization.translate('change_avatar'),
                               style: boldTextStyle(),
-                            ).paddingTop(16).visible(!isLoggedInWithGoogleOrApple()),
+                            )
+                                .paddingTop(16)
+                                .visible(!isLoggedInWithGoogleOrApple()),
                           ],
                         ).paddingOnly(top: 16, bottom: 16),
                       ).onTap(() {
@@ -141,7 +159,8 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                       AppTextField(
                         controller: firstNameController,
                         textFieldType: TextFieldType.NAME,
-                        decoration: inputDecoration(context, hint: appLocalization.translate('first_Name')),
+                        decoration: inputDecoration(context,
+                            hint: appLocalization.translate('first_Name')),
                         nextFocus: lastNameFocus,
                         textStyle: primaryTextStyle(),
                       ),
@@ -150,7 +169,8 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                         controller: lastNameController,
                         focus: lastNameFocus,
                         textFieldType: TextFieldType.NAME,
-                        decoration: inputDecoration(context, hint: appLocalization.translate('last_Name')),
+                        decoration: inputDecoration(context,
+                            hint: appLocalization.translate('last_Name')),
                         onFieldSubmitted: (s) {
                           save();
                         },
@@ -159,7 +179,9 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                       30.height,
                       AppButton(
                         text: appLocalization.translate('save'),
-                        color: appStore.isDarkMode ? scaffoldSecondaryDark : colorPrimary,
+                        color: appStore.isDarkMode
+                            ? scaffoldSecondaryDark
+                            : colorPrimary,
                         textStyle: boldTextStyle(color: white),
                         onTap: () {
                           save();

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:mighty_news/components/DetailPageVariant1Widget.dart';
-import 'package:mighty_news/components/DetailPageVariant2Widget.dart';
-import 'package:mighty_news/components/DetailPageVariant3Widget.dart';
-import 'package:mighty_news/components/ReadAloudDialog.dart';
-import 'package:mighty_news/models/DashboardResponse.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/screens/LoginScreen.dart';
-import 'package:mighty_news/utils/Common.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/components/DetailPageVariant1Widget.dart';
+import 'package:gnews/components/DetailPageVariant2Widget.dart';
+import 'package:gnews/components/DetailPageVariant3Widget.dart';
+import 'package:gnews/components/ReadAloudDialog.dart';
+import 'package:gnews/models/DashboardResponse.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/screens/LoginScreen.dart';
+import 'package:gnews/utils/Common.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:share/share.dart';
 
@@ -23,7 +23,8 @@ class NewsDetailScreen extends StatefulWidget {
   final String id;
   final bool disableAd;
 
-  NewsDetailScreen({this.newsData, this.heroTag, this.id, this.disableAd = false});
+  NewsDetailScreen(
+      {this.newsData, this.heroTag, this.id, this.disableAd = false});
 
   @override
   NewsDetailScreenState createState() => NewsDetailScreenState();
@@ -42,7 +43,8 @@ class NewsDetailScreenState extends State<NewsDetailScreen> {
     setDynamicStatusBarColorDetail(milliseconds: 400);
 
     if (widget.newsData == null) {
-      getBlogDetail({'post_id': widget.id.toString()}, appStore.isLoggedIn).then((value) {
+      getBlogDetail({'post_id': widget.id.toString()}, appStore.isLoggedIn)
+          .then((value) {
         widget.newsData = value;
 
         setState(() {});
@@ -119,35 +121,69 @@ class NewsDetailScreenState extends State<NewsDetailScreen> {
   Widget build(BuildContext context) {
     Widget getVariant(int postView, List<NewsData> relatedNews) {
       if (getIntAsync(DETAIL_PAGE_VARIANT, defaultValue: 1) == 1) {
-        return DetailPageVariant1Widget(widget.newsData, postView: postView, postContent: postContent, relatedNews: relatedNews.validate(), heroTag: widget.heroTag);
+        return DetailPageVariant1Widget(widget.newsData,
+            postView: postView,
+            postContent: postContent,
+            relatedNews: relatedNews.validate(),
+            heroTag: widget.heroTag);
       } else if (getIntAsync(DETAIL_PAGE_VARIANT, defaultValue: 1) == 2) {
-        return DetailPageVariant2Widget(widget.newsData, postView: postView, postContent: postContent, relatedNews: relatedNews.validate(), heroTag: widget.heroTag);
+        return DetailPageVariant2Widget(widget.newsData,
+            postView: postView,
+            postContent: postContent,
+            relatedNews: relatedNews.validate(),
+            heroTag: widget.heroTag);
       } else if (getIntAsync(DETAIL_PAGE_VARIANT, defaultValue: 1) == 3) {
-        return DetailPageVariant3Widget(widget.newsData, postView: postView, postContent: postContent, relatedNews: relatedNews.validate());
+        return DetailPageVariant3Widget(widget.newsData,
+            postView: postView,
+            postContent: postContent,
+            relatedNews: relatedNews.validate());
       } else {
-        return DetailPageVariant1Widget(widget.newsData, postView: postView, postContent: postContent, relatedNews: relatedNews.validate(), heroTag: widget.heroTag);
+        return DetailPageVariant1Widget(widget.newsData,
+            postView: postView,
+            postContent: postContent,
+            relatedNews: relatedNews.validate(),
+            heroTag: widget.heroTag);
       }
     }
 
     return SafeArea(
       top: (getIntAsync(DETAIL_PAGE_VARIANT, defaultValue: 1) == 1),
       child: Scaffold(
-        appBar: (getIntAsync(DETAIL_PAGE_VARIANT, defaultValue: 1) == 1 && widget.newsData != null)
+        appBar: (getIntAsync(DETAIL_PAGE_VARIANT, defaultValue: 1) == 1 &&
+                widget.newsData != null)
             ? appBarWidget(
-                parseHtmlString(widget.newsData != null ? widget.newsData.post_title.validate() : ''),
+                parseHtmlString(widget.newsData != null
+                    ? widget.newsData.post_title.validate()
+                    : ''),
                 showBack: true,
-                color: getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) != 1 ? Theme.of(context).cardColor : getPrimaryColor(),
-                textColor: getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) != 1 ? textPrimaryColorGlobal : Colors.white,
+                color: getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) != 1
+                    ? Theme.of(context).cardColor
+                    : getPrimaryColor(),
+                textColor:
+                    getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) != 1
+                        ? textPrimaryColorGlobal
+                        : Colors.white,
                 actions: [
                   if (widget.newsData != null)
                     IconButton(
                       icon: Icon(
-                        widget.newsData.is_fav.validate() ? FontAwesome.bookmark : FontAwesome.bookmark_o,
-                        color: (getIntAsync(DETAIL_PAGE_VARIANT, defaultValue: 1) == 1 && getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) == 1) || appStore.isDarkMode ? Colors.white : Colors.black,
+                        widget.newsData.is_fav.validate()
+                            ? FontAwesome.bookmark
+                            : FontAwesome.bookmark_o,
+                        color: (getIntAsync(DETAIL_PAGE_VARIANT,
+                                            defaultValue: 1) ==
+                                        1 &&
+                                    getIntAsync(DASHBOARD_PAGE_VARIANT,
+                                            defaultValue: 1) ==
+                                        1) ||
+                                appStore.isDarkMode
+                            ? Colors.white
+                            : Colors.black,
                       ),
                       onPressed: () async {
                         if (!appStore.isLoggedIn) {
-                          bool res = await LoginScreen(isNewTask: false).launch(context);
+                          bool res = await LoginScreen(isNewTask: false)
+                              .launch(context);
 
                           if (res ?? false) {
                             addToWishList();
@@ -160,7 +196,15 @@ class NewsDetailScreenState extends State<NewsDetailScreen> {
                   IconButton(
                     icon: Icon(
                       Icons.share_rounded,
-                      color: (getIntAsync(DETAIL_PAGE_VARIANT, defaultValue: 1) == 1 && getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) == 1) || appStore.isDarkMode ? Colors.white : Colors.black,
+                      color:
+                          (getIntAsync(DETAIL_PAGE_VARIANT, defaultValue: 1) ==
+                                          1 &&
+                                      getIntAsync(DASHBOARD_PAGE_VARIANT,
+                                              defaultValue: 1) ==
+                                          1) ||
+                                  appStore.isDarkMode
+                              ? Colors.white
+                              : Colors.black,
                     ),
                     onPressed: () async {
                       Share.share(widget.newsData.share_url.validate());
@@ -169,7 +213,15 @@ class NewsDetailScreenState extends State<NewsDetailScreen> {
                   IconButton(
                     icon: Icon(
                       Icons.play_circle_outline,
-                      color: (getIntAsync(DETAIL_PAGE_VARIANT, defaultValue: 1) == 1 && getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) == 1) || appStore.isDarkMode ? Colors.white : Colors.black,
+                      color:
+                          (getIntAsync(DETAIL_PAGE_VARIANT, defaultValue: 1) ==
+                                          1 &&
+                                      getIntAsync(DASHBOARD_PAGE_VARIANT,
+                                              defaultValue: 1) ==
+                                          1) ||
+                                  appStore.isDarkMode
+                              ? Colors.white
+                              : Colors.black,
                     ),
                     onPressed: () async {
                       showInDialog(
@@ -185,10 +237,14 @@ class NewsDetailScreenState extends State<NewsDetailScreen> {
             : null,
         body: widget.newsData != null
             ? Container(
-                padding: EdgeInsets.only(bottom: !getBoolAsync(DISABLE_AD) ? AdSize.banner.height.toDouble() : 0),
+                padding: EdgeInsets.only(
+                    bottom: !getBoolAsync(DISABLE_AD)
+                        ? AdSize.banner.height.toDouble()
+                        : 0),
                 height: context.height(),
                 width: context.width(),
-                child: getVariant(widget.newsData.post_view.validate(), widget.newsData.related_news.validate()),
+                child: getVariant(widget.newsData.post_view.validate(),
+                    widget.newsData.related_news.validate()),
               )
             : Loader(),
       ),

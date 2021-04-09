@@ -6,33 +6,37 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart';
-import 'package:mighty_news/main.dart';
-import 'package:mighty_news/models/BaseResponse.dart' as BR;
-import 'package:mighty_news/models/CategoryData.dart';
-import 'package:mighty_news/models/CommentData.dart';
-import 'package:mighty_news/models/CryptoCurrencyModel.dart';
-import 'package:mighty_news/models/DashboardResponse.dart';
-import 'package:mighty_news/models/LoginResponse.dart';
-import 'package:mighty_news/models/RegisterResponse.dart';
-import 'package:mighty_news/models/SearchNewsResponse.dart';
-import 'package:mighty_news/models/TweetModel.dart';
-import 'package:mighty_news/models/WeatherResponse.dart';
-import 'package:mighty_news/network/NetworkUtils.dart';
-import 'package:mighty_news/screens/DashboardScreen.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/main.dart';
+import 'package:gnews/models/BaseResponse.dart' as BR;
+import 'package:gnews/models/CategoryData.dart';
+import 'package:gnews/models/CommentData.dart';
+import 'package:gnews/models/CryptoCurrencyModel.dart';
+import 'package:gnews/models/DashboardResponse.dart';
+import 'package:gnews/models/LoginResponse.dart';
+import 'package:gnews/models/RegisterResponse.dart';
+import 'package:gnews/models/SearchNewsResponse.dart';
+import 'package:gnews/models/TweetModel.dart';
+import 'package:gnews/models/WeatherResponse.dart';
+import 'package:gnews/network/NetworkUtils.dart';
+import 'package:gnews/screens/DashboardScreen.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 //region Third Party APIs
 Future<WeatherResponse> getWeatherApi() async {
   LocationPermission permission = await Geolocator.requestPermission();
 
-  if (permission == LocationPermission.always || permission == LocationPermission.whileInUse) {
+  if (permission == LocationPermission.always ||
+      permission == LocationPermission.whileInUse) {
     Position position = await Geolocator.getLastKnownPosition();
     if (position == null) {
       position = await Geolocator.getCurrentPosition();
     }
 
-    return WeatherResponse.fromJson(await handleResponse(await buildHttpResponse('$mCryptoCurrencyBaseUrl?key=$mWeatherAPIKey&q=${position.latitude},${position.longitude}'), true));
+    return WeatherResponse.fromJson(await handleResponse(
+        await buildHttpResponse(
+            '$mCryptoCurrencyBaseUrl?key=$mWeatherAPIKey&q=${position.latitude},${position.longitude}'),
+        true));
   } else {
     throw errorSomethingWentWrong;
   }
@@ -40,19 +44,24 @@ Future<WeatherResponse> getWeatherApi() async {
 
 Future<void> getCryptoCurrencyApi() async {
   return await handleResponse(
-    await buildHttpResponse('$mWeatherBaseUrl?CMC_PRO_API_KEY=$mCoinMarketCapKey&symbol=BTC,ETH'),
+    await buildHttpResponse(
+        '$mWeatherBaseUrl?CMC_PRO_API_KEY=$mCoinMarketCapKey&symbol=BTC,ETH'),
   ).then((json) async {
     var cryptoCurrencyData = CryptoCurrencyModel.fromJson(json);
 
     if (cryptoCurrencyData.data.btc.validate().length >= 1) {
-      await setValue(BITCOIN_PRICE, cryptoCurrencyData.data.btc.first.quote.usd.price);
-      await setValue(BITCOIN_CHANGE, cryptoCurrencyData.data.btc.first.quote.usd.percent_change_24h);
+      await setValue(
+          BITCOIN_PRICE, cryptoCurrencyData.data.btc.first.quote.usd.price);
+      await setValue(BITCOIN_CHANGE,
+          cryptoCurrencyData.data.btc.first.quote.usd.percent_change_24h);
       appStore.setCurrencyStoreModel();
     }
 
     if (cryptoCurrencyData.data.eth.validate().length >= 1) {
-      await setValue(ETHEREUM_PRICE, cryptoCurrencyData.data.eth.first.quote.usd.price);
-      await setValue(ETHEREUM_CHANGE, cryptoCurrencyData.data.eth.first.quote.usd.percent_change_24h);
+      await setValue(
+          ETHEREUM_PRICE, cryptoCurrencyData.data.eth.first.quote.usd.price);
+      await setValue(ETHEREUM_CHANGE,
+          cryptoCurrencyData.data.eth.first.quote.usd.percent_change_24h);
       appStore.setCurrencyStoreModel();
     }
     setValue(CURRENT_TIME, DateTime.now().toString());
@@ -63,9 +72,13 @@ Future<void> getCryptoCurrencyApi() async {
 }
 
 Future<List<TweetModel>> loadTweetConfig() async {
-  AuthCredential credential = TwitterAuthProvider.credential(accessToken: mTwitterApiAccessToken, secret: mTwitterApiAccessTokenSecret);
+  AuthCredential credential = TwitterAuthProvider.credential(
+      accessToken: mTwitterApiAccessToken,
+      secret: mTwitterApiAccessTokenSecret);
 
-  return FirebaseAuth.instance.signInWithCredential(credential).then((value) async {
+  return FirebaseAuth.instance
+      .signInWithCredential(credential)
+      .then((value) async {
     final String proxy = isWeb ? "http://localhost:8888/" : "";
 
     final String authUrl = "${proxy}https://api.twitter.com/oauth2/token";
@@ -76,16 +89,21 @@ Future<List<TweetModel>> loadTweetConfig() async {
 
     Response authRes = await post(
       Uri.parse(authUrl),
-      headers: {"Authorization": "Basic $auth", "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"},
+      headers: {
+        "Authorization": "Basic $auth",
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+      },
       body: "grant_type=client_credentials",
     );
 
     Map decoded = jsonDecode(authRes.body);
 
     if (isIos) {
-      await setValue(TWITTER_USERNAME, value.additionalUserInfo.profile['screen_name']);
+      await setValue(
+          TWITTER_USERNAME, value.additionalUserInfo.profile['screen_name']);
     } else {
-      await setValue(TWITTER_USERNAME, value.additionalUserInfo.username.validate());
+      await setValue(
+          TWITTER_USERNAME, value.additionalUserInfo.username.validate());
     }
 
     await setValue(TWITTER_ACCESS_TOKEN, decoded['access_token']);
@@ -106,8 +124,11 @@ Future<List<TweetModel>> loadTweetConfig() async {
 
 Future<List<TweetModel>> loadTweets() async {
   return await get(
-    Uri.parse('https://api.twitter.com/1.1/statuses/user_timeline.json?tweet_mode=extended&screen_name=${getStringAsync(TWITTER_USERNAME)}'),
-    headers: {'Authorization': 'Bearer ${getStringAsync(TWITTER_ACCESS_TOKEN)}'},
+    Uri.parse(
+        'https://api.twitter.com/1.1/statuses/user_timeline.json?tweet_mode=extended&screen_name=${getStringAsync(TWITTER_USERNAME)}'),
+    headers: {
+      'Authorization': 'Bearer ${getStringAsync(TWITTER_ACCESS_TOKEN)}'
+    },
   ).then((timelineRes) async {
     if (timelineRes.statusCode.isSuccessful()) {
       retryCount = 0;
@@ -130,17 +151,24 @@ Future<List<TweetModel>> loadTweets() async {
 
 //region User Authentications
 Future validateToken() async {
-  return await handleResponse(await buildHttpResponse('jwt-auth/v1/token/validate', request: {}, method: HttpMethod.POST));
+  return await handleResponse(await buildHttpResponse(
+      'jwt-auth/v1/token/validate',
+      request: {},
+      method: HttpMethod.POST));
 }
 
 Future<LoginResponse> login(Map request, {bool isSocialLogin = false}) async {
-  Response response = await buildHttpResponse(isSocialLogin ? 'news/api/v1/mighty/social_login' : 'jwt-auth/v1/token', request: request, method: HttpMethod.POST);
+  Response response = await buildHttpResponse(
+      isSocialLogin ? 'news/api/v1/mighty/social_login' : 'jwt-auth/v1/token',
+      request: request,
+      method: HttpMethod.POST);
 
   if (!response.statusCode.isSuccessful()) {
     if (response.body.isJson()) {
       var json = jsonDecode(response.body);
 
-      if (json.containsKey('code') && json['code'].toString().contains('invalid_username')) {
+      if (json.containsKey('code') &&
+          json['code'].toString().contains('invalid_username')) {
         throw 'invalid_username';
       }
     }
@@ -156,8 +184,10 @@ Future<LoginResponse> login(Map request, {bool isSocialLogin = false}) async {
     await setValue(USER_EMAIL, loginResponse.user_email.validate());
     await setValue(USERNAME, loginResponse.user_nicename.validate());
 
-    await setValue(USER_DISPLAY_NAME, loginResponse.user_display_name.validate());
-    if (loginResponse.my_topics != null) await setValue(MY_TOPICS, jsonEncode(loginResponse.my_topics));
+    await setValue(
+        USER_DISPLAY_NAME, loginResponse.user_display_name.validate());
+    if (loginResponse.my_topics != null)
+      await setValue(MY_TOPICS, jsonEncode(loginResponse.my_topics));
 
     if (request['loginType'] == LoginTypeGoogle) {
       await setValue(PROFILE_IMAGE, request['photoURL']);
@@ -172,13 +202,17 @@ Future<LoginResponse> login(Map request, {bool isSocialLogin = false}) async {
     if (loginResponse.myPreference != null) {
       await setValue(MY_PREFERENCE, jsonEncode(loginResponse.myPreference));
 
-      await setValue(DETAIL_PAGE_VARIANT, loginResponse.myPreference.detailVariant.validate(value: 1));
+      await setValue(DETAIL_PAGE_VARIANT,
+          loginResponse.myPreference.detailVariant.validate(value: 1));
 
-      await setValue(THEME_MODE_INDEX, loginResponse.myPreference.themeMode.validate());
-      if (loginResponse.myPreference.themeMode.validate() == ThemeModeLight || loginResponse.myPreference.themeMode.validate() == ThemeModeDark) {
+      await setValue(
+          THEME_MODE_INDEX, loginResponse.myPreference.themeMode.validate());
+      if (loginResponse.myPreference.themeMode.validate() == ThemeModeLight ||
+          loginResponse.myPreference.themeMode.validate() == ThemeModeDark) {
         if (loginResponse.myPreference.themeMode.validate() == ThemeModeLight) {
           appStore.setDarkMode(false);
-        } else if (loginResponse.myPreference.themeMode.validate() == ThemeModeDark) {
+        } else if (loginResponse.myPreference.themeMode.validate() ==
+            ThemeModeDark) {
           appStore.setDarkMode(true);
         }
       }
@@ -216,7 +250,9 @@ Future<void> logout(BuildContext context) async {
   await removeKey(PROFILE_IMAGE);
   await removeKey(IS_LOGGED_IN);
 
-  if (getBoolAsync(IS_SOCIAL_LOGIN) || getStringAsync(LOGIN_TYPE) == LoginTypeOTP || !getBoolAsync(IS_REMEMBERED)) {
+  if (getBoolAsync(IS_SOCIAL_LOGIN) ||
+      getStringAsync(LOGIN_TYPE) == LoginTypeOTP ||
+      !getBoolAsync(IS_REMEMBERED)) {
     await removeKey(PASSWORD);
     await removeKey(USER_EMAIL);
   }
@@ -228,32 +264,54 @@ Future<void> logout(BuildContext context) async {
 }
 
 Future<RegisterResponse> createUser(Map request) async {
-  return RegisterResponse.fromJson(await handleResponse(await buildHttpResponse('news/api/v1/auth/register', request: request, method: HttpMethod.POST)));
+  return RegisterResponse.fromJson(await handleResponse(await buildHttpResponse(
+      'news/api/v1/auth/register',
+      request: request,
+      method: HttpMethod.POST)));
 }
 
 Future<LoginResponse> viewProfile() async {
-  return LoginResponse.fromJson(await handleResponse(await buildHttpResponse('news/api/v1/mighty/view-profile')));
+  return LoginResponse.fromJson(await handleResponse(
+      await buildHttpResponse('news/api/v1/mighty/view-profile')));
 }
 
 Future<LoginResponse> updateUser(id, Map request) async {
-  return LoginResponse.fromJson(await handleResponse(await buildHttpResponse('news/api/v1/mighty/update-profile', request: request, method: HttpMethod.POST)));
+  return LoginResponse.fromJson(await handleResponse(await buildHttpResponse(
+      'news/api/v1/mighty/update-profile',
+      request: request,
+      method: HttpMethod.POST)));
 }
 
 Future<BR.BaseResponse> forgotPassword(Map request) async {
-  return BR.BaseResponse.fromJson(await handleResponse(await buildHttpResponse('news/api/v1/mighty/forgot-password', request: request, method: HttpMethod.POST)));
+  return BR.BaseResponse.fromJson(await handleResponse(await buildHttpResponse(
+      'news/api/v1/mighty/forgot-password',
+      request: request,
+      method: HttpMethod.POST)));
 }
 
 Future<BR.BaseResponse> changePassword(Map request) async {
-  return BR.BaseResponse.fromJson(await handleResponse(await buildHttpResponse('news/api/v1/mighty/change-password', request: request, method: HttpMethod.POST)));
+  return BR.BaseResponse.fromJson(await handleResponse(await buildHttpResponse(
+      'news/api/v1/mighty/change-password',
+      request: request,
+      method: HttpMethod.POST)));
 }
 
-Future<bool> updateProfile({String firstName, String lastName, File file, String toastMessage, bool showToast = true}) async {
-  var multiPartRequest = MultipartRequest('POST', Uri.parse('$mBaseUrl${'news/api/v1/mighty/update-profile'}'));
+Future<bool> updateProfile(
+    {String firstName,
+    String lastName,
+    File file,
+    String toastMessage,
+    bool showToast = true}) async {
+  var multiPartRequest = MultipartRequest(
+      'POST', Uri.parse('$mBaseUrl${'news/api/v1/mighty/update-profile'}'));
 
-  multiPartRequest.fields['first_name'] = firstName ?? getStringAsync(FIRST_NAME);
+  multiPartRequest.fields['first_name'] =
+      firstName ?? getStringAsync(FIRST_NAME);
   multiPartRequest.fields['last_name'] = lastName ?? getStringAsync(LAST_NAME);
   multiPartRequest.fields['my_topics'] = jsonEncode(appStore.myTopics);
-  if (file != null) multiPartRequest.files.add(await MultipartFile.fromPath('profile_image', file.path));
+  if (file != null)
+    multiPartRequest.files
+        .add(await MultipartFile.fromPath('profile_image', file.path));
 
   Map map = {
     'detailVariant': getIntAsync(DETAIL_PAGE_VARIANT),
@@ -290,7 +348,8 @@ Future<bool> updateProfile({String firstName, String lastName, File file, String
     if (data.myPreference != null) {
       await setValue(MY_PREFERENCE, jsonEncode(data.myPreference));
 
-      await setValue(DETAIL_PAGE_VARIANT, data.myPreference.detailVariant.validate(value: 1));
+      await setValue(DETAIL_PAGE_VARIANT,
+          data.myPreference.detailVariant.validate(value: 1));
 
       await setValue(THEME_MODE_INDEX, data.myPreference.themeMode.validate());
     }
@@ -308,37 +367,58 @@ Future<bool> updateProfile({String firstName, String lastName, File file, String
 
 //region News List
 Future<SearchNewsResponse> getWishList(int page) async {
-  return SearchNewsResponse.fromJson(await handleResponse(await buildHttpResponse('news/api/v1/mighty/get-fav-list?paged=$page&posts_per_page=$postsPerPage')));
+  return SearchNewsResponse.fromJson(await handleResponse(await buildHttpResponse(
+      'news/api/v1/mighty/get-fav-list?paged=$page&posts_per_page=$postsPerPage')));
 }
 
 Future<SearchNewsResponse> blogFilterNewsApi(Map request, int page) async {
-  return SearchNewsResponse.fromJson(await handleResponse(await buildHttpResponse('news/api/v1/mighty/get-blog-by-filter?paged=$page', request: request, method: HttpMethod.POST)));
+  return SearchNewsResponse.fromJson(await handleResponse(
+      await buildHttpResponse(
+          'news/api/v1/mighty/get-blog-by-filter?paged=$page',
+          request: request,
+          method: HttpMethod.POST)));
 }
 
 Future<DashboardResponse> getDashboardApi(Map request, int page) async {
-  if (!(await isNetworkAvailable()) && getStringAsync(DASHBOARD_DATA).isNotEmpty) {
-    return DashboardResponse.fromJson(jsonDecode(getStringAsync(DASHBOARD_DATA)));
+  if (!(await isNetworkAvailable()) &&
+      getStringAsync(DASHBOARD_DATA).isNotEmpty) {
+    return DashboardResponse.fromJson(
+        jsonDecode(getStringAsync(DASHBOARD_DATA)));
   }
-  return await handleResponse(await buildHttpResponse('news/api/v1/mighty/get-dashboard?paged=$page', request: request, method: HttpMethod.POST)).then((value) async {
+  return await handleResponse(await buildHttpResponse(
+          'news/api/v1/mighty/get-dashboard?paged=$page',
+          request: request,
+          method: HttpMethod.POST))
+      .then((value) async {
     var res = DashboardResponse.fromJson(value);
 
     await setValue(DASHBOARD_DATA, jsonEncode(res));
     if (res.social_link != null) {
-      await setValue(TERMS_AND_CONDITION_PREF, res.social_link.termCondition.validate());
-      await setValue(PRIVACY_POLICY_PREF, res.social_link.privacyPolicy.validate());
+      await setValue(
+          TERMS_AND_CONDITION_PREF, res.social_link.termCondition.validate());
+      await setValue(
+          PRIVACY_POLICY_PREF, res.social_link.privacyPolicy.validate());
       await setValue(CONTACT_PREF, res.social_link.contact.validate());
       await setValue(DISABLE_AD, res.social_link.disableAd.validate());
-      await setValue(DISABLE_LOCATION_WIDGET, res.social_link.disableLocation.validate());
-      await setValue(DISABLE_TWITTER_WIDGET, res.social_link.disableTwitter.validate());
-      await setValue(DISABLE_CRYPTO_CURRENCY_WIDGET, res.social_link.disableCryptoCurrency.validate());
-      await setValue(DISABLE_HEADLINE_WIDGET, res.social_link.disableHeadline.validate());
-      await setValue(DISABLE_QUICK_READ_WIDGET, res.social_link.disableQuickRead.validate());
-      await setValue(DISABLE_STORY_WIDGET, res.social_link.disableStory.validate());
+      await setValue(
+          DISABLE_LOCATION_WIDGET, res.social_link.disableLocation.validate());
+      await setValue(
+          DISABLE_TWITTER_WIDGET, res.social_link.disableTwitter.validate());
+      await setValue(DISABLE_CRYPTO_CURRENCY_WIDGET,
+          res.social_link.disableCryptoCurrency.validate());
+      await setValue(
+          DISABLE_HEADLINE_WIDGET, res.social_link.disableHeadline.validate());
+      await setValue(DISABLE_QUICK_READ_WIDGET,
+          res.social_link.disableQuickRead.validate());
+      await setValue(
+          DISABLE_STORY_WIDGET, res.social_link.disableStory.validate());
     }
     return res;
   }).catchError((e) async {
-    if (!await isNetworkAvailable() && getStringAsync(DASHBOARD_DATA).isNotEmpty) {
-      return DashboardResponse.fromJson(jsonDecode(getStringAsync(DASHBOARD_DATA)));
+    if (!await isNetworkAvailable() &&
+        getStringAsync(DASHBOARD_DATA).isNotEmpty) {
+      return DashboardResponse.fromJson(
+          jsonDecode(getStringAsync(DASHBOARD_DATA)));
     }
 
     throw e.toString();
@@ -346,38 +426,55 @@ Future<DashboardResponse> getDashboardApi(Map request, int page) async {
 }
 
 Future<NewsData> getBlogDetail(Map request, bool isLogin) async {
-  return NewsData.fromJson(await handleResponse(await buildHttpResponse('news/api/v1/mighty/get-post-details', request: request, method: HttpMethod.POST)));
+  return NewsData.fromJson(await handleResponse(await buildHttpResponse(
+      'news/api/v1/mighty/get-post-details',
+      request: request,
+      method: HttpMethod.POST)));
 }
 //endregion
 
-Future<List<CategoryData>> getCategories({int page, int perPage = 100, int parent}) async {
-  if (!(await isNetworkAvailable()) && getStringAsync(CATEGORY_DATA).isNotEmpty) {
+Future<List<CategoryData>> getCategories(
+    {int page, int perPage = 100, int parent}) async {
+  if (!(await isNetworkAvailable()) &&
+      getStringAsync(CATEGORY_DATA).isNotEmpty) {
     Iterable it = jsonDecode(getStringAsync(CATEGORY_DATA));
     return it.map((e) => CategoryData.fromJson(e)).toList();
   } else {
-    Iterable it = await handleResponse(await buildHttpResponse('news/api/v1/mighty/get-category?parent=${parent ?? 0}&page=${page ?? 1}&per_page=$perPage'));
+    Iterable it = await handleResponse(await buildHttpResponse(
+        'news/api/v1/mighty/get-category?parent=${parent ?? 0}&page=${page ?? 1}&per_page=$perPage'));
     return it.map((e) => CategoryData.fromJson(e)).toList();
   }
 }
 
 Future addWishList(Map request) async {
-  return handleResponse(await buildHttpResponse('news/api/v1/mighty/add-fav-list', request: request, method: HttpMethod.POST));
+  return handleResponse(await buildHttpResponse(
+      'news/api/v1/mighty/add-fav-list',
+      request: request,
+      method: HttpMethod.POST));
 }
 
 Future<BR.BaseResponse> removeWishList(Map request) async {
-  return BR.BaseResponse.fromJson(await handleResponse(await buildHttpResponse('news/api/v1/mighty/delete-fav-list', request: request, method: HttpMethod.POST)));
+  return BR.BaseResponse.fromJson(await handleResponse(await buildHttpResponse(
+      'news/api/v1/mighty/delete-fav-list',
+      request: request,
+      method: HttpMethod.POST)));
 }
 
 Future<List<VideoData>> getVideos(int page) async {
-  Iterable it = await handleResponse(await buildHttpResponse('news/api/v1/mighty/get-video-list?paged=$page&posts_per_page=$postsPerPage'));
+  Iterable it = await handleResponse(await buildHttpResponse(
+      'news/api/v1/mighty/get-video-list?paged=$page&posts_per_page=$postsPerPage'));
   return it.map((e) => VideoData.fromJson(e)).toList();
 }
 
 Future<List<CommentData>> getCommentList(int id) async {
-  Iterable res = await handleResponse(await buildHttpResponse('wp/v2/comments/?post=$id'));
+  Iterable res =
+      await handleResponse(await buildHttpResponse('wp/v2/comments/?post=$id'));
   return res.map((e) => CommentData.fromJson(e)).toList();
 }
 
 Future<BR.BaseResponse> postComment(Map request) async {
-  return BR.BaseResponse.fromJson(await handleResponse(await buildHttpResponse('news/api/v1/mighty/post-comment', request: request, method: HttpMethod.POST)));
+  return BR.BaseResponse.fromJson(await handleResponse(await buildHttpResponse(
+      'news/api/v1/mighty/post-comment',
+      request: request,
+      method: HttpMethod.POST)));
 }

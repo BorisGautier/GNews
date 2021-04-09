@@ -4,14 +4,15 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:html/parser.dart';
-import 'package:mighty_news/main.dart';
+import 'package:gnews/main.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'Colors.dart';
 import 'Constants.dart';
 
-Color getPrimaryColor() => appStore.isDarkMode ? scaffoldSecondaryDark : colorPrimary;
+Color getPrimaryColor() =>
+    appStore.isDarkMode ? scaffoldSecondaryDark : colorPrimary;
 
 String titleFont() {
   return GoogleFonts.cormorantGaramond().fontFamily;
@@ -23,16 +24,20 @@ String parseHtmlString(String htmlString) {
 
 Future<void> launchUrl(String url, {bool forceWebView = false}) async {
   log(url);
-  await launch(url, forceWebView: forceWebView, enableJavaScript: true).catchError((e) {
+  await launch(url, forceWebView: forceWebView, enableJavaScript: true)
+      .catchError((e) {
     log(e);
     toast('Invalid URL: $url');
   });
 }
 
-InputDecoration inputDecoration(BuildContext context, {String hint, Widget prefixIcon}) {
+InputDecoration inputDecoration(BuildContext context,
+    {String hint, Widget prefixIcon}) {
   return InputDecoration(
-    focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: colorPrimary)),
-    enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: viewLineColor)),
+    focusedBorder:
+        UnderlineInputBorder(borderSide: BorderSide(color: colorPrimary)),
+    enabledBorder:
+        UnderlineInputBorder(borderSide: BorderSide(color: viewLineColor)),
     labelText: hint,
     labelStyle: TextStyle(color: Theme.of(context).textTheme.headline6.color),
     contentPadding: EdgeInsets.only(top: 8, bottom: 8),
@@ -54,7 +59,8 @@ Widget titleWidget(String title) {
     children: [
       VerticalDivider(color: colorPrimary, thickness: 4).withHeight(10),
       8.width,
-      Text(title, style: boldTextStyle(size: 12, color: textSecondaryColorGlobal)),
+      Text(title,
+          style: boldTextStyle(size: 12, color: textSecondaryColorGlobal)),
     ],
   ).paddingLeft(16);
 }
@@ -80,12 +86,14 @@ String durationFormatter(int milliSeconds) {
       : seconds == 0
           ? '00'
           : '0$seconds';
-  final formattedTime = '${hoursString == '00' ? '' : hoursString + ':'}$minutesString:$secondsString';
+  final formattedTime =
+      '${hoursString == '00' ? '' : hoursString + ':'}$minutesString:$secondsString';
   return formattedTime;
 }
 
 bool isLoggedInWithGoogleOrApple() {
-  return appStore.isLoggedIn && getStringAsync(LOGIN_TYPE) == LoginTypeGoogle || getStringAsync(LOGIN_TYPE) == LoginTypeApple;
+  return appStore.isLoggedIn && getStringAsync(LOGIN_TYPE) == LoginTypeGoogle ||
+      getStringAsync(LOGIN_TYPE) == LoginTypeApple;
 }
 
 double getDashBoard2WidgetHeight() {
@@ -103,7 +111,8 @@ double getDashBoard2WidgetHeight() {
 Color getAppBarWidgetBackGroundColor() {
   if (getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) == 1) {
     return appStore.isDarkMode ? scaffoldSecondaryDark : colorPrimary;
-  } else if (getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) == 2 || getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) == 3) {
+  } else if (getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) == 2 ||
+      getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) == 3) {
     return appStore.isDarkMode ? scaffoldSecondaryDark : white;
   } else {
     return appStore.isDarkMode ? scaffoldSecondaryDark : colorPrimary;
@@ -113,7 +122,8 @@ Color getAppBarWidgetBackGroundColor() {
 Color getAppBarWidgetTextColor() {
   if (getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) == 1) {
     return appStore.isDarkMode ? white : white;
-  } else if (getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) == 2 || getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) == 3) {
+  } else if (getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) == 2 ||
+      getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) == 3) {
     return appStore.isDarkMode ? white : black;
   } else {
     return appStore.isDarkMode ? white : black;
@@ -128,22 +138,43 @@ int getWidgetTwitterLine() {
   }
 }
 
-Future<void> setDynamicStatusBarColor({Color color, int milliseconds = 100}) async {
+Future<void> setDynamicStatusBarColor(
+    {Color color, int milliseconds = 100}) async {
   if (getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) == 1) {
-    setStatusBarColor(color ?? getPrimaryColor() /*, statusBarIconBrightness: Brightness.light*/, delayInMilliSeconds: milliseconds);
-  } else if (getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) == 2 || getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) == 3) {
-    setStatusBarColor(color ?? (appStore.isDarkMode ? scaffoldSecondaryDark : white) /*, statusBarIconBrightness: appStore.isDarkMode ? Brightness.light : Brightness.dark*/, delayInMilliSeconds: milliseconds);
+    setStatusBarColor(
+        color ??
+            getPrimaryColor() /*, statusBarIconBrightness: Brightness.light*/,
+        delayInMilliSeconds: milliseconds);
+  } else if (getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) == 2 ||
+      getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) == 3) {
+    setStatusBarColor(
+        color ??
+            (appStore.isDarkMode
+                ? scaffoldSecondaryDark
+                : white) /*, statusBarIconBrightness: appStore.isDarkMode ? Brightness.light : Brightness.dark*/,
+        delayInMilliSeconds: milliseconds);
   }
 }
 
 Future<void> setDynamicStatusBarColorDetail({int milliseconds = 100}) async {
-  if (getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) != 1 && getIntAsync(DETAIL_PAGE_VARIANT, defaultValue: 1) == 1) {
-    setStatusBarColor(appStore.isDarkMode ? scaffoldSecondaryDark : Colors.white /*, statusBarIconBrightness: appStore.isDarkMode ? Brightness.light : Brightness.dark*/, delayInMilliSeconds: milliseconds);
+  if (getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) != 1 &&
+      getIntAsync(DETAIL_PAGE_VARIANT, defaultValue: 1) == 1) {
+    setStatusBarColor(
+        appStore.isDarkMode
+            ? scaffoldSecondaryDark
+            : Colors
+                .white /*, statusBarIconBrightness: appStore.isDarkMode ? Brightness.light : Brightness.dark*/,
+        delayInMilliSeconds: milliseconds);
   } else {
-    if (getIntAsync(DETAIL_PAGE_VARIANT, defaultValue: 1) == 2 || getIntAsync(DETAIL_PAGE_VARIANT, defaultValue: 1) == 3) {
-      setStatusBarColor(Colors.transparent /*, statusBarIconBrightness: Brightness.light*/, delayInMilliSeconds: milliseconds);
+    if (getIntAsync(DETAIL_PAGE_VARIANT, defaultValue: 1) == 2 ||
+        getIntAsync(DETAIL_PAGE_VARIANT, defaultValue: 1) == 3) {
+      setStatusBarColor(
+          Colors.transparent /*, statusBarIconBrightness: Brightness.light*/,
+          delayInMilliSeconds: milliseconds);
     } else {
-      setStatusBarColor(getPrimaryColor() /*, statusBarIconBrightness: Brightness.light*/, delayInMilliSeconds: milliseconds);
+      setStatusBarColor(
+          getPrimaryColor() /*, statusBarIconBrightness: Brightness.light*/,
+          delayInMilliSeconds: milliseconds);
     }
   }
 }
@@ -184,7 +215,8 @@ Future<RemoteConfig> initializeRemoteConfig() async {
   final defaults = <String, dynamic>{};
   await remoteConfig.setDefaults(defaults);
 
-  remoteConfig.setConfigSettings(RemoteConfigSettings(minimumFetchInterval: Duration.zero, fetchTimeout: Duration.zero));
+  remoteConfig.setConfigSettings(RemoteConfigSettings(
+      minimumFetchInterval: Duration.zero, fetchTimeout: Duration.zero));
   await remoteConfig.fetch();
 
   await remoteConfig.fetchAndActivate().then((value) {
@@ -192,12 +224,16 @@ Future<RemoteConfig> initializeRemoteConfig() async {
   });
 
   await setValue(LAST_UPDATE_DATE, remoteConfig.getString(LAST_UPDATE_DATE));
-  await setValue(FORCE_UPDATE_VERSION_CODE, remoteConfig.getInt(FORCE_UPDATE_VERSION_CODE));
+  await setValue(FORCE_UPDATE_VERSION_CODE,
+      remoteConfig.getInt(FORCE_UPDATE_VERSION_CODE));
 
   return remoteConfig;
 }
 
-void checkForceUpdateForAndroid({@required int currentVersion, @required int forceUpdateVersion, @required String packageName}) {
+void checkForceUpdateForAndroid(
+    {@required int currentVersion,
+    @required int forceUpdateVersion,
+    @required String packageName}) {
   if (isAndroid) {
     if (currentVersion < forceUpdateVersion) {
       launchUrl('$playStoreBaseURL$packageName');
@@ -209,10 +245,14 @@ void checkForceUpdateForAndroid({@required int currentVersion, @required int for
 ///  HttpOverrides.global = HttpOverridesSkipCertificate();
 class HttpOverridesSkipCertificate extends HttpOverrides {
   @override
-  HttpClient createHttpClient(SecurityContext context) => super.createHttpClient(context)..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+  HttpClient createHttpClient(SecurityContext context) =>
+      super.createHttpClient(context)
+        ..badCertificateCallback =
+            (X509Certificate cert, String host, int port) => true;
 }
 
-double newsListWidgetSize(BuildContext context) => isWeb ? 300 : context.width() * 0.6;
+double newsListWidgetSize(BuildContext context) =>
+    isWeb ? 300 : context.width() * 0.6;
 
 String storeBaseURL() {
   return isAndroid ? playStoreBaseURL : appStoreBaseUrl;

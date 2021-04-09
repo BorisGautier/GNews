@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_news/models/DashboardResponse.dart';
-import 'package:mighty_news/utils/Common.dart';
+import 'package:gnews/models/DashboardResponse.dart';
+import 'package:gnews/utils/Common.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import 'AppWidgets.dart';
@@ -39,15 +39,20 @@ class BreakingNewsItemWidgetState extends State<BreakingNewsItemWidget> {
     return Container(
       width: newsListWidgetSize(context),
       decoration: BoxDecoration(
-        boxShadow: [BoxShadow(color: white.withOpacity(0.1), spreadRadius: 0.5, blurRadius: 1.0)],
+        boxShadow: [
+          BoxShadow(
+              color: white.withOpacity(0.1), spreadRadius: 0.5, blurRadius: 1.0)
+        ],
         borderRadius: radius(),
       ),
       margin: EdgeInsets.all(8),
       child: Stack(
         fit: StackFit.expand,
         children: [
-          cachedImage(widget.newsData.image.validate(), fit: BoxFit.cover).cornerRadiusWithClipRRect(defaultRadius),
-          Container(color: Colors.black38).cornerRadiusWithClipRRect(defaultRadius),
+          cachedImage(widget.newsData.image.validate(), fit: BoxFit.cover)
+              .cornerRadiusWithClipRRect(defaultRadius),
+          Container(color: Colors.black38)
+              .cornerRadiusWithClipRRect(defaultRadius),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,7 +60,8 @@ class BreakingNewsItemWidgetState extends State<BreakingNewsItemWidget> {
               Text(
                 parseHtmlString(widget.newsData.post_title.validate()),
                 maxLines: 1,
-                style: boldTextStyle(size: 20, color: Colors.white, fontFamily: titleFont()),
+                style: boldTextStyle(
+                    size: 20, color: Colors.white, fontFamily: titleFont()),
               ),
               Text(
                 parseHtmlString(widget.newsData.post_content.validate()),

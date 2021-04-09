@@ -1,4 +1,4 @@
-import 'package:mighty_news/models/DashboardResponse.dart';
+import 'package:gnews/models/DashboardResponse.dart';
 
 class SearchNewsResponse {
   int num_pages;
@@ -9,7 +9,9 @@ class SearchNewsResponse {
   factory SearchNewsResponse.fromJson(Map<String, dynamic> json) {
     return SearchNewsResponse(
       num_pages: json['num_pages'],
-      posts: json['posts'] != null ? (json['posts'] as List).map((i) => NewsData.fromJson(i)).toList() : null,
+      posts: json['posts'] != null
+          ? (json['posts'] as List).map((i) => NewsData.fromJson(i)).toList()
+          : null,
     );
   }
 

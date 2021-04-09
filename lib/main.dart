@@ -7,12 +7,12 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:mighty_news/AppLocalizations.dart';
-import 'package:mighty_news/AppTheme.dart';
-import 'package:mighty_news/models/FontSizeModel.dart';
-import 'package:mighty_news/screens/SplashScreen.dart';
-import 'package:mighty_news/store/AppStore.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/AppLocalizations.dart';
+import 'package:gnews/AppTheme.dart';
+import 'package:gnews/models/FontSizeModel.dart';
+import 'package:gnews/screens/SplashScreen.dart';
+import 'package:gnews/store/AppStore.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 

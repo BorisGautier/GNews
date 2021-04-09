@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
-import 'package:mighty_news/AppLocalizations.dart';
-import 'package:mighty_news/components/AppWidgets.dart';
-import 'package:mighty_news/components/PostCommentDialog.dart';
-import 'package:mighty_news/main.dart';
-import 'package:mighty_news/models/CommentData.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/screens/LoginScreen.dart';
-import 'package:mighty_news/utils/Common.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/AppLocalizations.dart';
+import 'package:gnews/components/AppWidgets.dart';
+import 'package:gnews/components/PostCommentDialog.dart';
+import 'package:gnews/main.dart';
+import 'package:gnews/models/CommentData.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/screens/LoginScreen.dart';
+import 'package:gnews/utils/Common.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class CommentListScreen extends StatefulWidget {
@@ -59,10 +59,15 @@ class CommentListScreenState extends State<CommentListScreen> {
             actions: [
               IconButton(
                 icon: Icon(Icons.add),
-                color: getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) == 1 || appStore.isDarkMode ? Colors.white : Colors.black,
+                color:
+                    getIntAsync(DASHBOARD_PAGE_VARIANT, defaultValue: 1) == 1 ||
+                            appStore.isDarkMode
+                        ? Colors.white
+                        : Colors.black,
                 onPressed: () async {
                   if (appStore.isLoggedIn) {
-                    bool res = await showInDialog(context, child: PostCommentDialog(widget.id));
+                    bool res = await showInDialog(context,
+                        child: PostCommentDialog(widget.id));
 
                     if (res ?? false) {
                       setState(() {});
@@ -85,7 +90,8 @@ class CommentListScreenState extends State<CommentListScreen> {
                     if (snap.hasData) {
                       if (snap.data.isNotEmpty) {
                         return Container(
-                          margin: EdgeInsets.only(bottom: !getBoolAsync(DISABLE_AD) ? 50 : 0),
+                          margin: EdgeInsets.only(
+                              bottom: !getBoolAsync(DISABLE_AD) ? 50 : 0),
                           child: ListView.builder(
                             itemCount: snap.data.length,
                             shrinkWrap: true,
@@ -101,20 +107,38 @@ class CommentListScreenState extends State<CommentListScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Container(
-                                      decoration: BoxDecoration(shape: BoxShape.circle, color: getPrimaryColor()),
-                                      child: Text(name.toUpperCase(), style: boldTextStyle(color: Colors.white, size: 22)).center(),
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: getPrimaryColor()),
+                                      child: Text(name.toUpperCase(),
+                                              style: boldTextStyle(
+                                                  color: Colors.white,
+                                                  size: 22))
+                                          .center(),
                                       padding: EdgeInsets.all(14),
                                     ),
                                     16.width,
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Text(parseHtmlString(data.author_name.validate()), style: secondaryTextStyle()),
-                                        Text(parseHtmlString(data.content.rendered.validate()), style: primaryTextStyle()),
+                                        Text(
+                                            parseHtmlString(
+                                                data.author_name.validate()),
+                                            style: secondaryTextStyle()),
+                                        Text(
+                                            parseHtmlString(data
+                                                .content.rendered
+                                                .validate()),
+                                            style: primaryTextStyle()),
                                       ],
                                     ).expand(),
                                     8.width,
-                                    Text(DateFormat('dd MMM, yyyy HH:mm').format(DateTime.parse(data.date.validate())), style: secondaryTextStyle(size: 10)),
+                                    Text(
+                                        DateFormat('dd MMM, yyyy HH:mm').format(
+                                            DateTime.parse(
+                                                data.date.validate())),
+                                        style: secondaryTextStyle(size: 10)),
                                   ],
                                 ),
                               );

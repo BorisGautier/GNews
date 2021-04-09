@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_news/components/BreakingNewsMarqueeWidget.dart';
-import 'package:mighty_news/components/CryptoCurrencyListWidget.dart';
-import 'package:mighty_news/components/VideoListWidget.dart';
-import 'package:mighty_news/components/ViewAllHeadingWidget.dart';
-import 'package:mighty_news/components/home3/components/Dashboard3BreakingNewsListWidget.dart';
-import 'package:mighty_news/components/home3/components/Dashboard3NewsListWidget.dart';
-import 'package:mighty_news/models/DashboardResponse.dart';
-import 'package:mighty_news/screens/ViewAllNewsScreen.dart';
-import 'package:mighty_news/screens/ViewAllVideoScreen.dart';
-import 'package:mighty_news/utils/Colors.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/components/BreakingNewsMarqueeWidget.dart';
+import 'package:gnews/components/CryptoCurrencyListWidget.dart';
+import 'package:gnews/components/VideoListWidget.dart';
+import 'package:gnews/components/ViewAllHeadingWidget.dart';
+import 'package:gnews/components/home3/components/Dashboard3BreakingNewsListWidget.dart';
+import 'package:gnews/components/home3/components/Dashboard3NewsListWidget.dart';
+import 'package:gnews/models/DashboardResponse.dart';
+import 'package:gnews/screens/ViewAllNewsScreen.dart';
+import 'package:gnews/screens/ViewAllVideoScreen.dart';
+import 'package:gnews/utils/Colors.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../AppLocalizations.dart';
@@ -74,15 +74,20 @@ class Dashboard3WidgetState extends State<Dashboard3Widget> {
               children: [
                 20.height,
                 ViewAllHeadingWidget(
-                  title: appLocalization.translate('breaking_News').toUpperCase(),
+                  title:
+                      appLocalization.translate('breaking_News').toUpperCase(),
                   backgroundColor: white,
                   textColor: scaffoldColorDark,
                   onTap: () {
-                    ViewAllNewsScreen(title: 'breaking_News', req: {'posts_per_page': postsPerPage, FILTER: FILTER_FEATURE}).launch(context);
+                    ViewAllNewsScreen(title: 'breaking_News', req: {
+                      'posts_per_page': postsPerPage,
+                      FILTER: FILTER_FEATURE
+                    }).launch(context);
                   },
                 ),
                 8.height,
-                Dashboard3BreakingNewsListWidget(widget.snap.data.breaking_post),
+                Dashboard3BreakingNewsListWidget(
+                    widget.snap.data.breaking_post),
               ],
             ).visible(widget.snap.data.breaking_post.validate().isNotEmpty),
 
@@ -99,11 +104,14 @@ class Dashboard3WidgetState extends State<Dashboard3Widget> {
                   textColor: scaffoldColorDark,
                   backgroundColor: white,
                   onTap: () {
-                    ViewAllNewsScreen(title: 'recent_News', req: {'posts_per_page': postsPerPage}).launch(context);
+                    ViewAllNewsScreen(
+                        title: 'recent_News',
+                        req: {'posts_per_page': postsPerPage}).launch(context);
                   },
                 ),
                 8.height,
-                Dashboard3NewsListWidget(widget.snap.data.recent_post, padding: EdgeInsets.symmetric(horizontal: 8)),
+                Dashboard3NewsListWidget(widget.snap.data.recent_post,
+                    padding: EdgeInsets.symmetric(horizontal: 8)),
               ],
             ).visible(widget.snap.data.recent_post.validate().isNotEmpty),
 
@@ -121,7 +129,8 @@ class Dashboard3WidgetState extends State<Dashboard3Widget> {
                   },
                 ),
                 8.height,
-                VideoListWidget(widget.snap.data.videos.validate(), axis: Axis.horizontal),
+                VideoListWidget(widget.snap.data.videos.validate(),
+                    axis: Axis.horizontal),
               ],
             ).visible(widget.snap.data.videos.validate().isNotEmpty),
 

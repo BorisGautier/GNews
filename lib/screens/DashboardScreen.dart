@@ -2,17 +2,17 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:mighty_news/AppLocalizations.dart';
-import 'package:mighty_news/main.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/screens/ChooseTopicScreen.dart';
-import 'package:mighty_news/screens/HomeFragment.dart';
-import 'package:mighty_news/screens/LoginScreen.dart';
-import 'package:mighty_news/screens/NewsDetailScreen.dart';
-import 'package:mighty_news/screens/ProfileFragment.dart';
-import 'package:mighty_news/utils/Colors.dart';
-import 'package:mighty_news/utils/Common.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/AppLocalizations.dart';
+import 'package:gnews/main.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/screens/ChooseTopicScreen.dart';
+import 'package:gnews/screens/HomeFragment.dart';
+import 'package:gnews/screens/LoginScreen.dart';
+import 'package:gnews/screens/NewsDetailScreen.dart';
+import 'package:gnews/screens/ProfileFragment.dart';
+import 'package:gnews/utils/Colors.dart';
+import 'package:gnews/utils/Common.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:package_info/package_info.dart';
@@ -28,7 +28,8 @@ class DashboardScreen extends StatefulWidget {
   DashboardScreenState createState() => DashboardScreenState();
 }
 
-class DashboardScreenState extends State<DashboardScreen> with AfterLayoutMixin<DashboardScreen> {
+class DashboardScreenState extends State<DashboardScreen>
+    with AfterLayoutMixin<DashboardScreen> {
   List<Widget> widgets = [];
   int currentIndex = 0;
 
@@ -63,13 +64,16 @@ class DashboardScreenState extends State<DashboardScreen> with AfterLayoutMixin<
 
     window.onPlatformBrightnessChanged = () {
       if (getIntAsync(THEME_MODE_INDEX) == ThemeModeSystem) {
-        appStore.setDarkMode(MediaQuery.of(context).platformBrightness == Brightness.light);
+        appStore.setDarkMode(
+            MediaQuery.of(context).platformBrightness == Brightness.light);
       }
     };
 
     if (getStringAsync(CURRENT_TIME).isEmpty) {
       getCryptoCurrencyApi();
-    } else if (DateTime.now().difference(DateTime.parse(getStringAsync(CURRENT_TIME))) >= Duration(hours: 6)) {
+    } else if (DateTime.now()
+            .difference(DateTime.parse(getStringAsync(CURRENT_TIME))) >=
+        Duration(hours: 6)) {
       getCryptoCurrencyApi();
     }
   }
@@ -79,23 +83,28 @@ class DashboardScreenState extends State<DashboardScreen> with AfterLayoutMixin<
     appLocale = AppLocalizations.of(context);
 
     if (isMobile) {
-      OneSignal.shared.setNotificationOpenedHandler((OSNotificationOpenedResult notification) async {
-        String notId = await notification.notification.payload.additionalData["ID"];
+      OneSignal.shared.setNotificationOpenedHandler(
+          (OSNotificationOpenedResult notification) async {
+        String notId =
+            await notification.notification.payload.additionalData["ID"];
 
         if (notId.validate().isNotEmpty) {
           String heroTag = '$notId${currentTimeStamp()}';
 
-          NewsDetailScreen(id: notId.toString(), heroTag: heroTag).launch(context);
+          NewsDetailScreen(id: notId.toString(), heroTag: heroTag)
+              .launch(context);
         }
       });
     }
 
     if (isAndroid) {
       PackageInfo.fromPlatform().then((value) {
-        checkForceUpdateForAndroid(currentVersion: value.buildNumber.toInt(), forceUpdateVersion: getIntAsync(FORCE_UPDATE_VERSION_CODE), packageName: value.packageName);
+        checkForceUpdateForAndroid(
+            currentVersion: value.buildNumber.toInt(),
+            forceUpdateVersion: getIntAsync(FORCE_UPDATE_VERSION_CODE),
+            packageName: value.packageName);
       });
     }
-
   }
 
   @override
@@ -118,7 +127,8 @@ class DashboardScreenState extends State<DashboardScreen> with AfterLayoutMixin<
       child: WillPopScope(
         onWillPop: () async {
           DateTime now = DateTime.now();
-          if (currentBackPressTime == null || now.difference(currentBackPressTime) > 2.seconds) {
+          if (currentBackPressTime == null ||
+              now.difference(currentBackPressTime) > 2.seconds) {
             currentBackPressTime = now;
             toast(AppLocalizations.of(context).translate('exit_app'));
             return Future.value(false);
@@ -131,29 +141,35 @@ class DashboardScreenState extends State<DashboardScreen> with AfterLayoutMixin<
             currentIndex: currentIndex,
             items: [
               BottomNavigationBarItem(
-                icon: Icon(AntDesign.home, color: Theme.of(context).iconTheme.color),
+                icon: Icon(AntDesign.home,
+                    color: Theme.of(context).iconTheme.color),
                 label: 'Home',
                 activeIcon: Icon(AntDesign.home, color: colorPrimary),
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.dashboard_outlined, color: Theme.of(context).iconTheme.color),
+                icon: Icon(Icons.dashboard_outlined,
+                    color: Theme.of(context).iconTheme.color),
                 label: 'Suggested For You',
                 activeIcon: Icon(Icons.dashboard_outlined, color: colorPrimary),
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.category_outlined, color: Theme.of(context).iconTheme.color),
+                icon: Icon(Icons.category_outlined,
+                    color: Theme.of(context).iconTheme.color),
                 label: 'Category',
                 activeIcon: Icon(Icons.category_outlined, color: colorPrimary),
               ),
               BottomNavigationBarItem(
-                icon: Icon(Ionicons.ios_search, color: Theme.of(context).iconTheme.color),
+                icon: Icon(Ionicons.ios_search,
+                    color: Theme.of(context).iconTheme.color),
                 label: 'Search News',
                 activeIcon: Icon(Ionicons.ios_search, color: colorPrimary),
               ),
               BottomNavigationBarItem(
-                icon: Icon(MaterialIcons.person_outline, color: Theme.of(context).iconTheme.color),
+                icon: Icon(MaterialIcons.person_outline,
+                    color: Theme.of(context).iconTheme.color),
                 label: 'Profile',
-                activeIcon: Icon(MaterialIcons.person_outline, color: colorPrimary),
+                activeIcon:
+                    Icon(MaterialIcons.person_outline, color: colorPrimary),
               ),
             ],
             type: BottomNavigationBarType.fixed,

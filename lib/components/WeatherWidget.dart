@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_news/models/WeatherResponse.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/utils/Common.dart';
+import 'package:gnews/models/WeatherResponse.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/utils/Common.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../AppLocalizations.dart';

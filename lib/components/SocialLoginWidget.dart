@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:mighty_news/network/AuthService.dart';
+import 'package:gnews/network/AuthService.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../main.dart';
@@ -19,7 +19,10 @@ class SocialLoginWidget extends StatelessWidget {
       children: [
         Container(
           padding: EdgeInsets.all(2),
-          decoration: BoxDecoration(shape: BoxShape.circle, color: appStore.isDarkMode ? Colors.white12 : Colors.grey.shade100),
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color:
+                  appStore.isDarkMode ? Colors.white12 : Colors.grey.shade100),
           child: IconButton(
             icon: Image.asset('assets/ic_google.png', height: 30),
             onPressed: () async {
@@ -42,9 +45,13 @@ class SocialLoginWidget extends StatelessWidget {
         Container(
           margin: EdgeInsets.only(left: 4),
           padding: EdgeInsets.all(2),
-          decoration: BoxDecoration(shape: BoxShape.circle, color: appStore.isDarkMode ? Colors.white12 : Colors.grey.shade100),
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color:
+                  appStore.isDarkMode ? Colors.white12 : Colors.grey.shade100),
           child: IconButton(
-            icon: Image.asset('assets/ic_apple.png', color: appStore.isDarkMode ? white : black),
+            icon: Image.asset('assets/ic_apple.png',
+                color: appStore.isDarkMode ? white : black),
             onPressed: () async {
               hideKeyboard(context);
 
@@ -65,7 +72,10 @@ class SocialLoginWidget extends StatelessWidget {
         Container(
           margin: EdgeInsets.only(left: 4),
           padding: EdgeInsets.all(2),
-          decoration: BoxDecoration(shape: BoxShape.circle, color: appStore.isDarkMode ? Colors.white12 : Colors.grey.shade100),
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color:
+                  appStore.isDarkMode ? Colors.white12 : Colors.grey.shade100),
           child: IconButton(
             icon: Icon(Feather.phone, color: Colors.blue),
             onPressed: () async {
@@ -73,7 +83,9 @@ class SocialLoginWidget extends StatelessWidget {
 
               appStore.setLoading(true);
 
-              await showInDialog(context, child: OTPDialog(), barrierDismissible: false).catchError((e) {
+              await showInDialog(context,
+                      child: OTPDialog(), barrierDismissible: false)
+                  .catchError((e) {
                 toast(e.toString());
               });
 

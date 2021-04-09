@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mighty_news/AppLocalizations.dart';
-import 'package:mighty_news/components/AppWidgets.dart';
-import 'package:mighty_news/components/NewsListWidget.dart';
-import 'package:mighty_news/models/DashboardResponse.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/shimmer/VerticalTextImageShimmer.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/AppLocalizations.dart';
+import 'package:gnews/components/AppWidgets.dart';
+import 'package:gnews/components/NewsListWidget.dart';
+import 'package:gnews/models/DashboardResponse.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/shimmer/VerticalTextImageShimmer.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../main.dart';
@@ -50,7 +50,8 @@ class SearchNewsFragmentState extends State<SearchNewsFragment> {
     }
 
     scrollController.addListener(() {
-      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
         if (page < numPage) {
           page++;
 
@@ -122,11 +123,14 @@ class SearchNewsFragmentState extends State<SearchNewsFragment> {
               textFieldType: TextFieldType.OTHER,
               decoration: InputDecoration(
                 border: OutlineInputBorder(borderRadius: radius(30)),
-                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: viewLineColor), borderRadius: radius(30)),
+                enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: viewLineColor),
+                    borderRadius: radius(30)),
                 hintText: appLocalization.translate('search_hintText'),
                 hintStyle: primaryTextStyle(),
                 contentPadding: EdgeInsets.only(top: 8, bottom: 8),
-                prefixIcon: Icon(Icons.search_rounded, color: Theme.of(context).iconTheme.color),
+                prefixIcon: Icon(Icons.search_rounded,
+                    color: Theme.of(context).iconTheme.color),
               ),
               onFieldSubmitted: (s) {
                 searchKey = s;
@@ -146,16 +150,32 @@ class SearchNewsFragmentState extends State<SearchNewsFragment> {
               width: context.width(),
               child: news.isNotEmpty
                   ? SingleChildScrollView(
-                      padding: EdgeInsets.only(top: 8, right: 0, left: 0, bottom: 200),
+                      padding: EdgeInsets.only(
+                          top: 8, right: 0, left: 0, bottom: 200),
                       controller: scrollController,
                       child: NewsListWidget(news, padding: EdgeInsets.all(8)),
                     )
-                  : noDataWidget(context).visible(!hasError && !appStore.isLoading && !isShimmerLoading),
+                  : noDataWidget(context).visible(
+                      !hasError && !appStore.isLoading && !isShimmerLoading),
             ),
           ),
-          VerticalTextImageShimmer().paddingOnly(top: news.isNotEmpty ? 0 : 90, bottom: 16, left: 8, right: 8).center().visible(isShimmerLoading),
-          Observer(builder: (_) => Loader().paddingOnly(top: news.isNotEmpty ? 0 : 90, bottom: 16, left: 8, right: 8).center().visible(appStore.isLoading)),
-          Text(error.validate(), style: primaryTextStyle()).center().visible(hasError),
+          VerticalTextImageShimmer()
+              .paddingOnly(
+                  top: news.isNotEmpty ? 0 : 90, bottom: 16, left: 8, right: 8)
+              .center()
+              .visible(isShimmerLoading),
+          Observer(
+              builder: (_) => Loader()
+                  .paddingOnly(
+                      top: news.isNotEmpty ? 0 : 90,
+                      bottom: 16,
+                      left: 8,
+                      right: 8)
+                  .center()
+                  .visible(appStore.isLoading)),
+          Text(error.validate(), style: primaryTextStyle())
+              .center()
+              .visible(hasError),
         ],
       ),
     );

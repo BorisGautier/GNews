@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:mighty_news/models/DashboardResponse.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/screens/CommentListScreen.dart';
-import 'package:mighty_news/screens/LoginScreen.dart';
-import 'package:mighty_news/utils/Colors.dart';
-import 'package:mighty_news/utils/Common.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/models/DashboardResponse.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/screens/CommentListScreen.dart';
+import 'package:gnews/screens/LoginScreen.dart';
+import 'package:gnews/utils/Colors.dart';
+import 'package:gnews/utils/Common.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:share/share.dart';
 
@@ -28,10 +28,12 @@ class DetailPageVariant2Widget extends StatefulWidget {
   final List<NewsData> relatedNews;
   final String heroTag;
 
-  DetailPageVariant2Widget(this.newsData, {this.postView, this.postContent, this.relatedNews, this.heroTag});
+  DetailPageVariant2Widget(this.newsData,
+      {this.postView, this.postContent, this.relatedNews, this.heroTag});
 
   @override
-  DetailPageVariant2WidgetState createState() => DetailPageVariant2WidgetState();
+  DetailPageVariant2WidgetState createState() =>
+      DetailPageVariant2WidgetState();
 }
 
 class DetailPageVariant2WidgetState extends State<DetailPageVariant2Widget> {
@@ -94,13 +96,18 @@ class DetailPageVariant2WidgetState extends State<DetailPageVariant2Widget> {
             height: context.height() * 0.5,
             child: Stack(
               children: [
-                cachedImage(widget.newsData.image.validate(), height: context.height() * 0.48, fit: BoxFit.cover),
-                Container(color: Colors.black26, height: context.height() * 0.48),
+                cachedImage(widget.newsData.image.validate(),
+                    height: context.height() * 0.48, fit: BoxFit.cover),
+                Container(
+                    color: Colors.black26, height: context.height() * 0.48),
                 Positioned(
                   bottom: context.height() * 0.2,
                   left: 16,
                   right: 16,
-                  child: Text(parseHtmlString(widget.newsData.post_title.validate()), style: boldTextStyle(color: Colors.white, size: 24), maxLines: 2),
+                  child: Text(
+                      parseHtmlString(widget.newsData.post_title.validate()),
+                      style: boldTextStyle(color: Colors.white, size: 24),
+                      maxLines: 2),
                 ),
                 Positioned(
                   bottom: context.height() * 0.14,
@@ -109,15 +116,24 @@ class DetailPageVariant2WidgetState extends State<DetailPageVariant2Widget> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      if (widget.newsData.category.validate().isNotEmpty) getPostCategoryTagWidget(context, widget.newsData).withSize(height: 40, width: context.width()).expand(),
+                      if (widget.newsData.category.validate().isNotEmpty)
+                        getPostCategoryTagWidget(context, widget.newsData)
+                            .withSize(height: 40, width: context.width())
+                            .expand(),
                       Row(
                         children: [
-                          Icon(Icons.access_time_rounded, color: Colors.white, size: 16),
+                          Icon(Icons.access_time_rounded,
+                              color: Colors.white, size: 16),
                           4.width,
-                          Text(widget.newsData.human_time_diff, style: secondaryTextStyle(color: Colors.white)),
+                          Text(widget.newsData.human_time_diff,
+                              style: secondaryTextStyle(color: Colors.white)),
                           4.width,
-                          Text('・', style: secondaryTextStyle(color: Colors.white)),
-                          Text(getArticleReadTime(context, widget.newsData.post_content.validate()), style: secondaryTextStyle(color: Colors.white)),
+                          Text('・',
+                              style: secondaryTextStyle(color: Colors.white)),
+                          Text(
+                              getArticleReadTime(context,
+                                  widget.newsData.post_content.validate()),
+                              style: secondaryTextStyle(color: Colors.white)),
                         ],
                       ),
                     ],
@@ -133,12 +149,19 @@ class DetailPageVariant2WidgetState extends State<DetailPageVariant2Widget> {
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(FontAwesome.commenting_o, size: 16, color: Colors.white),
+                          Icon(FontAwesome.commenting_o,
+                              size: 16, color: Colors.white),
                           8.width,
-                          CommentTextWidget(text: widget.newsData.no_of_comments_text.validate(value: '0'), textColor: Colors.white),
+                          CommentTextWidget(
+                              text: widget.newsData.no_of_comments_text
+                                  .validate(value: '0'),
+                              textColor: Colors.white),
                         ],
-                      ).paddingOnly(left: 8, right: 8, top: 8, bottom: 8).onTap(() async {
-                        await CommentListScreen(widget.newsData.iD).launch(context);
+                      )
+                          .paddingOnly(left: 8, right: 8, top: 8, bottom: 8)
+                          .onTap(() async {
+                        await CommentListScreen(widget.newsData.iD)
+                            .launch(context);
                         await Future.delayed(Duration(milliseconds: 300));
 
                         setStatusBarColor(Colors.transparent);
@@ -148,7 +171,8 @@ class DetailPageVariant2WidgetState extends State<DetailPageVariant2Widget> {
                         children: [
                           Icon(FontAwesome.eye, size: 16, color: Colors.white),
                           8.width,
-                          Text(widget.postView.validate().toString(), style: secondaryTextStyle(color: Colors.white)),
+                          Text(widget.postView.validate().toString(),
+                              style: secondaryTextStyle(color: Colors.white)),
                         ],
                       ).paddingOnly(left: 8, right: 8, top: 8, bottom: 8),
                     ],
@@ -164,14 +188,20 @@ class DetailPageVariant2WidgetState extends State<DetailPageVariant2Widget> {
               children: [
                 Container(
                   width: context.width(),
-                  decoration: BoxDecoration(borderRadius: radiusOnly(topLeft: 30, topRight: 30), color: appStore.isDarkMode ? scaffoldSecondaryDark : Colors.white),
+                  decoration: BoxDecoration(
+                      borderRadius: radiusOnly(topLeft: 30, topRight: 30),
+                      color: appStore.isDarkMode
+                          ? scaffoldSecondaryDark
+                          : Colors.white),
                   padding: EdgeInsets.only(left: 16, right: 16, top: 24),
                   child: HtmlWidget(postContent: widget.postContent),
                   margin: EdgeInsets.only(bottom: 30),
                 ),
                 AppButton(
                   text: appLocalization.translate('view_Comments'),
-                  color: appStore.isDarkMode ? scaffoldSecondaryDark : colorPrimary,
+                  color: appStore.isDarkMode
+                      ? scaffoldSecondaryDark
+                      : colorPrimary,
                   textStyle: boldTextStyle(color: white),
                   onTap: () async {
                     await CommentListScreen(widget.newsData.iD).launch(context);
@@ -185,10 +215,17 @@ class DetailPageVariant2WidgetState extends State<DetailPageVariant2Widget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      padding: EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
+                      padding:
+                          EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
                       margin: EdgeInsets.only(left: 16, top: 32, bottom: 8),
-                      decoration: BoxDecoration(color: colorPrimary, borderRadius: radius(defaultRadius)),
-                      child: Text(appLocalization.translate('related_news'), style: boldTextStyle(size: 12, color: Colors.white, letterSpacing: 1.5)),
+                      decoration: BoxDecoration(
+                          color: colorPrimary,
+                          borderRadius: radius(defaultRadius)),
+                      child: Text(appLocalization.translate('related_news'),
+                          style: boldTextStyle(
+                              size: 12,
+                              color: Colors.white,
+                              letterSpacing: 1.5)),
                     ),
                     BreakingNewsListWidget(widget.relatedNews.validate()),
                   ],
@@ -203,18 +240,29 @@ class DetailPageVariant2WidgetState extends State<DetailPageVariant2Widget> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(child: BackButton(), decoration: BoxDecoration(color: context.scaffoldBackgroundColor, shape: BoxShape.circle, boxShadow: defaultBoxShadow())),
+                Container(
+                    child: BackButton(),
+                    decoration: BoxDecoration(
+                        color: context.scaffoldBackgroundColor,
+                        shape: BoxShape.circle,
+                        boxShadow: defaultBoxShadow())),
                 Row(
                   children: [
                     IconButton(
                       icon: Container(
-                        child: Icon(widget.newsData.is_fav.validate() ? FontAwesome.bookmark : FontAwesome.bookmark_o),
-                        decoration: BoxDecoration(color: context.scaffoldBackgroundColor, shape: BoxShape.circle, boxShadow: defaultBoxShadow()),
+                        child: Icon(widget.newsData.is_fav.validate()
+                            ? FontAwesome.bookmark
+                            : FontAwesome.bookmark_o),
+                        decoration: BoxDecoration(
+                            color: context.scaffoldBackgroundColor,
+                            shape: BoxShape.circle,
+                            boxShadow: defaultBoxShadow()),
                         padding: EdgeInsets.all(4),
                       ),
                       onPressed: () async {
                         if (!appStore.isLoggedIn) {
-                          bool res = await LoginScreen(isNewTask: false).launch(context);
+                          bool res = await LoginScreen(isNewTask: false)
+                              .launch(context);
                           if (res ?? false) {
                             addToWishList();
                           }
@@ -226,7 +274,10 @@ class DetailPageVariant2WidgetState extends State<DetailPageVariant2Widget> {
                     IconButton(
                       icon: Container(
                         child: Icon(Icons.share_rounded),
-                        decoration: BoxDecoration(color: context.scaffoldBackgroundColor, shape: BoxShape.circle, boxShadow: defaultBoxShadow()),
+                        decoration: BoxDecoration(
+                            color: context.scaffoldBackgroundColor,
+                            shape: BoxShape.circle,
+                            boxShadow: defaultBoxShadow()),
                         padding: EdgeInsets.all(4),
                       ),
                       onPressed: () async {
@@ -236,13 +287,17 @@ class DetailPageVariant2WidgetState extends State<DetailPageVariant2Widget> {
                     IconButton(
                       icon: Container(
                         child: Icon(Icons.play_circle_outline),
-                        decoration: BoxDecoration(color: context.scaffoldBackgroundColor, shape: BoxShape.circle, boxShadow: defaultBoxShadow()),
+                        decoration: BoxDecoration(
+                            color: context.scaffoldBackgroundColor,
+                            shape: BoxShape.circle,
+                            boxShadow: defaultBoxShadow()),
                         padding: EdgeInsets.all(4),
                       ),
                       onPressed: () async {
                         showInDialog(
                           context,
-                          child: ReadAloudDialog(parseHtmlString(widget.postContent)),
+                          child: ReadAloudDialog(
+                              parseHtmlString(widget.postContent)),
                           contentPadding: EdgeInsets.zero,
                           barrierDismissible: false,
                         );

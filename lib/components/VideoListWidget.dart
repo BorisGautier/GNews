@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_news/components/VideoItemWidget.dart';
-import 'package:mighty_news/models/DashboardResponse.dart';
-import 'package:mighty_news/utils/Common.dart';
+import 'package:gnews/components/VideoItemWidget.dart';
+import 'package:gnews/models/DashboardResponse.dart';
+import 'package:gnews/utils/Common.dart';
 
 class VideoListWidget extends StatelessWidget {
   static String tag = '/VideoListWidget';
@@ -9,7 +9,8 @@ class VideoListWidget extends StatelessWidget {
   final Axis axis;
   final ScrollController scrollController;
 
-  VideoListWidget(this.videos, {this.axis = Axis.horizontal, this.scrollController});
+  VideoListWidget(this.videos,
+      {this.axis = Axis.horizontal, this.scrollController});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,8 @@ class VideoListWidget extends StatelessWidget {
         },
         itemCount: videos.length,
         shrinkWrap: true,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        gridDelegate:
+            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
       );
     } else {
       return Container(

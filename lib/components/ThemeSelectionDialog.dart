@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/screens/DashboardScreen.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/screens/DashboardScreen.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../main.dart';
@@ -51,7 +51,9 @@ class ThemeSelectionDialogState extends State<ThemeSelectionDialog> {
                 currentIndex = val;
 
                 if (val == ThemeModeSystem) {
-                  appStore.setDarkMode(MediaQuery.of(context).platformBrightness == Brightness.dark);
+                  appStore.setDarkMode(
+                      MediaQuery.of(context).platformBrightness ==
+                          Brightness.dark);
                 } else if (val == ThemeModeLight) {
                   appStore.setDarkMode(false);
                 } else if (val == ThemeModeDark) {
@@ -62,7 +64,9 @@ class ThemeSelectionDialogState extends State<ThemeSelectionDialog> {
               });
 
               if (appStore.isLoggedIn) {
-                updateProfile(showToast: false).then((value) {}).catchError(log);
+                updateProfile(showToast: false)
+                    .then((value) {})
+                    .catchError(log);
               }
 
               finish(context);

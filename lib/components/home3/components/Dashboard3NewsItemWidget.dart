@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:mighty_news/components/AppWidgets.dart';
-import 'package:mighty_news/main.dart';
-import 'package:mighty_news/models/DashboardResponse.dart';
-import 'package:mighty_news/screens/NewsDetailScreen.dart';
-import 'package:mighty_news/utils/Colors.dart';
-import 'package:mighty_news/utils/Common.dart';
+import 'package:gnews/components/AppWidgets.dart';
+import 'package:gnews/main.dart';
+import 'package:gnews/models/DashboardResponse.dart';
+import 'package:gnews/screens/NewsDetailScreen.dart';
+import 'package:gnews/utils/Colors.dart';
+import 'package:gnews/utils/Common.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class Dashboard3NewsItemWidget extends StatefulWidget {
@@ -17,7 +17,8 @@ class Dashboard3NewsItemWidget extends StatefulWidget {
   Dashboard3NewsItemWidget(this.newsData, {this.onTap});
 
   @override
-  Dashboard3NewsItemWidgetState createState() => Dashboard3NewsItemWidgetState();
+  Dashboard3NewsItemWidgetState createState() =>
+      Dashboard3NewsItemWidgetState();
 }
 
 class Dashboard3NewsItemWidgetState extends State<Dashboard3NewsItemWidget> {
@@ -79,7 +80,8 @@ class Dashboard3NewsItemWidgetState extends State<Dashboard3NewsItemWidget> {
                   ),
                   8.height,
                   Align(
-                    child: Text(widget.newsData.human_time_diff.validate(), maxLines: 1, style: secondaryTextStyle(size: 12)),
+                    child: Text(widget.newsData.human_time_diff.validate(),
+                        maxLines: 1, style: secondaryTextStyle(size: 12)),
                     alignment: Alignment.centerLeft,
                   ),
                   8.height,

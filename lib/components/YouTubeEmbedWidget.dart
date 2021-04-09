@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:mighty_news/utils/Common.dart';
+import 'package:gnews/utils/Common.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class YouTubeEmbedWidget extends StatelessWidget {
@@ -12,7 +12,9 @@ class YouTubeEmbedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String path = fullIFrame.validate() ? videoId : 'https://www.youtube.com/embed/$videoId';
+    String path = fullIFrame.validate()
+        ? videoId
+        : 'https://www.youtube.com/embed/$videoId';
 
     return IgnorePointer(
       ignoring: true,

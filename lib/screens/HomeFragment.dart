@@ -2,17 +2,17 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mighty_news/components/HeaderWidget.dart';
-import 'package:mighty_news/components/WeatherWidget.dart';
-import 'package:mighty_news/components/home1/Dashboard1Widget.dart';
-import 'package:mighty_news/components/home2/Dashboard2Widget.dart';
-import 'package:mighty_news/components/home3/Dashboard3Widget.dart';
-import 'package:mighty_news/models/DashboardResponse.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/shimmer/HorizontalImageShimmer.dart';
-import 'package:mighty_news/shimmer/VerticalTextImageShimmer.dart';
-import 'package:mighty_news/utils/Common.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/components/HeaderWidget.dart';
+import 'package:gnews/components/WeatherWidget.dart';
+import 'package:gnews/components/home1/Dashboard1Widget.dart';
+import 'package:gnews/components/home2/Dashboard2Widget.dart';
+import 'package:gnews/components/home3/Dashboard3Widget.dart';
+import 'package:gnews/models/DashboardResponse.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/shimmer/HorizontalImageShimmer.dart';
+import 'package:gnews/shimmer/VerticalTextImageShimmer.dart';
+import 'package:gnews/utils/Common.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class HomeFragment extends StatefulWidget {
@@ -68,7 +68,9 @@ class HomeFragmentState extends State<HomeFragment> {
                 background: Container(
                   height: !getBoolAsync(DISABLE_LOCATION_WIDGET) ? 100 : 70,
                   color: getAppBarWidgetBackGroundColor(),
-                  child: !getBoolAsync(DISABLE_LOCATION_WIDGET) ? WeatherWidget() : HeaderWidget(),
+                  child: !getBoolAsync(DISABLE_LOCATION_WIDGET)
+                      ? WeatherWidget()
+                      : HeaderWidget(),
                 ),
               ),
             ),
@@ -80,7 +82,10 @@ class HomeFragmentState extends State<HomeFragment> {
             await Future.delayed(Duration(seconds: 2));
           },
           child: FutureBuilder<DashboardResponse>(
-            initialData: getStringAsync(DASHBOARD_DATA).isEmpty ? null : DashboardResponse.fromJson(jsonDecode(getStringAsync(DASHBOARD_DATA))),
+            initialData: getStringAsync(DASHBOARD_DATA).isEmpty
+                ? null
+                : DashboardResponse.fromJson(
+                    jsonDecode(getStringAsync(DASHBOARD_DATA))),
             future: getDashboardApi({'posts_per_page': postsPerPage}, 1),
             builder: (_, snap) {
               if (snap.hasData) {
@@ -89,7 +94,10 @@ class HomeFragmentState extends State<HomeFragment> {
               return snapWidgetHelper(
                 snap,
                 errorWidget: Container(
-                  child: Text(errorSomethingWentWrong, style: primaryTextStyle()).paddingAll(16).center(),
+                  child:
+                      Text(errorSomethingWentWrong, style: primaryTextStyle())
+                          .paddingAll(16)
+                          .center(),
                   height: context.height() - 180,
                   width: context.width(),
                 ),

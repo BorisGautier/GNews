@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_news/components/BreakingNewsMarqueeWidget.dart';
-import 'package:mighty_news/components/CryptoCurrencyListWidget.dart';
-import 'package:mighty_news/components/ViewAllHeadingWidget.dart';
-import 'package:mighty_news/components/home2/component/DashBoard2BreakingNewsListWidget.dart';
-import 'package:mighty_news/components/home2/component/DashBoard2NewsListWidget.dart';
-import 'package:mighty_news/components/home2/component/DashBoard2TwitterFeedListWidget.dart';
-import 'package:mighty_news/models/DashboardResponse.dart';
-import 'package:mighty_news/screens/ViewAllNewsScreen.dart';
-import 'package:mighty_news/screens/ViewAllVideoScreen.dart';
-import 'package:mighty_news/utils/Colors.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/components/BreakingNewsMarqueeWidget.dart';
+import 'package:gnews/components/CryptoCurrencyListWidget.dart';
+import 'package:gnews/components/ViewAllHeadingWidget.dart';
+import 'package:gnews/components/home2/component/DashBoard2BreakingNewsListWidget.dart';
+import 'package:gnews/components/home2/component/DashBoard2NewsListWidget.dart';
+import 'package:gnews/components/home2/component/DashBoard2TwitterFeedListWidget.dart';
+import 'package:gnews/models/DashboardResponse.dart';
+import 'package:gnews/screens/ViewAllNewsScreen.dart';
+import 'package:gnews/screens/ViewAllVideoScreen.dart';
+import 'package:gnews/utils/Colors.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../AppLocalizations.dart';
@@ -73,15 +73,20 @@ class Dashboard2WidgetState extends State<Dashboard2Widget> {
               children: [
                 20.height,
                 ViewAllHeadingWidget(
-                  title: appLocalization.translate('breaking_News').toUpperCase(),
+                  title:
+                      appLocalization.translate('breaking_News').toUpperCase(),
                   backgroundColor: white,
                   textColor: scaffoldColorDark,
                   onTap: () {
-                    ViewAllNewsScreen(title: 'breaking_News', req: {'posts_per_page': postsPerPage, FILTER: FILTER_FEATURE}).launch(context);
+                    ViewAllNewsScreen(title: 'breaking_News', req: {
+                      'posts_per_page': postsPerPage,
+                      FILTER: FILTER_FEATURE
+                    }).launch(context);
                   },
                 ),
                 8.height,
-                DashBoard2BreakingNewsListWidget(widget.snap.data.breaking_post),
+                DashBoard2BreakingNewsListWidget(
+                    widget.snap.data.breaking_post),
               ],
             ).visible(widget.snap.data.breaking_post.validate().isNotEmpty),
 
@@ -98,11 +103,14 @@ class Dashboard2WidgetState extends State<Dashboard2Widget> {
                   backgroundColor: white,
                   textColor: scaffoldColorDark,
                   onTap: () {
-                    ViewAllNewsScreen(title: 'recent_News', req: {'posts_per_page': postsPerPage}).launch(context);
+                    ViewAllNewsScreen(
+                        title: 'recent_News',
+                        req: {'posts_per_page': postsPerPage}).launch(context);
                   },
                 ),
                 8.height,
-                DashBoard2NewsListWidget(widget.snap.data.recent_post, padding: EdgeInsets.symmetric(horizontal: 8)),
+                DashBoard2NewsListWidget(widget.snap.data.recent_post,
+                    padding: EdgeInsets.symmetric(horizontal: 8)),
               ],
             ).visible(widget.snap.data.recent_post.validate().isNotEmpty),
 
@@ -120,7 +128,8 @@ class Dashboard2WidgetState extends State<Dashboard2Widget> {
                   },
                 ),
                 8.height,
-                DashBoard2VideoListWidget(widget.snap.data.videos.validate(), axis: Axis.horizontal),
+                DashBoard2VideoListWidget(widget.snap.data.videos.validate(),
+                    axis: Axis.horizontal),
               ],
             ).visible(widget.snap.data.videos.validate().isNotEmpty),
 

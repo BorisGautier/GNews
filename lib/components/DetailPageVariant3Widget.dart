@@ -2,14 +2,14 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:mighty_news/main.dart';
-import 'package:mighty_news/models/DashboardResponse.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/screens/CommentListScreen.dart';
-import 'package:mighty_news/screens/LoginScreen.dart';
-import 'package:mighty_news/utils/Colors.dart';
-import 'package:mighty_news/utils/Common.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/main.dart';
+import 'package:gnews/models/DashboardResponse.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/screens/CommentListScreen.dart';
+import 'package:gnews/screens/LoginScreen.dart';
+import 'package:gnews/utils/Colors.dart';
+import 'package:gnews/utils/Common.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:share/share.dart';
 
@@ -29,10 +29,12 @@ class DetailPageVariant3Widget extends StatefulWidget {
   final String postContent;
   final List<NewsData> relatedNews;
 
-  DetailPageVariant3Widget(this.newsData, {this.postView, this.postContent, this.relatedNews});
+  DetailPageVariant3Widget(this.newsData,
+      {this.postView, this.postContent, this.relatedNews});
 
   @override
-  DetailPageVariant3WidgetState createState() => DetailPageVariant3WidgetState();
+  DetailPageVariant3WidgetState createState() =>
+      DetailPageVariant3WidgetState();
 }
 
 class DetailPageVariant3WidgetState extends State<DetailPageVariant3Widget> {
@@ -91,7 +93,8 @@ class DetailPageVariant3WidgetState extends State<DetailPageVariant3Widget> {
     return Container(
       child: Stack(
         children: [
-          cachedImage(widget.newsData.image.validate(), height: context.height(), fit: BoxFit.cover),
+          cachedImage(widget.newsData.image.validate(),
+              height: context.height(), fit: BoxFit.cover),
           Container(
             decoration: BoxDecoration(color: Colors.black26),
             child: SingleChildScrollView(
@@ -109,28 +112,45 @@ class DetailPageVariant3WidgetState extends State<DetailPageVariant3Widget> {
                           children: [
                             Container(
                               child: BackButton(),
-                              decoration: BoxDecoration(color: context.scaffoldBackgroundColor, shape: BoxShape.circle),
+                              decoration: BoxDecoration(
+                                  color: context.scaffoldBackgroundColor,
+                                  shape: BoxShape.circle),
                             ),
                             8.width,
-                            Icon(Icons.access_time_rounded, color: Colors.white, size: 16),
+                            Icon(Icons.access_time_rounded,
+                                color: Colors.white, size: 16),
                             4.width,
-                            Text(widget.newsData.human_time_diff.validate(), style: secondaryTextStyle(color: Colors.white)),
+                            Text(widget.newsData.human_time_diff.validate(),
+                                style: secondaryTextStyle(color: Colors.white)),
                             4.width,
-                            Text('・', style: secondaryTextStyle(color: Colors.white)),
-                            Text(getArticleReadTime(context, widget.newsData.post_content.validate()), style: secondaryTextStyle(color: Colors.white)).expand(),
+                            Text('・',
+                                style: secondaryTextStyle(color: Colors.white)),
+                            Text(
+                                    getArticleReadTime(
+                                        context,
+                                        widget.newsData.post_content
+                                            .validate()),
+                                    style:
+                                        secondaryTextStyle(color: Colors.white))
+                                .expand(),
                           ],
                         ).expand(),
                         Row(
                           children: [
                             IconButton(
                               icon: Container(
-                                child: Icon(widget.newsData.is_fav.validate() ? FontAwesome.bookmark : FontAwesome.bookmark_o),
-                                decoration: BoxDecoration(color: context.scaffoldBackgroundColor, shape: BoxShape.circle),
+                                child: Icon(widget.newsData.is_fav.validate()
+                                    ? FontAwesome.bookmark
+                                    : FontAwesome.bookmark_o),
+                                decoration: BoxDecoration(
+                                    color: context.scaffoldBackgroundColor,
+                                    shape: BoxShape.circle),
                                 padding: EdgeInsets.all(4),
                               ),
                               onPressed: () async {
                                 if (!appStore.isLoggedIn) {
-                                  bool res = await LoginScreen(isNewTask: false).launch(context);
+                                  bool res = await LoginScreen(isNewTask: false)
+                                      .launch(context);
                                   if (res ?? false) {
                                     addToWishList();
                                   }
@@ -142,23 +162,29 @@ class DetailPageVariant3WidgetState extends State<DetailPageVariant3Widget> {
                             IconButton(
                               icon: Container(
                                 child: Icon(Icons.share_rounded),
-                                decoration: BoxDecoration(color: context.scaffoldBackgroundColor, shape: BoxShape.circle),
+                                decoration: BoxDecoration(
+                                    color: context.scaffoldBackgroundColor,
+                                    shape: BoxShape.circle),
                                 padding: EdgeInsets.all(4),
                               ),
                               onPressed: () async {
-                                Share.share(widget.newsData.share_url.validate());
+                                Share.share(
+                                    widget.newsData.share_url.validate());
                               },
                             ),
                             IconButton(
                               icon: Container(
                                 child: Icon(Icons.play_circle_outline),
-                                decoration: BoxDecoration(color: context.scaffoldBackgroundColor, shape: BoxShape.circle),
+                                decoration: BoxDecoration(
+                                    color: context.scaffoldBackgroundColor,
+                                    shape: BoxShape.circle),
                                 padding: EdgeInsets.all(4),
                               ),
                               onPressed: () async {
                                 showInDialog(
                                   context,
-                                  child: ReadAloudDialog(parseHtmlString(widget.postContent)),
+                                  child: ReadAloudDialog(
+                                      parseHtmlString(widget.postContent)),
                                   contentPadding: EdgeInsets.zero,
                                   barrierDismissible: false,
                                 );
@@ -169,8 +195,16 @@ class DetailPageVariant3WidgetState extends State<DetailPageVariant3Widget> {
                       ],
                     ),
                     16.height,
-                    if (widget.newsData.category.validate().isNotEmpty) getPostCategoryTagWidget(context, widget.newsData).withSize(height: 40, width: context.width()).paddingLeft(8),
-                    Text(parseHtmlString(widget.newsData.post_title.validate()), style: boldTextStyle(size: 40, fontFamily: titleFont(), color: Colors.white)).paddingOnly(left: 8, right: 8),
+                    if (widget.newsData.category.validate().isNotEmpty)
+                      getPostCategoryTagWidget(context, widget.newsData)
+                          .withSize(height: 40, width: context.width())
+                          .paddingLeft(8),
+                    Text(parseHtmlString(widget.newsData.post_title.validate()),
+                            style: boldTextStyle(
+                                size: 40,
+                                fontFamily: titleFont(),
+                                color: Colors.white))
+                        .paddingOnly(left: 8, right: 8),
                     8.height,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -178,12 +212,19 @@ class DetailPageVariant3WidgetState extends State<DetailPageVariant3Widget> {
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(FontAwesome.commenting_o, size: 16, color: Colors.white),
+                            Icon(FontAwesome.commenting_o,
+                                size: 16, color: Colors.white),
                             8.width,
-                            CommentTextWidget(text: widget.newsData.no_of_comments_text.validate(value: '0'), textColor: Colors.white),
+                            CommentTextWidget(
+                                text: widget.newsData.no_of_comments_text
+                                    .validate(value: '0'),
+                                textColor: Colors.white),
                           ],
-                        ).paddingOnly(left: 8, right: 8, top: 8, bottom: 8).onTap(() async {
-                          await CommentListScreen(widget.newsData.iD).launch(context);
+                        )
+                            .paddingOnly(left: 8, right: 8, top: 8, bottom: 8)
+                            .onTap(() async {
+                          await CommentListScreen(widget.newsData.iD)
+                              .launch(context);
                           await Future.delayed(Duration(milliseconds: 300));
 
                           setStatusBarColor(Colors.transparent);
@@ -191,21 +232,27 @@ class DetailPageVariant3WidgetState extends State<DetailPageVariant3Widget> {
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(FontAwesome.eye, size: 16, color: Colors.white),
+                            Icon(FontAwesome.eye,
+                                size: 16, color: Colors.white),
                             8.width,
-                            Text(widget.postView.validate().toString(), style: secondaryTextStyle(color: Colors.white)),
+                            Text(widget.postView.validate().toString(),
+                                style: secondaryTextStyle(color: Colors.white)),
                           ],
                         ).paddingOnly(left: 8, right: 8, top: 8, bottom: 8),
                       ],
                     ),
-                    HtmlWidget(postContent: widget.postContent, color: Colors.white),
+                    HtmlWidget(
+                        postContent: widget.postContent, color: Colors.white),
                     30.height,
                     AppButton(
                       text: appLocalization.translate('view_Comments'),
-                      color: appStore.isDarkMode ? scaffoldSecondaryDark : colorPrimary,
+                      color: appStore.isDarkMode
+                          ? scaffoldSecondaryDark
+                          : colorPrimary,
                       textStyle: boldTextStyle(color: white),
                       onTap: () async {
-                        await CommentListScreen(widget.newsData.iD).launch(context);
+                        await CommentListScreen(widget.newsData.iD)
+                            .launch(context);
                         await Future.delayed(Duration(milliseconds: 300));
 
                         setDynamicStatusBarColorDetail(milliseconds: 400);
@@ -216,10 +263,17 @@ class DetailPageVariant3WidgetState extends State<DetailPageVariant3Widget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          padding: EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
+                          padding: EdgeInsets.only(
+                              left: 8, right: 8, top: 4, bottom: 4),
                           margin: EdgeInsets.only(left: 16, top: 32, bottom: 8),
-                          decoration: BoxDecoration(color: colorPrimary, borderRadius: radius(defaultRadius)),
-                          child: Text(appLocalization.translate('related_news'), style: boldTextStyle(size: 12, color: Colors.white, letterSpacing: 1.5)),
+                          decoration: BoxDecoration(
+                              color: colorPrimary,
+                              borderRadius: radius(defaultRadius)),
+                          child: Text(appLocalization.translate('related_news'),
+                              style: boldTextStyle(
+                                  size: 12,
+                                  color: Colors.white,
+                                  letterSpacing: 1.5)),
                         ),
                         BreakingNewsListWidget(widget.relatedNews.validate()),
                       ],

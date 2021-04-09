@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_news/components/VideoItemWidget.dart';
-import 'package:mighty_news/models/DashboardResponse.dart';
-import 'package:mighty_news/utils/Common.dart';
+import 'package:gnews/components/VideoItemWidget.dart';
+import 'package:gnews/models/DashboardResponse.dart';
+import 'package:gnews/utils/Common.dart';
 import 'DashBoard2VideoItemWidget.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -15,10 +15,12 @@ class DashBoard2VideoListWidget extends StatefulWidget {
   DashBoard2VideoListWidget(this.videos, {this.axis = Axis.horizontal});
 
   @override
-  _DashBoard2VideoListWidgetState createState() => _DashBoard2VideoListWidgetState();
+  _DashBoard2VideoListWidgetState createState() =>
+      _DashBoard2VideoListWidgetState();
 }
 
-class _DashBoard2VideoListWidgetState extends State<DashBoard2VideoListWidget> with AfterLayoutMixin<DashBoard2VideoListWidget> {
+class _DashBoard2VideoListWidgetState extends State<DashBoard2VideoListWidget>
+    with AfterLayoutMixin<DashBoard2VideoListWidget> {
   PageController pageController = PageController();
 
   double currentPage = 0;
@@ -39,11 +41,11 @@ class _DashBoard2VideoListWidgetState extends State<DashBoard2VideoListWidget> w
     });
   }
 
-
-
   @override
   void afterFirstLayout(BuildContext context) {
-    pages = widget.videos.map((e) => DashBoard2VideoItemWidget(e, widget.axis)).toList();
+    pages = widget.videos
+        .map((e) => DashBoard2VideoItemWidget(e, widget.axis))
+        .toList();
     setState(() {});
   }
 
@@ -70,14 +72,17 @@ class _DashBoard2VideoListWidgetState extends State<DashBoard2VideoListWidget> w
         },
         itemCount: widget.videos.length,
         shrinkWrap: true,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        gridDelegate:
+            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
       );
     } else {
       return Container(
         height: getDashBoard2WidgetHeight(),
         child: Stack(
           children: [
-            PageView(controller: pageController, children: pages.map((e) => e).toList()),
+            PageView(
+                controller: pageController,
+                children: pages.map((e) => e).toList()),
             Positioned(
               bottom: 16,
               left: 0,
@@ -89,7 +94,9 @@ class _DashBoard2VideoListWidgetState extends State<DashBoard2VideoListWidget> w
                 unselectedIndicatorColor: white,
                 indicatorColor: appStore.isDarkMode ? gray : getPrimaryColor(),
                 onDotTap: (s) {
-                  pageController.animateToPage(s, duration: Duration(milliseconds: 5), curve: Curves.bounceIn);
+                  pageController.animateToPage(s,
+                      duration: Duration(milliseconds: 5),
+                      curve: Curves.bounceIn);
                 },
               ),
             ),

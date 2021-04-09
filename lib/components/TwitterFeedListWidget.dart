@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:mighty_news/AppLocalizations.dart';
-import 'package:mighty_news/models/TweetModel.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/shimmer/HorizontalImageShimmer.dart';
-import 'package:mighty_news/utils/Colors.dart';
-import 'package:mighty_news/utils/Common.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/AppLocalizations.dart';
+import 'package:gnews/models/TweetModel.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/shimmer/HorizontalImageShimmer.dart';
+import 'package:gnews/utils/Colors.dart';
+import 'package:gnews/utils/Common.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import 'AppWidgets.dart';
@@ -26,7 +26,6 @@ class TwitterFeedListWidget extends StatefulWidget {
 }
 
 class TwitterFeedListWidgetState extends State<TwitterFeedListWidget> {
-
   @override
   void initState() {
     super.initState();
@@ -57,7 +56,8 @@ class TwitterFeedListWidgetState extends State<TwitterFeedListWidget> {
           if (snap.error.toString().isEmpty) {
             return SizedBox();
           } else {
-            return Text(errorSomethingWentWrong, style: primaryTextStyle()).center(heightFactor: 10);
+            return Text(errorSomethingWentWrong, style: primaryTextStyle())
+                .center(heightFactor: 10);
           }
         }
         if (snap.hasData) {
@@ -69,7 +69,10 @@ class TwitterFeedListWidgetState extends State<TwitterFeedListWidget> {
             mainAxisSize: MainAxisSize.min,
             children: [
               16.height,
-              ViewAllHeadingWidget(title: appLocale.translate('our_twitter_handle'), backgroundColor: widget.backgroundColor, textColor: widget.textColor),
+              ViewAllHeadingWidget(
+                  title: appLocale.translate('our_twitter_handle'),
+                  backgroundColor: widget.backgroundColor,
+                  textColor: widget.textColor),
               8.height,
               Container(
                 height: getDashBoard2WidgetHeight(),
@@ -82,25 +85,52 @@ class TwitterFeedListWidgetState extends State<TwitterFeedListWidget> {
                       margin: EdgeInsets.all(8),
                       padding: EdgeInsets.all(8),
                       width: newsListWidgetSize(context),
-                      decoration: BoxDecoration(border: Border.all(color: viewLineColor.withOpacity(0.5)), borderRadius: radius(defaultRadius)),
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(color: viewLineColor.withOpacity(0.5)),
+                          borderRadius: radius(defaultRadius)),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          cachedImage(data.user.profile_image_url_https.validate(), height: 40, width: 40, fit: BoxFit.cover).cornerRadiusWithClipRRect(30),
+                          cachedImage(
+                                  data.user.profile_image_url_https.validate(),
+                                  height: 40,
+                                  width: 40,
+                                  fit: BoxFit.cover)
+                              .cornerRadiusWithClipRRect(30),
                           8.width,
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              TextIcon(text: data.user.name.validate(), suffix: Icon(Octicons.verified, size: 14)),
-                              Text('@${data.user.screen_name.validate()}', style: secondaryTextStyle(), maxLines: 1, overflow: TextOverflow.ellipsis),
+                              TextIcon(
+                                  text: data.user.name.validate(),
+                                  suffix: Icon(Octicons.verified, size: 14)),
+                              Text('@${data.user.screen_name.validate()}',
+                                  style: secondaryTextStyle(),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis),
                               8.height,
-                              Text(data.full_text.validate(), style: primaryTextStyle(), maxLines: getWidgetTwitterLine(), overflow: TextOverflow.ellipsis).expand(),
+                              Text(data.full_text.validate(),
+                                      style: primaryTextStyle(),
+                                      maxLines: getWidgetTwitterLine(),
+                                      overflow: TextOverflow.ellipsis)
+                                  .expand(),
                               8.height,
                               Row(
                                 children: [
-                                  TextIcon(text: data.retweet_count.validate().toString(), prefix: Icon(EvilIcons.retweet, size: 24)),
+                                  TextIcon(
+                                      text: data.retweet_count
+                                          .validate()
+                                          .toString(),
+                                      prefix:
+                                          Icon(EvilIcons.retweet, size: 24)),
                                   8.width,
-                                  TextIcon(text: data.favorite_count.validate().toString(), prefix: Icon(Icons.favorite, size: 18, color: Colors.red)),
+                                  TextIcon(
+                                      text: data.favorite_count
+                                          .validate()
+                                          .toString(),
+                                      prefix: Icon(Icons.favorite,
+                                          size: 18, color: Colors.red)),
                                 ],
                               ),
                             ],
@@ -108,7 +138,8 @@ class TwitterFeedListWidgetState extends State<TwitterFeedListWidget> {
                         ],
                       ),
                     ).onTap(() {
-                      launchUrl('https://twitter.com/${data.user.screen_name}/status/${data.id}');
+                      launchUrl(
+                          'https://twitter.com/${data.user.screen_name}/status/${data.id}');
                     });
                   },
                   itemCount: snap.data.length,

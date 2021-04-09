@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_news/AppLocalizations.dart';
-import 'package:mighty_news/utils/Colors.dart';
+import 'package:gnews/AppLocalizations.dart';
+import 'package:gnews/utils/Colors.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class ViewAllHeadingWidget extends StatelessWidget {
@@ -10,7 +10,8 @@ class ViewAllHeadingWidget extends StatelessWidget {
   final Color textColor;
   final Function onTap;
 
-  ViewAllHeadingWidget({this.title, this.onTap, this.backgroundColor, this.textColor});
+  ViewAllHeadingWidget(
+      {this.title, this.onTap, this.backgroundColor, this.textColor});
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +21,14 @@ class ViewAllHeadingWidget extends StatelessWidget {
         Container(
           padding: EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
           margin: EdgeInsets.only(left: 16),
-          decoration: BoxDecoration(color: backgroundColor ?? colorPrimary, borderRadius: radius(defaultRadius)),
-          child: Text(title.validate(), style: boldTextStyle(size: 12, color: textColor ?? Colors.white, letterSpacing: 1.5)),
+          decoration: BoxDecoration(
+              color: backgroundColor ?? colorPrimary,
+              borderRadius: radius(defaultRadius)),
+          child: Text(title.validate(),
+              style: boldTextStyle(
+                  size: 12,
+                  color: textColor ?? Colors.white,
+                  letterSpacing: 1.5)),
         ),
         Container(
           margin: EdgeInsets.only(right: 8),

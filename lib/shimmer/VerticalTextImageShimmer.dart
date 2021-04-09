@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_news/main.dart';
+import 'package:gnews/main.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -11,7 +11,7 @@ class VerticalTextImageShimmer extends StatelessWidget {
       physics: NeverScrollableScrollPhysics(),
       itemCount: 10,
       itemBuilder: (_, __) => Shimmer.fromColors(
-        highlightColor: appStore.isDarkMode ? Colors.black :Colors.white,
+        highlightColor: appStore.isDarkMode ? Colors.black : Colors.white,
         baseColor: appStore.isDarkMode ? Colors.grey.shade50 : Colors.grey[300],
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,

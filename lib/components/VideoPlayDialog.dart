@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_news/components/VideoFileWidget.dart';
-import 'package:mighty_news/components/YouTubeEmbedWidget.dart';
-import 'package:mighty_news/models/DashboardResponse.dart';
-import 'package:mighty_news/utils/Colors.dart';
-import 'package:mighty_news/utils/Common.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/components/VideoFileWidget.dart';
+import 'package:gnews/components/YouTubeEmbedWidget.dart';
+import 'package:gnews/models/DashboardResponse.dart';
+import 'package:gnews/utils/Colors.dart';
+import 'package:gnews/utils/Common.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class VideoPlayDialog extends StatefulWidget {
@@ -27,7 +27,8 @@ class VideoPlayDialogState extends State<VideoPlayDialog> {
   Future<void> init() async {
     await Future.delayed(Duration(milliseconds: 200));
 
-    setStatusBarColor(scaffoldSecondaryDark, statusBarIconBrightness: Brightness.light);
+    setStatusBarColor(scaffoldSecondaryDark,
+        statusBarIconBrightness: Brightness.light);
   }
 
   @override
@@ -50,11 +51,17 @@ class VideoPlayDialogState extends State<VideoPlayDialog> {
       body: Stack(
         children: [
           widget.videoData.video_type.validate() == VideoTypeYouTube
-              ? YouTubeEmbedWidget(widget.videoData.video_url.validate().convertYouTubeUrlToId()).center()
+              ? YouTubeEmbedWidget(widget.videoData.video_url
+                      .validate()
+                      .convertYouTubeUrlToId())
+                  .center()
               : widget.videoData.video_type.validate() == VideoTypeIFrame
-                  ? YouTubeEmbedWidget(widget.videoData.video_url.validate(), fullIFrame: true).center()
+                  ? YouTubeEmbedWidget(widget.videoData.video_url.validate(),
+                          fullIFrame: true)
+                      .center()
                   : widget.videoData.video_type.validate() == VideoTypeCustom
-                      ? VideoFileWidget(widget.videoData.video_url.validate()).center()
+                      ? VideoFileWidget(widget.videoData.video_url.validate())
+                          .center()
                       : Container(child: Text('Invalid video').center()),
           Positioned(child: BackButton(color: white), top: 20, left: 16),
         ],

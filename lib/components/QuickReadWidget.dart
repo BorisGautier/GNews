@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_news/models/DashboardResponse.dart';
-import 'package:mighty_news/screens/QuickReadScreen.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/models/DashboardResponse.dart';
+import 'package:gnews/screens/QuickReadScreen.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../AppLocalizations.dart';
@@ -31,7 +31,10 @@ class QuickReadWidget extends StatelessWidget {
         children: [
           Positioned(
             right: 30,
-            child: Container(decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.blue), padding: EdgeInsets.all(8)),
+            child: Container(
+                decoration:
+                    BoxDecoration(shape: BoxShape.circle, color: Colors.blue),
+                padding: EdgeInsets.all(8)),
           ),
           Positioned(
             right: 60,
@@ -41,7 +44,10 @@ class QuickReadWidget extends StatelessWidget {
           Positioned(
             right: 100,
             top: -23,
-            child: Container(decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.redAccent), padding: EdgeInsets.all(20)),
+            child: Container(
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle, color: Colors.redAccent),
+                padding: EdgeInsets.all(20)),
           ),
           Positioned(
             right: 150,
@@ -49,16 +55,20 @@ class QuickReadWidget extends StatelessWidget {
             child: Container(
               height: 60,
               width: 20,
-              decoration: BoxDecoration(borderRadius: radius(), border: Border.all(color: Colors.green)),
+              decoration: BoxDecoration(
+                  borderRadius: radius(),
+                  border: Border.all(color: Colors.green)),
             ),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(appLocale.translate('quick_read'), style: boldTextStyle(size: 18)),
+              Text(appLocale.translate('quick_read'),
+                  style: boldTextStyle(size: 18)),
               4.height,
-              Text(appLocale.translate('quick_read_desc'), style: primaryTextStyle()),
+              Text(appLocale.translate('quick_read_desc'),
+                  style: primaryTextStyle()),
             ],
           ).paddingAll(16),
         ],

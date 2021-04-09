@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_news/components/NewsItemWidget.dart';
-import 'package:mighty_news/models/DashboardResponse.dart';
-import 'package:mighty_news/screens/NewsDetailListScreen.dart';
+import 'package:gnews/components/NewsItemWidget.dart';
+import 'package:gnews/models/DashboardResponse.dart';
+import 'package:gnews/screens/NewsDetailListScreen.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 // ignore: must_be_immutable
@@ -38,12 +38,15 @@ class NewsListWidgetState extends State<NewsListWidget> {
     return Container(
       child: ListView.builder(
         padding: widget.padding ?? EdgeInsets.all(0),
-        physics: widget.enableScrolling.validate() ? AlwaysScrollableScrollPhysics() : NeverScrollableScrollPhysics(),
+        physics: widget.enableScrolling.validate()
+            ? AlwaysScrollableScrollPhysics()
+            : NeverScrollableScrollPhysics(),
         itemBuilder: (_, index) {
           return NewsItemWidget(
             widget.newsList[index],
             onTap: () {
-              NewsDetailListScreen(widget.newsList, index: index).launch(context);
+              NewsDetailListScreen(widget.newsList, index: index)
+                  .launch(context);
             },
           );
         },

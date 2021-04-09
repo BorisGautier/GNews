@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mighty_news/components/AppWidgets.dart';
-import 'package:mighty_news/main.dart';
-import 'package:mighty_news/models/DashboardResponse.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/utils/Colors.dart';
-import 'package:mighty_news/utils/Common.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/components/AppWidgets.dart';
+import 'package:gnews/main.dart';
+import 'package:gnews/models/DashboardResponse.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/utils/Colors.dart';
+import 'package:gnews/utils/Common.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import 'NewsDetailScreen.dart';
@@ -54,7 +54,8 @@ class _QuickReadScreenState extends State<QuickReadScreen> {
   }
 
   Future<void> loadNews() async {
-    await blogFilterNewsApi({'posts_per_page': postsPerPage}, page).then((value) async {
+    await blogFilterNewsApi({'posts_per_page': postsPerPage}, page)
+        .then((value) async {
       appStore.setLoading(false);
 
       hasError = false;
@@ -114,17 +115,24 @@ class _QuickReadScreenState extends State<QuickReadScreen> {
                     child: Container(
                       child: Column(
                         children: [
-                          cachedImage(e.image, width: context.width(), fit: BoxFit.cover),
+                          cachedImage(e.image,
+                              width: context.width(), fit: BoxFit.cover),
                           16.height,
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(parseHtmlString(e.post_title.validate()), style: boldTextStyle(size: 20), maxLines: 4),
+                              Text(parseHtmlString(e.post_title.validate()),
+                                  style: boldTextStyle(size: 20), maxLines: 4),
                               4.height,
-                              Text(e.human_time_diff.validate(), style: secondaryTextStyle()),
+                              Text(e.human_time_diff.validate(),
+                                  style: secondaryTextStyle()),
                               8.height,
-                              Text(parseHtmlString(e.post_content.validate()), style: primaryTextStyle()).expand(),
-                              Text('Read more', style: boldTextStyle(color: colorPrimary)).paddingAll(8),
+                              Text(parseHtmlString(e.post_content.validate()),
+                                      style: primaryTextStyle())
+                                  .expand(),
+                              Text('Read more',
+                                      style: boldTextStyle(color: colorPrimary))
+                                  .paddingAll(8),
                             ],
                           ).paddingSymmetric(horizontal: 16).expand(),
                         ],

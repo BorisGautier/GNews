@@ -1,16 +1,16 @@
 import 'package:apple_sign_in/apple_sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mighty_news/AppLocalizations.dart';
-import 'package:mighty_news/components/LanguageSelectionWidget.dart';
-import 'package:mighty_news/components/ForgotPasswordDialog.dart';
-import 'package:mighty_news/components/SocialLoginWidget.dart';
-import 'package:mighty_news/main.dart';
-import 'package:mighty_news/network/RestApis.dart';
-import 'package:mighty_news/screens/RegisterScreen.dart';
-import 'package:mighty_news/utils/Colors.dart';
-import 'package:mighty_news/utils/Common.dart';
-import 'package:mighty_news/utils/Constants.dart';
+import 'package:gnews/AppLocalizations.dart';
+import 'package:gnews/components/LanguageSelectionWidget.dart';
+import 'package:gnews/components/ForgotPasswordDialog.dart';
+import 'package:gnews/components/SocialLoginWidget.dart';
+import 'package:gnews/main.dart';
+import 'package:gnews/network/RestApis.dart';
+import 'package:gnews/screens/RegisterScreen.dart';
+import 'package:gnews/utils/Colors.dart';
+import 'package:gnews/utils/Common.dart';
+import 'package:gnews/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import 'DashboardScreen.dart';
