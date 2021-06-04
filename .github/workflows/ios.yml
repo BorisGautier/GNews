@@ -48,7 +48,7 @@ jobs:
       #     token: ${{ secrets.TOKEN }}
 
       # Upload generated apk to the artifacts.
-      - uses: actions/upload-artifact@v1
-        with:
-          name: release-ipa
-          path: build/app/outputs/ipa/release/app-release.ipa
+      #- uses: actions/upload-artifact@v1
+      #  with:
+      #    name: release-ipa
+      #    path: build/app/outputs/ipa/release/app-release.ipa
