@@ -1,9 +1,15 @@
 **
 
-Mighty News {.display-4}
+GNews
 ===========
 
 * * * * *
+
+![1622802208823.jpg](images/1622802208823.jpg)
+![1622802208833.jpg](images/1622802208833.jpg)
+![1622802208843.jpg](images/1622802208843.jpg)
+![1622802208852.jpg](images/1622802208852.jpg)
+![1622802208862.jpg](images/1622802208862.jpg)
 
 -   [Prerequisite Tools & Setup](#intro)
     -   [Introduction to Flutter](#intro-flutter)
@@ -18,7 +24,6 @@ Mighty News {.display-4}
     -   [iOS Configuration](#config-ios)
     -   [Firebase Configuration](#basic-loading)
     -   [Flutter Configuration](#basic-fonts)
-    -   [WordPress Setup](#basic-logo)
 -   [Common errors](#common-error1)
     -   [No matching client found for package name](#common-error1)
     -   [Flutter SDK Not Available](#common-error2)
@@ -611,7 +616,3 @@ Add below line in .htaccess file :
 
 * * * * *
 
-##### **Forgot password mail goes into spam ?**
-
-Please follow this link : [Change mailer in WP Mail
-SMTP](#other-smtp-config)
