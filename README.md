@@ -1,15 +1,16 @@
 **
 
-GNews
+GNews v1.0.1 
+
+Complete Flutter mobile application using a wordpress backend
 ===========
 
 * * * * *
 
-![1622802208823.jpg](images/1622802208823.jpg)
-![1622802208833.jpg](images/1622802208833.jpg)
-![1622802208843.jpg](images/1622802208843.jpg)
-![1622802208852.jpg](images/1622802208852.jpg)
-![1622802208862.jpg](images/1622802208862.jpg)
+### Screenshots
+<table style={border:"none"}><tr><td><img src="images/1622802208823.jpg" alt="Login Screen(light)"/></td><td><img src="images/1622802208833.jpg" alt="Setting Screen(light)"/></td><td><img src="images/1622802208843.jpg" alt="Login Screen(dark)"/></td><td><img src="images/1622802208852.jpg" alt="Setting Screen(Dark)"/></td><td><img src="images/1622802208862.jpg" alt="Home Screen(dark)"/></td></tr></table>
+
+
 
 -   [Prerequisite Tools & Setup](#intro)
     -   [Introduction to Flutter](#intro-flutter)
